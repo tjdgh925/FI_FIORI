@@ -7,12 +7,14 @@ using {
 } from '@sap/cds/common';
 
 entity GeneralLedger {
-    key GL_CODE         : String;
-        GL_NAME         : String not null;
-        GL_DESCRIPTION  : String not null;
-        GL_COA          : String not null;
-        GL_ACCOUNTTYPE  : String not null;
-        GL_ACCOUNTGROUP : String not null;
+    key GL_CODE           : String;
+        GL_NAME           : String not null;
+        GL_DESCRIPTION    : String not null;
+        GL_COA            : String not null;
+        GL_ACCOUNTTYPE    : String not null;
+        GL_ACCOUNTGROUP   : String not null;
+        GL_PL_ACCOUNTTYPE : String; 
+        GL_TRADINGPARTNER : String;
 
 };
 
