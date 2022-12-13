@@ -1,0 +1,9 @@
+<mvc:View controllerName="projectBP.controller.App"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true"
+	xmlns:tnt="sap.tnt"
+	height="100%"
+	xmlns="sap.m">
+	<App id="app"></App>
+</mvc:View>

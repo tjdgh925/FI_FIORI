@@ -1,0 +1,38 @@
+<mvc:View controllerName="projectBP.controller.BusinessPartnerHome"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	displayBlock="true"
+	height="100%">
+	<ScrollContainer height="100%"
+		width="100%"
+		vertical="true"
+		focusable="true">
+		<Panel width="auto"
+			class="sapUiSmallMargin">
+			<content class="panelbottomline">
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+					header="BP 조회"
+					press="onDisplayBP">
+					<TileContent >
+						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
+					</TileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+					header="BP 생성"
+					press="onCreateBP">
+					<TileContent >
+						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
+					</TileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+					header="BP 차트"
+					press="onChartBP">
+					<TileContent >
+						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
+					</TileContent>
+				</GenericTile>
+			</content>
+		</Panel>
+	</ScrollContainer>
+</mvc:View>

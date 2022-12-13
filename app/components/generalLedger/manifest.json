@@ -1,0 +1,151 @@
+{
+  "_version": "1.42.0",
+  "sap.app": {
+    "id": "projectGL",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "0.0.1"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "@sap/generator-fiori:basic",
+      "version": "1.8.1",
+      "toolsId": "58d6e26c-1d5b-47af-8b50-0f7ed9578dad"
+    },
+    "dataSources": {
+      "mainService": {
+        "uri": "/general-ledger/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      }
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    }
+  },
+  "sap.ui5": {
+    "flexEnabled": true,
+    "dependencies": {
+      "minUI5Version": "1.102.1",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.f": {},
+        "sap.suite.ui.generic.template": {},
+        "sap.ui.comp": {},
+        "sap.ui.generic.app": {},
+        "sap.ui.table": {},
+        "sap.ushell": {}
+      }
+    },
+    "contentDensities": {
+      "compact": true,
+      "cozy": true
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "settings": {
+          "bundleName": "projectGL.i18n.i18n"
+        }
+      },
+      "GL": {
+        "dataSource": "mainService",
+        "preload": true,
+        "settings": {
+          "operationMode": "Server",
+          "earlyRequests": true,
+          "synchronizationMode": "None",
+          "autoExpandSelect": true
+        }
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "css/style.css"
+        }
+      ]
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "async": true,
+        "viewPath": "projectGL.view",
+        "controlAggregation": "pages",
+        "controlId": "app",
+        "clearControlAggregation": false
+      },
+      "routes": [
+        {
+          "name": "GeneralLedgerHome",
+          "pattern": "",
+          "target": [
+            "GeneralLedgerHome"
+          ]
+        },
+        {
+          "name": "GeneralLedger",
+          "pattern": "GeneralLedger",
+          "target": [
+            "GeneralLedger"
+          ]
+        },
+        {
+          "name": "CreateGeneralLedger",
+          "pattern": "CreateGeneralLedger",
+          "target": [
+            "CreateGeneralLedger"
+          ]
+        }
+      ],
+      "targets": {
+        "GeneralLedgerHome": {
+          "viewType": "XML",
+          "transition": "show",
+          "viewId": "GeneralLedgerHome",
+          "viewName": "GeneralLedgerHome"
+        },
+        "GeneralLedger": {
+          "viewType": "XML",
+          "transition": "show",
+          "viewId": "GeneralLedger",
+          "viewName": "GeneralLedger"
+        },
+        "CreateGeneralLedger": {
+          "viewType": "XML",
+          "transition": "show",
+          "viewId": "CreateGeneralLedger",
+          "viewName": "CreateGeneralLedger"
+        }
+      }
+    },
+    "rootView": {
+      "viewName": "projectGL.view.App",
+      "type": "XML",
+      "async": true,
+      "id": "App"
+    }
+  }
+}

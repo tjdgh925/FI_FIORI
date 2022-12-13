@@ -1,0 +1,4 @@
+<mvc:View controllerName="projectGL.controller.GeneralLedger"
+    xmlns="sap.m">
+    <Text text="총계정원장 조회"/>
+</mvc:View>

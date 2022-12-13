@@ -1,0 +1,4 @@
+<mvc:View controllerName="projectGL.controller.CreateGeneralLedger"
+    xmlns="sap.m">
+    <Text text="총계정원장 생성"/>
+</mvc:View>

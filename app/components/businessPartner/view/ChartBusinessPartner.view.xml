@@ -1,0 +1,4 @@
+<mvc:View controllerName="projectBP.controller.ChartBusinessPartner"
+    xmlns="sap.m">
+    <Text text="비즈니스파트너 차트"/>
+</mvc:View>

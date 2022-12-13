@@ -1,0 +1,31 @@
+<mvc:View controllerName="projectGL.controller.GeneralLedgerHome"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.f"
+	displayBlock="true"
+	height="100%">
+	<ScrollContainer height="100%"
+		width="100%"
+		vertical="true"
+		focusable="true">
+		<Panel width="auto"
+			class="sapUiSmallMargin">
+			<content class="panelbottomline">
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+					header="GL 조회"
+					press="onDisplayGL">
+					<TileContent >
+						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
+					</TileContent>
+				</GenericTile>
+				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
+					header="GL 생성"
+					press="onCreateGL">
+					<TileContent >
+						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
+					</TileContent>
+				</GenericTile>
+			</content>
+		</Panel>
+	</ScrollContainer>
+</mvc:View>

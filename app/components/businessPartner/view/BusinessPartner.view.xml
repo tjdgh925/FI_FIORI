@@ -1,0 +1,4 @@
+<mvc:View controllerName="projectBP.controller.BusinessPartner"
+    xmlns="sap.m">
+    <Text text="비즈니스파트너 조회"/>
+</mvc:View>
