@@ -1,0 +1,18 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog
+        id="bp_sortDialog"
+        confirm="onConfirmSortDialog"
+        title="협력 업체 정렬">
+        <sortItems>
+            <ViewSettingsItem text="비즈니스 파트너" key="BP_CODE" />
+            <ViewSettingsItem text="회사코드" key="BP_COMPANY_CODE" />
+            <ViewSettingsItem text="도로 주소" key="BP_ADDRESS" />
+            <ViewSettingsItem text="시" key="BP_CITY" />
+            <ViewSettingsItem text="우편번호" key="BP_POSTCODE" />
+            <ViewSettingsItem text="국가/지역" key="BP_COUNTRY" />
+            <ViewSettingsItem text="비즈니스 파트너 범주" key="BP_CATEGORY" selected="true"/>
+        </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>

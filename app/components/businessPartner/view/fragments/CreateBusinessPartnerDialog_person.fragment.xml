@@ -1,0 +1,125 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:t="sap.ui.table" xmlns:layout="sap.ui.layout">
+    <Dialog id="bp_personDialog" title="개인 생성">
+        <content>
+            <form:SimpleForm layout="ResponsiveGridLayout">
+                <form:content>
+                    <VBox>
+                        <layoutData>
+                            <layout:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="일반 데이터" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="표준 주소" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="회사 코드 데이터" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="BP 코드" />
+                        <Input id="bp_code_person" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="도로 주소" />
+                        <Input id="bp_address_person" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="회사 코드" />
+                        <Input id="bp_company_code_person" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="BP 범주" />
+                        <Text id="bp_category_person" text="1" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="번지" />
+                        <Input id="bp_specific_address_person" width="50%" />
+                        <layoutData>
+                            <layout:GridData span="XL8 L8 M8 S8" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="개인 칭호" />
+                        <Input id="bp_name_title_person" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="우편 번호" />
+                        <Input id="bp_postCode_person" width="50%" />
+                        <layoutData>
+                            <layout:GridData span="XL8 L8 M8 S8" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="이름" />
+                        <Input id="bp_name_person" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="도시" />
+                        <Input id="bp_city_person" width="50%" />
+                        <layoutData>
+                            <layout:GridData span="XL8 L8 M8 S8" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="국가/지역" />
+                        <Input id="bp_country_person" width="50%" />
+                        <layoutData>
+                            <layout:GridData span="XL8 L8 M8 S8" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="지역" />
+                        <Input id="bp_region_person" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                </form:content>
+            </form:SimpleForm>
+        </content>
+        <OverflowToolbar>
+            <ToolbarSpacer />
+            <Button type="Emphasized" text="생성" press=".onCreateDialog_person" />
+            <Button text="취소" press=".onCancelDialog_person" />
+        </OverflowToolbar>
+    </Dialog>
+</core:FragmentDefinition>

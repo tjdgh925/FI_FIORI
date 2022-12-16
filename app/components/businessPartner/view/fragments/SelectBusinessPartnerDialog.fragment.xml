@@ -1,0 +1,15 @@
+<ActionSheet id="bp_createAction"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	title="Choose Action"
+	showCancelButton="true"
+	placement="Bottom">
+	<Button
+		text="개인 생성"
+		icon="sap-icon://employee"
+		press="onCreate_person" />
+	<Button
+		text="조직 생성"
+		icon="sap-icon://building"
+		press="onCreate_organization" />
+</ActionSheet>
