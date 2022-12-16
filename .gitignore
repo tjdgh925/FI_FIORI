@@ -33,3 +33,7 @@ mta_archives/
 db/.env
 # auto generated wildcard
 .env
+mta.yaml
+.vscode/extensions.json
+package.json
+.vscode/extensions.json

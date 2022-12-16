@@ -118,6 +118,13 @@
           "target": [
             "CreateGeneralLedger"
           ]
+        },
+        {
+          "name": "GeneralLedgerDetail",
+          "pattern": "GeneralLedgerDetail/{num}",
+          "target": [
+            "GeneralLedgerDetail"
+          ]
         }
       ],
       "targets": {
@@ -138,6 +145,12 @@
           "transition": "show",
           "viewId": "CreateGeneralLedger",
           "viewName": "CreateGeneralLedger"
+        },
+        "GeneralLedgerDetail": {
+          "viewType": "XML",
+          "transition": "show",
+          "viewId": "GeneralLedgerDetail",
+          "viewName": "GeneralLedgerDetail"
         }
       }
     },

@@ -10,5 +10,8 @@ sap.ui.define(['sap/ui/core/mvc/Controller'], function (Controller) {
     onCreateGL: function () {
       this.getOwnerComponent().getRouter().navTo('CreateGeneralLedger');
     },
+    onDetailGL: function () {
+      this.getOwnerComponent().getRouter().navTo('GeneralLedgerDetail');
+    },
   });
 });

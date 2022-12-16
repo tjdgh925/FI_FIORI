@@ -1,22 +1,17 @@
-<mvc:View controllerName="projectGL.controller.CreateGeneralLedger" 
-xmlns="sap.m" 
-xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.f" xmlns:t="sap.ui.table" xmlns:form="sap.ui.layout.form" 
-xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" height="100%">
-<uxap:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" upperCaseAnchorBar="false">
+<mvc:View controllerName="projectGL.controller.GeneralLedgerDetail" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.f" xmlns:t="sap.ui.table" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" height="100%">
+    <uxap:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" upperCaseAnchorBar="false">
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:heading>
-                    <Title text="NEW G/L계정 마스터 데이터" />
+                    <Title text="{GeneralLedgerModel>/GL_CODE}" />
                 </uxap:heading>
                 <uxap:snappedTitleOnMobile>
                     <Title text="여기는 뭔가 싶어서 찾아보는곳" />
                 </uxap:snappedTitleOnMobile>
                 <uxap:actions>
-                <Button type="Emphasized"
-                    text="생성" press=".onCreate"/>
-                <Button type="Default"
-                    text="취소"
-                    press=".onBack"/>
+                    <Button type="Emphasized" text="확인" press="onTest" visible="{= ${editModel>/edit}}" />
+                    <Button type="Emphasized" text="편집" press="onTest2" visible="{= !${editModel>/edit}}" />
+                    <Button type="Default" text="취소" press="onTest3" visible="{= ${editModel>/edit}}" />
                 </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
@@ -24,45 +19,9 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
         <uxap:sections>
             <uxap:ObjectPageSection titleUppercase="false" title="my section">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="헤더" mode="Expanded" id="Section1" titleUppercase="false">
+                    <uxap:ObjectPageSubSection title="일반" mode="Expanded" id="Section1" titleUppercase="false">
                         <uxap:blocks>
                             <uxap:ObjectPageLazyLoader stashed="true" id="Section1stashed">
-                                <VBox class="sapUiSmallMargin">
-                                    <form:SimpleForm
-                                        minWidth="1024"
-                                        maxContainerCols="1"
-                                        editable="false"
-                                        layout="ResponsiveGridLayout"
-                                        title="헤더"
-                                        labelSpanL="1"
-                                        labelSpanM="1"
-                                        emptySpanL="8"
-                                        emptySpanM="8"
-                                        columnsL="1"
-                                        columnsM="1"
-                                        width="auto"
-                                        class="sapUxAPObjectPageSubSectionAlignContent"
-                                    >
-                                        <form:content>
-                                            <core:Title text="GL 계정 정보" />
-                                            <Label text="GL 계정" />
-                                            <Input id="GL_CODE" />
-                                            
-                                        </form:content>
-                                    </form:SimpleForm>
-                                </VBox>
-                            </uxap:ObjectPageLazyLoader>
-                        </uxap:blocks>
-                    </uxap:ObjectPageSubSection>
-                </uxap:subSections>
-            </uxap:ObjectPageSection>
-
-
-            <uxap:ObjectPageSection titleUppercase="false" title="my section">
-                <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="일반" mode="Expanded" id="Section2" titleUppercase="false">
-                        <uxap:blocks>
-                            <uxap:ObjectPageLazyLoader stashed="true" id="Section2stashed">
                                 <VBox class="sapUiSmallMargin">
                                     <form:SimpleForm
                                         minWidth="1024"
@@ -81,30 +40,38 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
                                     >
                                         <form:content>
                                             <core:Title text="내역" />
-                                                                                        
+                                            <Label text="GL 계정" />
+                                            <Text id="GL_CODE" text="{GeneralLedgerModel>/GL_CODE}" />
 
                                             <Label text="계정과목표" />
-                                            <Input id="GL_COA" />
+                                            <Text text="{GeneralLedgerModel>/GL_COA}" visible="{=!${editModel>/edit}}" />
+                                            <Input id="GL_COA" value="{GeneralLedgerModel>/GL_COA}" visible="{=${editModel>/edit}}" />
 
                                             <Label text="G/L 계정 유형" />
-                                            <Input id="GL_ACCOUNTTYPE" />
+                                            <Text text="{GeneralLedgerModel>/GL_ACCOUNTTYPE}" visible="{=!${editModel>/edit}}" />
+                                            <Input id="GL_ACCOUNTTYPE" value="{GeneralLedgerModel>/GL_ACCOUNTTYPE}" visible="{=${editModel>/edit}}" />
 
                                             <Label text="계정 그룹" />
-                                            <Input id="GL_ACCOUNTGROUP" />
+                                            <Text text="{GeneralLedgerModel>/GL_ACCOUNTGROUP}" visible="{=!${editModel>/edit}}" />
+                                            <Input id="GL_ACCOUNTGROUP" value="{GeneralLedgerModel>/GL_ACCOUNTGROUP}" visible="{=${editModel>/edit}}" />
 
                                             <Label text="손익 계산서 계정 유형" />
-                                            <Input id="GL_PL_ACCOUNTTYPE" />
+                                            <Text text="{GeneralLedgerModel>/GL_PL_ACCOUNTTYPE}" visible="{=!${editModel>/edit}}" />
+                                            <Input id="GL_PL_ACCOUNTTYPE" value="{GeneralLedgerModel>/GL_PL_ACCOUNTTYPE}" visible="{=${editModel>/edit}}" />
 
                                             <core:Title text="내역(유지보수 언어)(EN)" />
                                             <Label text="내역" />
-                                            <Input id="GL_NAME" />
+                                            <Text text="{GeneralLedgerModel>/GL_NAME}" visible="{=!${editModel>/edit}}" />
+                                            <Input id="GL_NAME" value="{GeneralLedgerModel>/GL_NAME}" visible="{=${editModel>/edit}}" />
 
                                             <Label text="G/L 계정 설명" />
-                                            <Input id="GL_DESCRIPTION" />
+                                            <Text text="{GeneralLedgerModel>/GL_DESCRIPTION}" visible="{=!${editModel>/edit}}" />
+                                            <Input id="GL_DESCRIPTION" value="{GeneralLedgerModel>/GL_DESCRIPTION}" visible="{=${editModel>/edit}}" />
 
                                             <core:Title text="연결데이터" />
                                             <Label text="관계사 번호" />
-                                            <Input id="GL_TRADINGPARTNER" />
+                                            <Text text="{GeneralLedgerModel>/GL_TRADINGPARTNER}" visible="{=!${editModel>/edit}}" />
+                                            <Input id="GL_TRADINGPARTNER" value="{GeneralLedgerModel>/GL_TRADINGPARTNER}" visible="{=${editModel>/edit}}" />
                                         </form:content>
                                     </form:SimpleForm>
                                 </VBox>
@@ -116,43 +83,59 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
 
             <uxap:ObjectPageSection titleUppercase="false" title="my section">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="회사 코드 데이터" mode="Expanded" id="Section3" titleUppercase="false">
+                    <uxap:ObjectPageSubSection title="회사 코드 데이터" mode="Expanded" id="Section2" titleUppercase="false">
                         <uxap:blocks>
-                            <uxap:ObjectPageLazyLoader stashed="true" id="Section3stashed">
+                            <uxap:ObjectPageLazyLoader stashed="true" id="Section2stashed">
                                 <VBox class="sapUiSmallMargin">
                                     <form:SimpleForm minWidth="1024" editable="false" layout="ResponsiveGridLayout" title="회사 코드 지정" width="auto" class="sapUxAPObjectPageSubSectionAlignContent">
                                         <form:content>
-                                            <t:Table width="100%" id="table" rows="{/ProductCollection}" selectionMode="MultiToggle" rowActionCount="1" visibleRowCount="7" ariaLabelledBy="title">                                                
+                                            <t:Table width="100%" id="table" rows="{GeneralLedgerTableModel>/}" selectionMode="MultiToggle" rowActionCount="1" visibleRowCount="7" ariaLabelledBy="title">
+                                                <t:extension>
+                                                        <OverflowToolbar style="Clear">
+                                                            <ToolbarSpacer />
+                                                            <ToggleButton type="Emphasized" text="생성" press="onNavIndicatorsToggle" />
+                                                        </OverflowToolbar>
+                                                    </t:extension>
 
                                                 <t:columns>
                                                     <t:Column>
                                                         <Label text="회사 코드" />
                                                         <t:template>
-                                                            <Input id="cc_company_code" />
+                                                            <Text id="cc_company_code" text="{GeneralLedgerTableModel>CC_COMPANY_CODE}" wrapping="false" />
                                                         </t:template>
                                                     </t:Column>
                                                     <t:Column>
                                                         <Label text="회사 이름" />
                                                         <t:template>
-                                                            <Input id="cc_company_name" />
+                                                            <Text text="{GeneralLedgerTableModel>CC_COMPANY_NAME}" wrapping="false" />
                                                         </t:template>
                                                     </t:Column>
                                                     <t:Column>
-                                                        <Label text="계정 통화" / >
+                                                        <Label text="계정 통화" />
                                                         <t:template>
-                                                            <Input id="cc_currency" />
+                                                            <Text text="{GeneralLedgerTableModel>CC_CURRENCY}" wrapping="false" />
                                                         </t:template>
                                                     </t:Column>
                                                     <t:Column>
                                                         <Label text="계정과목표" />
                                                         <t:template>
-                                                            <Input id="cc_coa" />
+                                                            <Text text="{GeneralLedgerTableModel>CC_COA}" wrapping="false" />
                                                         </t:template>
                                                     </t:Column>
                                                 </t:columns>
+
+                                                <t:rowActionTemplate>
+                                                    <t:RowAction>
+                                                        <t:items>
+                                                            <t:RowActionItem type="Navigation" press="onNavToDetail" />
+                                                        </t:items>
+                                                    </t:RowAction>
+                                                </t:rowActionTemplate>
+                                                
+                                                
+                                                
                                             </t:Table>
                                         </form:content>
-
                                         <form:content />
                                     </form:SimpleForm>
                                 </VBox>
