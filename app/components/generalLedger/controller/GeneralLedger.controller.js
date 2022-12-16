@@ -35,13 +35,17 @@ sap.ui.define(
   ) {
     "use strict";
     const EdmType = exportLibrary.EdmType;
+
+    var accGroupFilter = [];
     return Controller.extend("projectGL.controller.GeneralLedger", {
       onInit: async function () {
+        //GL 라우터 이동했을 경우
         this.getOwnerComponent()
           .getRouter()
           .getRoute("GeneralLedger")
           .attachPatternMatched(this.onMyRoutePatternMatched, this);
 
+        //GL 데이터 가져오는 과정
         const GeneralLedger = await $.ajax({
           type: "get",
           url: "/general-ledger/GL",
@@ -49,22 +53,39 @@ sap.ui.define(
         let GeneralLedgerModel = new JSONModel(GeneralLedger.value);
         this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
 
+        //총계정원자 개수 계산
         var sum = this.getView().getModel("GeneralLedgerModel").oData.length;
 
         this.byId("TableName").setText("총계정원장(" + sum + ")");
 
-        var oMultiInput, oMultiInputWithSuggestions;
-        oMultiInput = this.byId("coaMulti");
-        oMultiInput.addValidator(this._onMultiInputValidate);
-        this._oMultiInput = oMultiInput;
+        // coa Multi Input 설정
+        var coaMultiInput;
+        coaMultiInput = this.byId("coaMulti");
+        coaMultiInput.addValidator(this._onMultiInputValidate);
+        this._oMultiInput = coaMultiInput;
 
         const coaData = await $.ajax({
           type: "GET",
           url: "/general-ledger/COA",
         });
         this.getView().setModel(new JSONModel(coaData.value), "COA");
+
+        //acc Multi Input 설정
+        var accGroupMultiInput;
+        accGroupMultiInput = this.byId("accGroupMulti");
+        accGroupMultiInput.addValidator(this._onMultiInputValidate);
+        this._oMultiInput2 = accGroupMultiInput;
+
+        const accGroupData = await $.ajax({
+          type: "GET",
+          url: "/general-ledger/AccountGroup",
+        });
+
+        console.log(accGroupData);
+        this.getView().setModel(new JSONModel(accGroupData.value), "accGroup");
       },
 
+      // 라우터 이름 일치할 경우 실행 함수
       onMyRoutePatternMatched: async function (oEvent) {
         const GeneralLedger = await $.ajax({
           type: "get",
@@ -74,6 +95,7 @@ sap.ui.define(
         this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
       },
 
+      // 검색 함수
       onSearch: function () {
         let coaTokens = this.byId("coaMulti").getTokens();
         let COA = coaTokens.map((token) => {
@@ -82,35 +104,48 @@ sap.ui.define(
 
         let account = this.byId("account").getValue();
         let accountTypes = this.byId("accountType").getSelectedKeys();
-        let accountGroup = this.byId("accountGroup").getValue();
+
+        let accountGroupTokens = this.byId("accGroupMulti").getTokens();
+        let acGroups = accountGroupTokens.map((acGroup) => {
+          return acGroup.mProperties.key;
+        });
+        // this.byId("accountGroup").getValue();
 
         console.log(accountTypes);
 
         var aFilter = [];
         var coaFilter = [];
         var acGroupFilter = [];
+        var acTypeFilter = [];
         if (COA.length > 0) {
           COA.forEach((coa) => {
             coaFilter.push(new Filter("GL_COA", FilterOperator.Contains, coa));
           });
           aFilter.push(new Filter(coaFilter, false));
         }
+
         if (account) {
           aFilter.push(new Filter("GL_CODE", FilterOperator.EQ, account));
         }
+
         if (accountTypes.length > 0) {
           accountTypes.forEach((accountType) => {
-            acGroupFilter.push(
+            acTypeFilter.push(
               new Filter("GL_ACCOUNTTYPE", FilterOperator.Contains, accountType)
+            );
+          });
+          aFilter.push(new Filter(acTypeFilter, false));
+        }
+
+        if (acGroups.length > 0) {
+          acGroups.forEach((acGroup) => {
+            acGroupFilter.push(
+              new Filter("GL_ACCOUNTGROUP", FilterOperator.Contains, acGroup)
             );
           });
           aFilter.push(new Filter(acGroupFilter, false));
         }
-        if (accountGroup) {
-          aFilter.push(
-            new Filter("GL_ACCOUNTGROUP", FilterOperator.Contains, accountGroup)
-          );
-        }
+
         let oTable = this.byId("GeneralLedgerTable").getBinding("rows");
         oTable.filter(aFilter);
 
@@ -159,7 +194,7 @@ sap.ui.define(
         this.byId("coaMulti").setTokens([]);
         this.byId("account").setValue(null);
         this.byId("accountType").setSelectedKeys([]);
-        this.byId("accountGroup").setValue(null);
+        this.byId("accGroupMulti").setTokens([]);
 
         var aFilter = [];
         let oTable = this.byId("GeneralLedgerTable").getBinding("rows");
@@ -420,6 +455,165 @@ sap.ui.define(
           }.bind(this)
         );
       },
+      getCoaTokens: function () {
+        let coaTokens = this.byId("coaMulti").getTokens();
+        return coaTokens.map((token) => {
+          return token.mProperties.key;
+        });
+      },
+
+      onAccGroupValueHelpRequested: function () {
+        var coaTokens = this.getCoaTokens();
+        var coaFilter = [];
+        accGroupFilter = [];
+        if (coaTokens.length > 0) {
+          coaTokens.forEach((coa) => {
+            coaFilter.push(new Filter("AC_COA", FilterOperator.Contains, coa));
+          });
+          accGroupFilter.push(new Filter(coaFilter, false));
+        }
+
+        if (!this._oBasicSearchField2)
+          this._oBasicSearchField2 = new SearchField();
+        if (!this.pDialog2) {
+          this.pDialog2 = this.loadFragment({
+            name: "projectGL.view.fragments.GeneralLedgerACGroupDialog",
+          });
+        }
+        this.pDialog2.then(
+          function (oDialog2) {
+            var oFilterBar2 = oDialog2.getFilterBar();
+            this._oVHD2 = oDialog2;
+            // Initialise the dialog with model only the first time. Then only open it
+            if (this._bDialogInitialized2) {
+              // Re-set the tokens from the input and update the table
+              oDialog2.setTokens([]);
+              oDialog2.setTokens(this._oMultiInput2.getTokens());
+              oDialog2.update();
+
+              this._filterTable2(
+                new Filter({
+                  filters: accGroupFilter,
+                  and: true,
+                })
+              );
+
+              oDialog2.open();
+              return;
+            }
+            this.getView().addDependent(oDialog2);
+
+            // Set key fields for filtering in the Define Conditions Tab
+            oDialog2.setRangeKeyFields([
+              {
+                label: "AC_GROUP_CODE",
+                key: "AC_GROUP_CODE",
+                type: "string",
+                typeInstance: new TypeString(
+                  {},
+                  {
+                    maxLength: 7,
+                  }
+                ),
+              },
+            ]);
+
+            // Set Basic Search for FilterBar
+            oFilterBar2.setFilterBarExpanded(false);
+            oFilterBar2.setBasicSearch(this._oBasicSearchField2);
+
+            // Trigger filter bar search when the basic search is fired
+            this._oBasicSearchField2.attachSearch(function () {
+              oFilterBar2.search();
+            });
+
+            oDialog2.getTableAsync().then(
+              function (oTable2) {
+                console.log(oTable2);
+                oTable2.setModel(this.getView().getModel("accGroup"));
+
+                // For Desktop and tabled the default table is sap.ui.table.Table
+                if (oTable2.bindRows) {
+                  // Bind rows to the ODataModel and add columns
+                  oTable2.bindAggregation("rows", {
+                    path: "accGroup>/",
+                    events: {
+                      dataReceived: function () {
+                        oDialog2.update();
+                      },
+                    },
+                  });
+                  oTable2.addColumn(
+                    new UIColumn({
+                      label: "AC_GROUP_CODE",
+                      template: "accGroup>AC_GROUP_CODE",
+                    })
+                  );
+                  oTable2.addColumn(
+                    new UIColumn({
+                      label: "AC_COA",
+                      template: "accGroup>AC_COA",
+                    })
+                  );
+                  oTable2.addColumn(
+                    new UIColumn({
+                      label: "AC_NAME",
+                      template: "accGroup>AC_NAME",
+                    })
+                  );
+                }
+
+                // For Mobile the default table is sap.m.Table
+                if (oTable2.bindItems) {
+                  // Bind items to the ODataModel and add columns
+                  oTable2.bindAggregation("items", {
+                    path: "COA>/",
+                    template: new ColumnListItem({
+                      cells: [
+                        new Label({ text: "{AC_GROUP_CODE}" }),
+                        new Label({ text: "{AC_COA}" }),
+                        new Label({ text: "{AC_NAME}" }),
+                      ],
+                    }),
+                    events: {
+                      dataReceived: function () {
+                        oDialog2.update();
+                      },
+                    },
+                  });
+                  oTable2.addColumn(
+                    new MColumn({
+                      header: new Label({ text: "AC_GROUP_CODE" }),
+                    })
+                  );
+                  oTable2.addColumn(
+                    new MColumn({ header: new Label({ text: "AC_COA" }) })
+                  );
+                  oTable2.addColumn(
+                    new MColumn({ header: new Label({ text: "AC_NAME" }) })
+                  );
+                }
+                oDialog2.update();
+              }.bind(this)
+            );
+
+            oDialog2.setTokens(this._oMultiInput2.getTokens());
+
+            // set flag that the dialog is initialized
+
+            this._filterTable2(
+              new Filter({
+                filters: accGroupFilter,
+                and: true,
+              })
+            );
+
+            this._bDialogInitialized2 = true;
+
+            oDialog2.open();
+          }.bind(this)
+        );
+      },
 
       onValueHelpOkPress: function (oEvent) {
         var aTokens = oEvent.getParameter("tokens");
@@ -435,7 +629,24 @@ sap.ui.define(
         this._oMultiInput.setTokens(arr);
         this._oVHD.close();
       },
+      onACGroupOkPress: function (oEvent) {
+        var aTokens = oEvent.getParameter("tokens");
+        var arr = [];
+        aTokens.map((token) => {
+          arr.push(
+            new Token({
+              key: token.mProperties.key,
+              text: token.mProperties.key,
+            })
+          );
+        });
+        this._oMultiInput2.setTokens(arr);
+        this._oVHD2.close();
+      },
 
+      onACGroupCancelPress: function () {
+        this._oVHD2.close();
+      },
       onValueHelpCancelPress: function () {
         this._oVHD.close();
       },
@@ -505,6 +716,72 @@ sap.ui.define(
         );
       },
 
+      onAcGroupFilterBarSearch: function (oEvent) {
+        var sSearchQuery = this._oBasicSearchField2.getValue(),
+          aSelectionSet = oEvent.getParameter("selectionSet");
+
+        console.log(aSelectionSet);
+        console.log(sSearchQuery);
+
+        var filter = [];
+        aSelectionSet.reduce(function (aResult, oControl) {
+          if (oControl.getValue()) {
+            accGroupFilter.push(
+              new Filter({
+                path: oControl.getName(),
+                operator: FilterOperator.Contains,
+                value1: oControl.getValue(),
+              })
+            );
+          }
+        }, []);
+
+        if (sSearchQuery.length > 0) {
+          accGroupFilter.push(
+            new Filter({
+              filters: [
+                new Filter({
+                  path: "AC_GROUP_CODE",
+                  operator: FilterOperator.Contains,
+                  value1: sSearchQuery,
+                }),
+                new Filter({
+                  path: "AC_COA",
+                  operator: FilterOperator.Contains,
+                  value1: sSearchQuery,
+                }),
+                new Filter({
+                  path: "AC_NAME",
+                  operator: FilterOperator.Contains,
+                  value1: sSearchQuery,
+                }),
+              ],
+              and: false,
+            })
+          );
+        } else {
+          accGroupFilter = [];
+          var coaTokens = this.getCoaTokens();
+          var coaFilter = [];
+          accGroupFilter = [];
+          if (coaTokens.length > 0) {
+            coaTokens.forEach((coa) => {
+              coaFilter.push(
+                new Filter("AC_COA", FilterOperator.Contains, coa)
+              );
+            });
+            accGroupFilter.push(new Filter(coaFilter, false));
+          }
+        }
+
+        this._filterTable2(
+          new Filter({
+            filters: accGroupFilter,
+            and: true,
+          })
+        );
+      },
+
       // @endregion
       // Internal helper methods
 
@@ -539,6 +816,21 @@ sap.ui.define(
 
           // This method must be called after binding update of the table.
           oVHD.update();
+        });
+      },
+      _filterTable2: function (oFilter) {
+        var oVHD2 = this._oVHD2;
+
+        oVHD2.getTableAsync().then(function (oTable2) {
+          if (oTable2.bindRows) {
+            oTable2.getBinding("rows").filter(oFilter);
+          }
+          if (oTable2.bindItems) {
+            oTable2.getBinding("items").filter(oFilter);
+          }
+
+          // This method must be called after binding update of the table.
+          oVHD2.update();
         });
       },
 

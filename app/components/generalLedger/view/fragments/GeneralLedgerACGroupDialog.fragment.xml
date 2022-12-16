@@ -1,0 +1,45 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core">
+    <ValueHelpDialog title="Product"
+        id="generalLedgerACGroupDialog"
+        ok="onACGroupOkPress"
+        cancel="onACGroupCancelPress"
+        supportRanges="true"
+        key="AC_GROUP_CODE"
+        descriptionKey="AC_GROUP">
+        <filterBar>
+            <fb:FilterBar advancedMode="true"
+                search=".onAcGroupFilterBarSearch"
+                isRunningInValueHelpDialog="true">
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem groupName="__$INTERNAL$"
+                        name="AC_GROUP_CODE"
+                        label="AC Group Code"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="AC Group Code" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem groupName="__$INTERNAL$"
+                        name="AC_COA"
+                        label="AC COA"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="AC COA" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem groupName="__$INTERNAL$"
+                        name="AC_NAME"
+                        label="AC Name"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="AC Name" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+        </filterBar>
+    </ValueHelpDialog>
+</core:FragmentDefinition>

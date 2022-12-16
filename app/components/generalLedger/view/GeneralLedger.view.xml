@@ -82,9 +82,31 @@
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="계정 그룹:" />
-                            <Input id="accountGroup"
-                                showValueHelp="true" />
+                            <Label text="계정 그룹"
+                                labelFor="multiInput" />
+                            <MultiInput id="accGroupMulti"
+                                valueHelpRequest="onAccGroupValueHelpRequested"
+                                required="true">
+                                <suggestionColumns>
+                                    <Column>
+                                        <Label text="Group Code" />
+                                    </Column>
+                                    <Column>
+                                        <Label text="Group COA" />
+                                    </Column>
+                                    <Column>
+                                        <Label text="Group Name" />
+                                    </Column>
+                                </suggestionColumns>
+                                <suggestionRows>
+                                    <ColumnListItem>
+                                        <Label text="{AC_GROUP_CODE}" />
+                                        <Label text="{AC_COA}" />
+                                        <Label text="{AC_NAME}" />
+                                    </ColumnListItem>
+                                </suggestionRows>
+                            </MultiInput>
+
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
