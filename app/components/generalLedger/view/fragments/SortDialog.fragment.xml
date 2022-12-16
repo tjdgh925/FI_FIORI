@@ -1,0 +1,17 @@
+<core:FragmentDefinition 
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core">
+    <ViewSettingsDialog
+    id="SortDialog"
+    confirm="onConfirmSortDialog"
+    title="정렬">
+    <sortItems>
+       <ViewSettingsItem text="G/L 계정" key="GL_CODE"/>
+       <ViewSettingsItem text="내역" key="GL_NAME"/>
+       <ViewSettingsItem text="계정과목표" key="GL_COA"/>
+       <ViewSettingsItem text="G/L 계정 유형" key="GL_ACCOUNTTYPE"/>
+       <ViewSettingsItem text="계정 그룹" key="GL_ACCOUNTGROUP"/>
+
+    </sortItems>
+    </ViewSettingsDialog>
+</core:FragmentDefinition>
