@@ -19,8 +19,8 @@
 					</TileContent>
 				</GenericTile>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-					header="BP 생성"
-					press="onCreateBP">
+					header="BP 상세"
+					press="onDetailBP">
 					<TileContent >
 						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
 					</TileContent>

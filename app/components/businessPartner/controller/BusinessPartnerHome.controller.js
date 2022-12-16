@@ -7,8 +7,8 @@ sap.ui.define(['sap/ui/core/mvc/Controller'], function (Controller) {
     onDisplayBP: function () {
       this.getOwnerComponent().getRouter().navTo('BusinessPartner');
     },
-    onCreateBP: function () {
-      this.getOwnerComponent().getRouter().navTo('CreateBusinessPartner');
+    onDetailBP: function () {
+      this.getOwnerComponent().getRouter().navTo('DetailBusinessPartner');
     },
     onChartBP: function () {
       this.getOwnerComponent().getRouter().navTo('ChartBusinessPartner');
