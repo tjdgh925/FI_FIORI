@@ -27,8 +27,8 @@
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="BP 코드" />
-                        <Input id="bp_code_person" />
+                        <Label text="BP 코드" labelFor="bp_code_person"/>
+                        <Input id="bp_code_person" required="true"/>
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
@@ -41,8 +41,8 @@
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="회사 코드" />
-                        <Input id="bp_company_code_person" />
+                        <Label text="회사 코드" labelFor="bp_company_code_person"/>
+                        <Input id="bp_company_code_person" required="true"/>
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
@@ -76,8 +76,8 @@
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="이름" />
-                        <Input id="bp_name_person" />
+                        <Label text="이름" labelFor="bp_name_person"/>
+                        <Input id="bp_name_person" required="true"/>
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>

@@ -42,8 +42,23 @@
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="국가/지역 : " />
-                            <Input id="bp_country" showValueHelp="true" valueHelpRequest="onhandleValueHelp" />
+                            <Label text="국가/지역 : " labelFor="bp_country" />
+                            <MultiInput id="bp_country" valueHelpRequest=".onValueHelpRequested">
+                                <suggestionColumns>
+                                    <Column>
+                                        <Label text="COUNTRY_CODE" />
+                                    </Column>
+                                    <Column>
+                                        <Label text="COUNTRY_NAME" />
+                                    </Column>
+                                </suggestionColumns>
+                                <suggestionRows>
+                                    <ColumnListItem>
+                                        <Label text="{COUNTRY_CODE}" />
+                                        <Label text="{COUNTRY_NAME}" />
+                                    </ColumnListItem>
+                                </suggestionRows>
+                            </MultiInput>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
@@ -125,7 +140,7 @@
                 </columns>
 
                 <items>
-                    <ColumnListItem vAlign="Middle">
+                    <ColumnListItem vAlign="Middle" press="onCellClick" type="Navigation">
                         <cells>
                             <CheckBox selected="{BusinessPartnerModel>CHK}" textAlign="Center" select="oncheckselect" />
                             <ObjectIdentifier title="{BusinessPartnerModel>BP_CODE}" text="{BusinessPartnerModel>BP_NAME}" />
@@ -134,12 +149,10 @@
                             <Text text="{BusinessPartnerModel>BP_CITY}" />
                             <Text text="{BusinessPartnerModel>BP_POSTCODE}" />
                             <Text text="{BusinessPartnerModel>BP_COUNTRY}" />
-                            <ObjectStatus
-                                text="{
+                            <ObjectStatus text="{
                             path: 'BusinessPartnerModel>BP_CATEGORY',
                             formatter: '.formatter.statusText'
-                            }"
-                            />
+                            }" />
                         </cells>
                     </ColumnListItem>
                 </items>
