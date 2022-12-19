@@ -1,91 +1,106 @@
-sap.ui.define(['sap/ui/core/mvc/Controller', 'sap/ui/model/json/JSONModel', "sap/m/MessageToast",
-"sap/ui/core/format/DateFormat",
-"sap/ui/thirdparty/jquery"], function (Controller, JSONModel,  MessageToast, DateFormat, jQuery) {
-    'use strict';
-  
+sap.ui.define(
+  [
+    "sap/ui/core/mvc/Controller",
+    "sap/ui/model/json/JSONModel",
+    "sap/ui/core/Fragment",
+  ],
+  function (Controller, JSONModel, Fragment) {
+    "use strict";
+
+    var gl_code;
     return Controller.extend("projectGL.controller.MassCreateGeneralLedger", {
+      async onInit() {
+        var initData = [];
+        this.getView().setModel(new JSONModel(initData), "MassCreateModel");
 
-		onInit : function() {
-			// set explored app's demo model on this sample
-			var oJSONModel = this.initSampleDataModel();
-			this.getView().setModel(oJSONModel);
-		},
+        const firstData = await $.ajax({
+          type: "GET",
+          url: "/general-ledger/GL?$orderby=GL_CODE desc&$top=1",
+        });
 
-		initSampleDataModel : function() {
-			var oModel = new JSONModel();
+        gl_code = firstData.value[0].GL_CODE;
+      },
 
-			var oDateFormat = DateFormat.getDateInstance({source: {pattern: "timestamp"}, pattern: "dd/MM/yyyy"});
+      onMassCreationNumber: async function () {
+        if (!this.byId("MassCreateNumberDialog")) {
+          Fragment.load({
+            id: this.getView().getId(),
+            name: "projectGL.view.fragments.MassCreateNumberDialog",
+            controller: this,
+          }).then(
+            function (oDialog) {
+              this.getView().addDependent(oDialog);
+              oDialog.open();
+            }.bind(this)
+          );
+        } else {
+          this.byId("MassCreateNumberDialog").open();
+        }
+      },
 
-			jQuery.ajax(sap.ui.require.toUrl("sap/ui/demo/mock/products.json"), {
-				dataType: "json",
-				success: function(oData) {
-					var aTemp1 = [];
-					var aTemp2 = [];
-					var aSuppliersData = [];
-					var aCategoryData = [];
-					for (var i = 0; i < oData.ProductCollection.length; i++) {
-						var oProduct = oData.ProductCollection[i];
-						if (oProduct.SupplierName && aTemp1.indexOf(oProduct.SupplierName) < 0) {
-							aTemp1.push(oProduct.SupplierName);
-							aSuppliersData.push({Name: oProduct.SupplierName});
-						}
-						if (oProduct.Category && aTemp2.indexOf(oProduct.Category) < 0) {
-							aTemp2.push(oProduct.Category);
-							aCategoryData.push({Name: oProduct.Category});
-						}
-						oProduct.DeliveryDate = (new Date()).getTime() - (i % 10 * 4 * 24 * 60 * 60 * 1000);
-						oProduct.DeliveryDateStr = oDateFormat.format(new Date(oProduct.DeliveryDate));
-						oProduct.Heavy = oProduct.WeightMeasure > 1000 ? "true" : "false";
-						oProduct.Available = oProduct.Status == "Available" ? true : false;
-					}
+      onMassCreationDialogCancel: function () {
+        this.byId("MassCreateNumberDialog").close();
+      },
 
-					oData.Suppliers = aSuppliersData;
-					oData.Categories = aCategoryData;
+      onMassCreationDialogApprove: function () {
+        const amount = this.byId("massCreationNumber").getValue();
 
-					oModel.setData(oData);
-				},
-				error: function() {
-					Log.error("failed to load json");
-				}
-			});
+        let massInputModel = this.getView().getModel("MassCreateModel").oData;
 
-			return oModel;
-		},
+        for (var i = 1; i <= amount; i++) {
+          massInputModel.push(this.createEmptyInput(i));
+        }
+        console.log(massInputModel);
+        this.getView().setModel(
+          new JSONModel(massInputModel),
+          "MassCreateModel"
+        );
 
-		updateMultipleSelection: function(oEvent) {
-			var oMultiInput = oEvent.getSource(),
-				sTokensPath = oMultiInput.getBinding("tokens").getContext().getPath() + "/" + oMultiInput.getBindingPath("tokens"),
-				aRemovedTokensKeys = oEvent.getParameter("removedTokens").map(function(oToken) {
-					return oToken.getKey();
-				}),
-				aCurrentTokensData = oMultiInput.getTokens().map(function(oToken) {
-					return {"Key" : oToken.getKey(), "Name" : oToken.getText()};
-				});
+        this.onMassCreationDialogCancel();
+      },
 
-			aCurrentTokensData = aCurrentTokensData.filter(function(oToken){
-				return aRemovedTokensKeys.indexOf(oToken.Key) === -1;
-			});
+      createEmptyInput: function () {
+        var emptyData = {
+          GL_COA: null,
+          GL_ACCOUNTTYPE: null,
+          GL_ACCOUNTGROUP: null,
+          GL_PL_ACCOUNTTYPE: null,
+          GL_NAME: null,
+          GL_DESCRIPTION: null,
+          GL_TRADINGPARTNER: null,
+          GL_COMPANY_CODE : null
+        };
 
-			oMultiInput.getModel().setProperty(sTokensPath, aCurrentTokensData);
-		},
+        return emptyData;
+      },
 
-		formatAvailableToObjectState : function(bAvailable) {
-			return bAvailable ? "Success" : "Error";
-		},
+      onClearMassCreate: function (e) {
+        const path = e.getSource().getParent().getRowBindingContext().getPath();
+        const index = path.split("/")[1];
 
-		formatAvailableToIcon : function(bAvailable) {
-			return bAvailable ? "sap-icon://accept" : "sap-icon://decline";
-		},
+        let massDeleteModel = this.getView().getModel("MassCreateModel").oData;
+        massDeleteModel.splice(index, 1);
 
-		handleDetailsPress : function(oEvent) {
-			MessageToast.show("Details for product with id " + this.getView().getModel().getProperty("ProductId", oEvent.getSource().getBindingContext()));
-		},
+        this.getView().setModel(
+          new JSONModel(massDeleteModel),
+          "MassCreateModel"
+        );
+      },
 
-		onPaste: function(oEvent) {
-			var aData = oEvent.getParameter("data");
-			MessageToast.show("Pasted Data: " + aData);
-		}
-  
+      onMassCreationApprove: async function () {
+        let inputData = this.getView().getModel("MassCreateModel").oData;
+        var cnt = 1;
+        await inputData.forEach((data) => {
+          Object.assign(data, { GL_CODE: parseInt(gl_code) + cnt++ });
+
+          $.ajax({
+            type: "POST",
+            url: "/general-ledger/GL",
+            contentType: "application/json;IEEE754Compatible=true",
+            data: JSON.stringify(data),
+          });
+        });
+      },
     });
-  });
-  
+  }
+);
