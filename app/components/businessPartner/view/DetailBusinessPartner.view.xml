@@ -1,253 +1,402 @@
-<mvc:View xmlns:mvc="sap.ui.core.mvc" xmlns="sap.uxap" xmlns:m="sap.m" xmlns:f="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" controllerName="projectBP.controller.DetailBusinessPartner" height="100%">
-    <ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" upperCaseAnchorBar="false" toggleHeaderOnTitleClick="false" headerContentPinnable="false">
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    controllerName="projectBP.controller.DetailBusinessPartner"
+    height="100%">
+    <ObjectPageLayout id="ObjectPageLayout"
+        enableLazyLoading="true"
+        upperCaseAnchorBar="false"
+        toggleHeaderOnTitleClick="false"
+        headerContentPinnable="false">
         <headerTitle>
             <ObjectPageDynamicHeaderTitle>
                 <expandedHeading>
-                <m:HBox>
-                    <m:Button icon="sap-icon://nav-back" type="Transparent" class="sapUiTinyMarginEnd" press="onBack" visible="{=!${editModel>/edit}}" />
-                    <m:Title text="{BusinessPartnerModel>/BP_NAME}" wrapping="true" />
+                    <m:HBox>
+                        <m:Button icon="sap-icon://nav-back"
+                            type="Transparent"
+                            class="sapUiTinyMarginEnd"
+                            press="onBack"
+                            visible="{=!${editModel>/edit}}" />
+                        <m:Title text="{BusinessPartnerModel>/BP_NAME}"
+                            wrapping="true" />
                     </m:HBox>
                 </expandedHeading>
 
                 <snappedHeading>
-                    <m:FlexBox fitContainer="true" alignItems="Center">
-                        <m:Avatar src="sap-icon://building" class="sapUiTinyMarginEnd" visible="{organization_visibleModel>/organization}"/>
-                        <m:Avatar src="sap-icon://person-placeholder" class="sapUiTinyMarginEnd" visible="{personal_visibleModel>/personal}" />
-                        <m:Title text="{BusinessPartnerModel>/BP_NAME}" wrapping="true" />
+                    <m:FlexBox fitContainer="true"
+                        alignItems="Center">
+                        <m:Avatar src="sap-icon://building"
+                            class="sapUiTinyMarginEnd"
+                            visible="{organization_visibleModel>/organization}" />
+                        <m:Avatar src="sap-icon://person-placeholder"
+                            class="sapUiTinyMarginEnd"
+                            visible="{personal_visibleModel>/personal}" />
+                        <m:Title text="{BusinessPartnerModel>/BP_NAME}"
+                            wrapping="true" />
                     </m:FlexBox>
                 </snappedHeading>
 
                 <expandedContent>
-              
                     <m:Text text="{BusinessPartnerModel>/BP_CODE}" />
                 </expandedContent>
 
                 <actions>
-               
-                    <m:Button type="Emphasized" text="편집" press="onEdit" visible="{=!${editModel>/edit}&amp;&amp;!${FinalSaveModel>/FinalSave}}" />
-                    <m:Button type="Emphasized" text="최종 저장 하시겠습니까?" press="onFinalSave" visible="{=!${editModel>/edit}&amp;&amp;${FinalSaveModel>/FinalSave}}" />
-					
-					<m:Button type="Emphasized" text="확인" press="onConfirm" visible="{=${editModel>/edit}}"/>
-					<m:Button type="Default" text="취소" press="onCancel" visible="{=${editModel>/edit}}"/>
+                    <m:Button type="Emphasized"
+                        text="편집"
+                        press="onEdit"
+                        visible="{=!${editModel>/edit}&amp;&amp;!${FinalSaveModel>/FinalSave}}" />
+                    <m:Button type="Emphasized"
+                        text="최종 저장 하시겠습니까?"
+                        press="onFinalSave"
+                        visible="{=!${editModel>/edit}&amp;&amp;${FinalSaveModel>/FinalSave}}" />
+
+                    <m:Button type="Emphasized"
+                        text="확인"
+                        press="onConfirm"
+                        visible="{=${editModel>/edit}}" />
+                    <m:Button type="Default"
+                        text="취소"
+                        press="onCancel"
+                        visible="{=${editModel>/edit}}" />
+                    <m:Button type="Default"
+                        text="아니오"
+                        press="onGotopage"
+                        visible="{=!${editModel>/edit}&amp;&amp;${FinalSaveModel>/FinalSave}}" />
                 </actions>
             </ObjectPageDynamicHeaderTitle>
         </headerTitle>
 
-        	<headerContent>
-
-							
-                	<layout:HorizontalLayout>
+        <headerContent>
+            <layout:HorizontalLayout>
                 <m:HBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
-					<m:Avatar src="sap-icon://building" displaySize="XL" class="sapUiTinyMarginEnd" visible="{organization_visibleModel>/organization}" />
-                 <m:Avatar src="sap-icon://person-placeholder" displaySize="XL" class="sapUiTinyMarginEnd" visible="{personal_visibleModel>/personal}" />
-	                </m:HBox>
-                        	</layout:HorizontalLayout>
+                    <m:Avatar src="sap-icon://building"
+                        displaySize="XL"
+                        class="sapUiTinyMarginEnd"
+                        visible="{organization_visibleModel>/organization}" />
+                    <m:Avatar src="sap-icon://person-placeholder"
+                        displaySize="XL"
+                        class="sapUiTinyMarginEnd"
+                        visible="{personal_visibleModel>/personal}" />
+                </m:HBox>
+            </layout:HorizontalLayout>
 
+            <layout:VerticalLayout>
+                <m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                    <m:Title text=""
+                        class="sapUiTinyMarginBottom" />
 
-                    	<layout:VerticalLayout>
-					<m:VBox class="sapUiSmallMarginBottom">
-						<m:Title class="sapUiTinyMarginBottom">
-							
-						</m:Title>
+                    <m:HBox class="sapUiTinyMarginBottom"
+                        renderType="Bare">
+                        <m:Label text="그룹화 :"
+                            class="sapUiTinyMarginEnd" />
 
-						<m:HBox class="sapUiTinyMarginBottom" renderType="Bare">
-							<m:Label text="그룹화 :" class="sapUiTinyMarginEnd"/>
-							<m:Text width="150px" text=""/>
-						</m:HBox>
+                        <m:Text width="250px"
+                            text="표준 용도의 내부 번호 지정"
+                            visible="{organization_visibleModel>/organization}" />
+                        <m:Text width="250px"
+                            text="외부 숫자 번호 지정(범위 높음)"
+                            visible="{personal_visibleModel>/personal}" />
+                    </m:HBox>
 
-						<m:HBox class="sapUiTinyMarginBottom" renderType="Bare">
-							<m:Label text="비즈니스 파트너 범주 :" class="sapUiTinyMarginEnd"/>
-							<m:Text width="150px" text="{BusinessPartnerModel>BP_CATEGORY}"/>
-						</m:HBox>
+                    <m:HBox class="sapUiTinyMarginBottom"
+                        renderType="Bare">
+                        <m:Label text="비즈니스 파트너 범주 :"
+                            class="sapUiTinyMarginEnd" />
+                        <!-- <m:Text width="150px" text="{BusinessPartnerModel>/BP_CATEGORY}"/> -->
 
-						
-					</m:VBox>
-    </layout:VerticalLayout>
+                        <m:ObjectStatus id="Status"
+                            text="{
+                        path: 'BusinessPartnerModel>/BP_CATEGORY',
+                        formatter: '.formatter.statusText'
+                        }" />
 
-                
-                <layout:VerticalLayout>
-				<m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
-					<m:Title text="표준 주소" class="sapUiTinyMarginBottom" />
-                    <m:Text  width="250px" text="{BusinessPartnerModel>/BP_SPECIFIC_ADDRESS} {BusinessPartnerModel>/BP_ADDRESS} {BusinessPartnerModel>/BP_CITY} {BusinessPartnerModel>/BP_REGION}, 
-                    {BusinessPartnerModel>/BP_POSTCODE}, {BusinessPartnerModel>/BP_COUNTRY}"/>
-
-				</m:VBox>
-                </layout:VerticalLayout>
-                
-             <layout:VerticalLayout>
-				<m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
-					<m:Title text="상태" class="sapUiTinyMarginBottom" />
-						
-					<m:HBox class="sapUiTinyMarginBottom" renderType="Bare">
-						<m:Label text="청구 보류 :" class="sapUiSmallMarginEnd"/>
-						<m:Text width="150px" text="{BusinessPartnerModel>/BP_CLAIM_HOLD}"/>
-					</m:HBox>
-
-					<m:HBox class="sapUiTinyMarginBottom">
-						<m:Label text="납품 보류 :" class="sapUiSmallMarginEnd"/>
-						<m:Text width="150px" text="{BusinessPartnerModel>/BP_DELIVER_HOLD}"/>
-					</m:HBox>
-
-					<m:HBox renderType="Bare">
-						<m:Label text="전기 보류 :" class="sapUiSmallMarginEnd"/>
-						<m:Text width="150px" text="아니오"/>
-					</m:HBox>
-
-                    
-				</m:VBox>
-                 </layout:VerticalLayout>
-
-                        <layout:VerticalLayout>
-					<m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
-					<m:Title text="회사 코드" class="sapUiTinyMarginBottom" />
-                    <m:Text width="150px" text="{BusinessPartnerModel>/BP_COMPANY_CODE}"/>
-
-				</m:VBox>
-				
-	
+                    </m:HBox>
+                </m:VBox>
             </layout:VerticalLayout>
 
+            <layout:VerticalLayout>
+                <m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                    <m:Title text="표준 주소"
+                        class="sapUiTinyMarginBottom" />
+                    <m:Text width="250px"
+                        text="{BusinessPartnerModel>/BP_SPECIFIC_ADDRESS} {BusinessPartnerModel>/BP_ADDRESS} {BusinessPartnerModel>/BP_CITY} {BusinessPartnerModel>/BP_REGION}, 
+                    {BusinessPartnerModel>/BP_POSTCODE}, {BusinessPartnerModel>/BP_COUNTRY}" />
+                </m:VBox>
+            </layout:VerticalLayout>
 
-		</headerContent>
+            <layout:VerticalLayout>
+                <m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                    <m:Title text="상태"
+                        class="sapUiTinyMarginBottom" />
 
-       
+                    <m:HBox class="sapUiTinyMarginBottom"
+                        renderType="Bare">
+                        <m:Label text="청구 보류 :"
+                            class="sapUiSmallMarginEnd" />
+                        <m:Text width="150px"
+                            text="{BusinessPartnerModel>/BP_CLAIM_HOLD}" />
+                    </m:HBox>
+
+                    <m:HBox class="sapUiTinyMarginBottom">
+                        <m:Label text="납품 보류 :"
+                            class="sapUiSmallMarginEnd" />
+                        <m:Text width="150px"
+                            text="{BusinessPartnerModel>/BP_DELIVER_HOLD}" />
+                    </m:HBox>
+
+                    <m:HBox renderType="Bare">
+                        <m:Label text="전기 보류 :"
+                            class="sapUiSmallMarginEnd" />
+                        <m:Text width="150px"
+                            text="아니오" />
+                    </m:HBox>
+                </m:VBox>
+            </layout:VerticalLayout>
+
+            <layout:VerticalLayout>
+                <m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
+                    <m:Title text="회사 코드"
+                        class="sapUiTinyMarginBottom" />
+                    <m:Text width="150px"
+                        text="{BusinessPartnerModel>/BP_COMPANY_CODE}" />
+                </m:VBox>
+            </layout:VerticalLayout>
+        </headerContent>
+
         <sections>
-            <ObjectPageSection titleUppercase="false" title="기본 데이터" showTitle="true">
+            <ObjectPageSection titleUppercase="false"
+                title="기본 데이터"
+                showTitle="true">
                 <subSections>
-                    <ObjectPageSubSection showTitle="false" title="일반 정보" titleUppercase="false">
+                    <ObjectPageSubSection showTitle="false"
+                        title="일반 정보"
+                        titleUppercase="false">
                         <blocks>
-                            <f:SimpleForm
-                                
-                                id="SimpleFormChange480_Trial"
+                            <f:SimpleForm id="SimpleFormChange480_Trial"
                                 editable="true"
                                 layout="ColumnLayout"
                                 title="일반 정보"
-                            
                                 columnsXL="4"
                                 columnsL="2"
                                 columnsM="2"
-                                singleContainerFullSize="false"
-                            >
+                                singleContainerFullSize="false">
                                 <f:content>
                                     <core:Title text="" />
-                                    <m:Label text="조직 구분 " visible="{visibleModel>/organization}"/>
-									<m:Text id="bp_org_division" text="{BusinessPartnerModel>/BP_ORG_DIVISION}" visible="{=!${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}"/>
-                                    <m:Input id="bp_org_division2" value="{BusinessPartnerModel>/BP_ORG_DIVISION}" visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}"/>
+                                    <m:Label text="조직 구분 "
+                                        visible="{visibleModel>/organization}" />
+                                    <m:Text id="bp_org_division"
+                                        text="{BusinessPartnerModel>/BP_ORG_DIVISION}"
+                                        visible="{=!${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
+                                    <m:Input id="bp_org_division2"
+                                        value="{BusinessPartnerModel>/BP_ORG_DIVISION}"
+                                        visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
 
-                                    <m:Label text="개인 칭호 " visible="{visibleModel>/personal}" />
-                                    <m:Text id="bp_name_title" text="{BusinessPartnerModel>/BP_NAME_TITLE}" visible="{=!${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}"/>
-                                    <m:Input id="bp_name_title2" value="{BusinessPartnerModel>/BP_NAME_TITLE}" visible="{=${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}"/>
-                                    <!-- <m:Select width="100%">
-                                    <core:Item text="dkssu" />
-                                    <core:Item text="M"/>
-                                    </m:Select> -->
-                                    
+                                    <m:Label text="개인 칭호 "
+                                        visible="{visibleModel>/personal}" />
+                                    <m:Text id="bp_name_title"
+                                        text="{BusinessPartnerModel>/BP_NAME_TITLE}"
+                                        visible="{=!${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}" />
 
-								
-                                    
+                                    <m:Select id="bp_name_title2"
+                                        width="100%"
+                                        visible="{=${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}">
+                                        <core:Item text="Mr"
+                                            key="Mrkey" />
+                                        <core:Item text="Mrs"
+                                            key="Mrskey" />
+                                    </m:Select>
+
+                                    <!--                                     
+                                    <m:Input id="bp_name_title2" value="{BusinessPartnerModel>/BP_NAME_TITLE}" visible="{=${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}" />
+                                         -->
+
                                     <m:Label text="이름 " />
-                                    <m:Text id="bp_name" text="{BusinessPartnerModel>/BP_NAME}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_name2" value="{BusinessPartnerModel>/BP_NAME}" visible="{=${editModel>/edit}}"/>
-                                  
-                            
+                                    <m:Text id="bp_name"
+                                        text="{BusinessPartnerModel>/BP_NAME}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_name2"
+                                        value="{BusinessPartnerModel>/BP_NAME}"
+                                        visible="{=${editModel>/edit}}" />
+
                                     <core:Title text="" />
                                     <m:Label text="검색어 1 " />
-                                    <m:Text id="bp_search" text="{BusinessPartnerModel>/BP_SEARCH}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_search2" value="{BusinessPartnerModel>/BP_SEARCH}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_search"
+                                        text="{BusinessPartnerModel>/BP_SEARCH}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_search2"
+                                        value="{BusinessPartnerModel>/BP_SEARCH}"
+                                        visible="{=${editModel>/edit}}" />
                                     <!-- <m:Input value="{Url}" /> -->
                                     <m:Label text="권한 그룹 " />
-                                     <m:Text id="bp_auth_group" text="{BusinessPartnerModel>/BP_AUTH_GROUP}" visible="{=!${editModel>/edit}}"/>
-                                     <m:Input id="bp_auth_group2" value="{BusinessPartnerModel>/BP_AUTH_GROUP}" visible="{=${editModel>/edit}}"/>
-                                    <!-- <m:Input value="{Twitter}" /> -->
+                                    <!-- <m:Text id="bp_auth_group" text="{BusinessPartnerModel>/BP_AUTH_GROUP}" visible="{=!${editModel>/edit}}" /> -->
 
-									<core:Title text=""  />
-                                    <m:Label text="법적 형태 " visible="{visibleModel>/organization}"/>
-                                     <m:Text id="bp_legal_from" text="{BusinessPartnerModel>/BP_LEGAL_FORM}" visible="{=!${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}"/>
-                                     <m:Input id="bp_legal_from2" value="{BusinessPartnerModel>/BP_LEGAL_FORM}" visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}"/>
-                                    <!-- <m:Input value="{Url}" /> -->
-                                  <m:Label text="아카이빙 플래그 " />
-                                     <m:Text id="bp_archiving_flag" text="{BusinessPartnerModel>/BP_Archiving_Flag}" visible="{=!${editModel>/edit}}"/>
-                                     <m:Input id="bp_archiving_flag2" value="{BusinessPartnerModel>/BP_Archiving_Flag}" visible="{=${editModel>/edit}}"/>
+                                    <!-- <m:ObjectStatus id="Status2" text="{path: 'BusinessPartnerModel>/BP_AUTH_GROUP'}" state="{= ${BusinessPartnerModel>/BP_AUTH_GROUP} === 'null' ? 'Error' :
+                            ${BusinessPartnerModel>/BP_AUTH_GROUP} === '조직(2)' ? '조직(2)' :
+                            'None'
+                        }" /> /> -->
 
-									<core:Title text="" />
+                                    <!-- <m:Input id="bp_auth_group2" value="{BusinessPartnerModel>/BP_AUTH_GROUP}" visible="{=${editModel>/edit}}" /> -->
+
+
+
+                                    <core:Title text="" />
+                                    <m:Label text="법적 형태 "
+                                        visible="{visibleModel>/organization}" />
+                                    <m:Text id="bp_legal_from"
+                                        text="{BusinessPartnerModel>/BP_LEGAL_FORM}"
+                                        visible="{=!${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
+                                    <m:Input id="bp_legal_from2"
+                                        value="{BusinessPartnerModel>/BP_LEGAL_FORM}"
+                                        visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
+
+                                    <m:Label text="아카이빙 플래그 " />
+                                    <m:Text id="bp_archiving_flag"
+                                        text="{BusinessPartnerModel>/BP_ARCHIVING_FLAG}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_archiving_flag2"
+                                        value="{BusinessPartnerModel>/BP_ARCHIVING_FLAG}"
+                                        visible="{=${editModel>/edit}}" />
+
+                                    <core:Title text="" />
+
+
                                     <m:Label text="생성일 " />
-                                     <m:Text text="" visible="{=!${editModel>/edit}}"/>
-                                     <m:Input value="" visible="{=${editModel>/edit}}"/>
-                                  
+                                    <m:Text id="bp_createdAt"
+                                        text="{BusinessPartnerModel>/createdAt}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Text id="bp_createdAt2"
+                                        text="{BusinessPartnerModel>/createdAt}"
+                                        visible="{=${editModel>/edit}}" />
+
                                     <m:Label text="최종 변경자 " />
-                                     <m:Text text="" visible="{=!${editModel>/edit}}"/>
-                                     <m:Input value="" visible="{=${editModel>/edit}}"/>
-                                   
-									 <m:Label text="최종 변경일 " />
-                                      <m:Text text="" visible="{=!${editModel>/edit}}"/>
-                                      <m:Input value="" visible="{=${editModel>/edit}}"/>
-                                   
-                                   
+                                    <m:Text id="bp_modifiedBy"
+                                        text="{BusinessPartnerModel>/modifiedBy}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Text id="bp_modifiedBy2"
+                                        text="{BusinessPartnerModel>/modifiedBy}"
+                                        visible="{=${editModel>/edit}}" />
+
+
+                                    <m:Label text="최종 변경일 " />
+                                    <m:Text id="bp_modifiedAt"
+                                        text="{BusinessPartnerModel>/modifiedAt}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Text id="bp_modifiedAt2"
+                                        text="{BusinessPartnerModel>/modifiedAt}"
+                                        visible="{=${editModel>/edit}}" />
+
                                 </f:content>
                             </f:SimpleForm>
                         </blocks>
                     </ObjectPageSubSection>
 
-                    <ObjectPageSubSection showTitle="false" title="고객 정보" mode="Expanded" titleUppercase="false">
+                    <ObjectPageSubSection showTitle="false"
+                        title="고객 정보"
+                        mode="Expanded"
+                        titleUppercase="false">
                         <blocks>
-                            <f:SimpleForm
-                              
-                                editable="true"
+                            <f:SimpleForm editable="true"
                                 layout="ColumnLayout"
                                 title="고객 정보"
-                               
                                 columnsXL="4"
                                 columnsL="2"
                                 columnsM="2"
-                                singleContainerFullSize="false"
-                            >
+                                singleContainerFullSize="false">
                                 <f:content>
                                     <core:Title text="" />
                                     <m:Label text="BP 코드 " />
-                                     <m:Text id="bp_code" text="{BusinessPartnerModel>/BP_CODE}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_code2" value="{BusinessPartnerModel>/BP_CODE}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_code"
+                                        text="{BusinessPartnerModel>/BP_CODE}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_code2"
+                                        value="{BusinessPartnerModel>/BP_CODE}"
+                                        visible="{=${editModel>/edit}}" />
                                     <m:Label text="고객 계정 그룹 " />
-                                     <m:Text id="bp_cust_account_group" text="{BusinessPartnerModel>/BP_CUST_ACCOUNT_GROUP}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_cust_account_group2" value="{BusinessPartnerModel>/BP_CUST_ACCOUNT_GROUP}" visible="{=${editModel>/edit}}"/>
-									<m:Label text="고객 권한 그룹 " />
-                                     <m:Text id="bp_cust_auth_group" text="{BusinessPartnerModel>/BP_CUST_AUTH_GROUP}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_cust_auth_group2" value="{BusinessPartnerModel>/BP_CUST_AUTH_GROUP}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_cust_account_group"
+                                        text="{BusinessPartnerModel>/BP_CUST_ACCOUNT_GROUP}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_cust_account_group2"
+                                        value="{BusinessPartnerModel>/BP_CUST_ACCOUNT_GROUP}"
+                                        visible="{=${editModel>/edit}}" />
+                                    <m:Label text="고객 권한 그룹 " />
+                                    <m:Text id="bp_cust_auth_group"
+                                        text="{BusinessPartnerModel>/BP_CUST_AUTH_GROUP}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_cust_auth_group2"
+                                        value="{BusinessPartnerModel>/BP_CUST_AUTH_GROUP}"
+                                        visible="{=${editModel>/edit}}" />
 
-									 <core:Title text="" />
+                                    <core:Title text="" />
                                     <m:Label text="납품일 규칙 " />
-                                     <m:Text id="bp_deliver_rule" text="{BusinessPartnerModel>/BP_DELIVER_RULE}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_deliver_rule2" value="{BusinessPartnerModel>/BP_DELIVER_RULE}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_deliver_rule"
+                                        text="{BusinessPartnerModel>/BP_DELIVER_RULE}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_deliver_rule2"
+                                        value="{BusinessPartnerModel>/BP_DELIVER_RULE}"
+                                        visible="{=${editModel>/edit}}" />
                                     <m:Label text="중앙 삭제 플래그 " />
-                                     <m:Text id="bp_delete_flag" text="{BusinessPartnerModel>/BP_DELETE_FLAG}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_delete_flag2" value="{BusinessPartnerModel>/BP_DELETE_FLAG}" visible="{=${editModel>/edit}}"/>
-									<m:Label text="그룹 키 " />
-                                     <m:Text id="bp_group_key" text="{BusinessPartnerModel>/BP_GROUP_KEY}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_group_key2" value="{BusinessPartnerModel>/BP_GROUP_KEY}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_delete_flag"
+                                        text="{BusinessPartnerModel>/BP_DELETE_FLAG}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_delete_flag2"
+                                        value="{BusinessPartnerModel>/BP_DELETE_FLAG}"
+                                        visible="{=${editModel>/edit}}" />
+                                    <m:Label text="그룹 키 " />
+                                    <m:Text id="bp_group_key"
+                                        text="{BusinessPartnerModel>/BP_GROUP_KEY}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_group_key2"
+                                        value="{BusinessPartnerModel>/BP_GROUP_KEY}"
+                                        visible="{=${editModel>/edit}}" />
 
-                                
                                     <core:Title text="" />
                                     <m:Label text="공급업체 " />
-                                     <m:Text id="bp_supplier" text="{BusinessPartnerModel>/BP_SUPPLIER}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_supplier2" value="{BusinessPartnerModel>/BP_SUPPLIER}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_supplier"
+                                        text="{BusinessPartnerModel>/BP_SUPPLIER}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_supplier2"
+                                        value="{BusinessPartnerModel>/BP_SUPPLIER}"
+                                        visible="{=${editModel>/edit}}" />
                                     <m:Label text="대리 지급인 " />
-                                     <m:Text id="bp_proxy_payment" text="{BusinessPartnerModel>/BP_PROXY_PAYMENT}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_proxy_payment2" value="{BusinessPartnerModel>/BP_PROXY_PAYMENT}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_proxy_payment"
+                                        text="{BusinessPartnerModel>/BP_PROXY_PAYMENT}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_proxy_payment2"
+                                        value="{BusinessPartnerModel>/BP_PROXY_PAYMENT}"
+                                        visible="{=${editModel>/edit}}" />
                                     <m:Label text="지급 사유 " />
-                                     <m:Text id="bp_payment_reason" text="{BusinessPartnerModel>/BP_PAYMENT_REASON}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_payment_reason2" value="{BusinessPartnerModel>/BP_PAYMENT_REASON}" visible="{=${editModel>/edit}}" />
+                                    <m:Text id="bp_payment_reason"
+                                        text="{BusinessPartnerModel>/BP_PAYMENT_REASON}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_payment_reason2"
+                                        value="{BusinessPartnerModel>/BP_PAYMENT_REASON}"
+                                        visible="{=${editModel>/edit}}" />
 
-									 <core:Title text="" />
+                                    <core:Title text="" />
                                     <m:Label text="오더 보류 " />
-                                     <m:Text id="bp_order_hold" text="{BusinessPartnerModel>/BP_ORDER_HOLD}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_order_hold2" value="{BusinessPartnerModel>/BP_ORDER_HOLD}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_order_hold"
+                                        text="{BusinessPartnerModel>/BP_ORDER_HOLD}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_order_hold2"
+                                        value="{BusinessPartnerModel>/BP_ORDER_HOLD}"
+                                        visible="{=${editModel>/edit}}" />
                                     <m:Label text="청구 보류 " />
-                                     <m:Text id="bp_claim_hold" text="{BusinessPartnerModel>/BP_CLAIM_HOLD}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_claim_hold2" value="{BusinessPartnerModel>/BP_CLAIM_HOLD}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_claim_hold"
+                                        text="{BusinessPartnerModel>/BP_CLAIM_HOLD}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_claim_hold2"
+                                        value="{BusinessPartnerModel>/BP_CLAIM_HOLD}"
+                                        visible="{=${editModel>/edit}}" />
                                     <m:Label text="납품 보류 " />
-                                     <m:Text id="bp_deliver_hole" text="{BusinessPartnerModel>/BP_DELIVER_HOLD}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_deliver_hole2" value="{BusinessPartnerModel>/BP_DELIVER_HOLD}" visible="{=${editModel>/edit}}" />
-                                
-
+                                    <m:Text id="bp_deliver_hole"
+                                        text="{BusinessPartnerModel>/BP_DELIVER_HOLD}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_deliver_hole2"
+                                        value="{BusinessPartnerModel>/BP_DELIVER_HOLD}"
+                                        visible="{=${editModel>/edit}}" />
                                 </f:content>
                             </f:SimpleForm>
                         </blocks>
@@ -255,60 +404,73 @@
                 </subSections>
             </ObjectPageSection>
 
-            <ObjectPageSection titleUppercase="false" title="주소">
+            <ObjectPageSection titleUppercase="false"
+                title="주소">
                 <subSections>
-                    <ObjectPageSubSection title="주소" titleUppercase="false">
+                    <ObjectPageSubSection title="주소"
+                        titleUppercase="false">
                         <blocks>
-							
-                            <f:SimpleForm
-                               
-                                editable="true"
+                            <f:SimpleForm editable="true"
                                 layout="ColumnLayout"
                                 title="표준 정보"
-                              
                                 columnsXL="6"
                                 columnsL="2"
                                 columnsM="2"
-                                singleContainerFullSize="false"
-                            >
+                                singleContainerFullSize="false">
                                 <f:content>
                                     <core:Title text="" />
                                     <m:Label text="도로 주소 " />
-                                    <m:Text id="bp_address" text="{BusinessPartnerModel>/BP_ADDRESS}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_address2" value="{BusinessPartnerModel>/BP_ADDRESS}" visible="{=${editModel>/edit}}"/>
-									 <m:Label text="번지 " />
-                                    <m:Text id="bp_specific_address" text="{BusinessPartnerModel>/BP_SPECIFIC_ADDRESS}" visible="{=!${editModel>/edit}}"/>
-                                    <m:Input id="bp_specific_address2" value="{BusinessPartnerModel>/BP_SPECIFIC_ADDRESS}" visible="{=${editModel>/edit}}"/>
-                                  
-                                  
+                                    <m:Text id="bp_address"
+                                        text="{BusinessPartnerModel>/BP_ADDRESS}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_address2"
+                                        value="{BusinessPartnerModel>/BP_ADDRESS}"
+                                        visible="{=${editModel>/edit}}" />
+                                    <m:Label text="번지 " />
+                                    <m:Text id="bp_specific_address"
+                                        text="{BusinessPartnerModel>/BP_SPECIFIC_ADDRESS}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_specific_address2"
+                                        value="{BusinessPartnerModel>/BP_SPECIFIC_ADDRESS}"
+                                        visible="{=${editModel>/edit}}" />
+
                                     <core:Title text="" />
                                     <m:Label text="우편 번호 " />
-                                     <m:Text id="bp_postcode" text="{BusinessPartnerModel>/BP_POSTCODE}" visible="{=!${editModel>/edit}}"/>
-                                      <m:Input id="bp_postcode2" value="{BusinessPartnerModel>/BP_POSTCODE}" visible="{=${editModel>/edit}}"/>
-                                    
+                                    <m:Text id="bp_postcode"
+                                        text="{BusinessPartnerModel>/BP_POSTCODE}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_postcode2"
+                                        value="{BusinessPartnerModel>/BP_POSTCODE}"
+                                        visible="{=${editModel>/edit}}" />
+
                                     <m:Label text="도시 " />
-                                     <m:Text id="bp_city" text="{BusinessPartnerModel>/BP_CITY}" visible="{=!${editModel>/edit}}"/>
-                                   <m:Input id="bp_city2" value="{BusinessPartnerModel>/BP_CITY}" visible="{=${editModel>/edit}}"/>
+                                    <m:Text id="bp_city"
+                                        text="{BusinessPartnerModel>/BP_CITY}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_city2"
+                                        value="{BusinessPartnerModel>/BP_CITY}"
+                                        visible="{=${editModel>/edit}}" />
 
-									<core:Title text="" />
+                                    <core:Title text="" />
                                     <m:Label text="국가/지역 " />
-                                     <m:Text id="bp_country" text="{BusinessPartnerModel>/BP_COUNTRY}" visible="{=!${editModel>/edit}}"/>
-                                     <m:Input id="bp_country2" value="{BusinessPartnerModel>/BP_COUNTRY}" visible="{=${editModel>/edit}}"/>
-                                    
-									<m:Label text="지역 " />
-                                     <m:Text id="bp_region" text="{BusinessPartnerModel>/BP_REGION}" visible="{=!${editModel>/edit}}"/>
-                                     <m:Input id="bp_region2" value="{BusinessPartnerModel>/BP_REGION}" visible="{=${editModel>/edit}}"/>
-                                   
-                                  
+                                    <m:Text id="bp_country"
+                                        text="{BusinessPartnerModel>/BP_COUNTRY}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_country2"
+                                        value="{BusinessPartnerModel>/BP_COUNTRY}"
+                                        visible="{=${editModel>/edit}}" />
 
-                                   
+                                    <m:Label text="지역 " />
+                                    <m:Text id="bp_region"
+                                        text="{BusinessPartnerModel>/BP_REGION}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_region2"
+                                        value="{BusinessPartnerModel>/BP_REGION}"
+                                        visible="{=${editModel>/edit}}" />
                                 </f:content>
                             </f:SimpleForm>
-								
                         </blocks>
                     </ObjectPageSubSection>
-
-                   
                 </subSections>
             </ObjectPageSection>
         </sections>
