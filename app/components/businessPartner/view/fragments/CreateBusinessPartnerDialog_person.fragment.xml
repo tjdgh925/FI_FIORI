@@ -9,19 +9,19 @@
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="일반 데이터" />
+                        <Label text="일반 데이터" design="Bold" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="표준 주소" />
+                        <Label text="표준 주소" design="Bold" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="회사 코드 데이터" />
+                        <Label text="회사 코드 데이터" design="Bold" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>

@@ -16,7 +16,7 @@
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem groupName="$INTERNAL$"
                         name="COUNTRY_CODE"
-                        label="COUNTRY_CODE"
+                        label="국가/지역 코드"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="COUNTRY_CODE" />
@@ -24,7 +24,7 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem groupName="$INTERNAL$"
                         name="COUNTRY_NAME"
-                        label="COUNTRY Name"
+                        label="국가/지역 이름"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="COUNTRY Name" />
