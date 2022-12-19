@@ -138,7 +138,7 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
                                                         </t:template>
                                                     </t:Column>
                                                     <t:Column>
-                                                        <Label text="계정 통화" / >
+                                                        <Label text="계정 통화" />
                                                         <t:template>
                                                             <Input id="cc_currency" />
                                                         </t:template>

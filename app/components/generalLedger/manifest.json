@@ -125,6 +125,13 @@
           "target": [
             "GeneralLedgerDetail"
           ]
+        },
+        {
+          "name": "MassCreateGeneralLedger",
+          "pattern": "MassCreateGeneralLedger",
+          "target": [
+            "MassCreateGeneralLedger"
+          ]
         }
       ],
       "targets": {
@@ -151,7 +158,14 @@
           "transition": "show",
           "viewId": "GeneralLedgerDetail",
           "viewName": "GeneralLedgerDetail"
+        },
+        "MassCreateGeneralLedger": {
+          "viewType": "XML",
+          "transition": "show",
+          "viewId": "MassCreateGeneralLedger",
+          "viewName": "MassCreateGeneralLedger"
         }
+        
       }
     },
     "rootView": {
