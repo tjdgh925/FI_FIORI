@@ -218,13 +218,13 @@ sap.ui.define(
           BP_ADDRESS: this.byId("bp_address_person").getValue(),
           BP_COMPANY_CODE: this.byId("bp_company_code_person").getValue(),
           BP_CATEGORY: Test,
-          // BP_SPECIFIC_ADDRESS: this.byId("bp_specific_address_person").getValue(),
+          BP_SPECIFIC_ADDRESS: this.byId("bp_specific_address_person").getValue(),
           BP_NAME_TITLE: this.byId("bp_name_title_person").getValue(),
           BP_POSTCODE: this.byId("bp_postCode_person").getValue(),
           BP_NAME: this.byId("bp_name_person").getValue(),
           BP_CITY: this.byId("bp_city_person").getValue(),
           BP_COUNTRY: this.byId("bp_country_person").getValue(),
-          // BP_REGION: this.byId("bp_region_person").getValue(),
+          BP_REGION: this.byId("bp_region_person").getValue(),
         };
 
         this.byId("bp_code_person").setValueState("None");
@@ -268,11 +268,12 @@ sap.ui.define(
         this.byId("bp_personDialog").destroy();
       },
 
-      // '생성'버튼 눌렀을 때 개인생성,조직생성 택1 메뉴 작동
-      onCreate: function (oEvent) {
-        var oButton = oEvent.getSource();
-        this.byId("bp_createAction").openBy(oButton);
+
+      // 뷰 : '개인 생성(대량)' 화면 기능
+      onMassCreate_person: function(){
+        this.getOwnerComponent().getRouter().navTo("MassCreateBusinessPartner_person");
       },
+
 
       // 팝업 : '조직 생성' 화면 기능
       onCreate_organization: function () {
@@ -306,13 +307,13 @@ sap.ui.define(
           BP_ADDRESS: this.byId("bp_address_organization").getValue(),
           BP_COMPANY_CODE: this.byId("bp_company_code_organization").getValue(),
           BP_CATEGORY: Test,
-          // BP_SPECIFIC_ADDRESS: this.byId("bp_specific_address_person").getValue(),
+          BP_SPECIFIC_ADDRESS: this.byId("bp_specific_address_organization").getValue(),
           BP_NAME_TITLE: this.byId("bp_org_division_organization").getValue(),
           BP_POSTCODE: this.byId("bp_postCode_organization").getValue(),
           BP_NAME: this.byId("bp_name_organization").getValue(),
           BP_CITY: this.byId("bp_city_organization").getValue(),
           BP_COUNTRY: this.byId("bp_country_organization").getValue(),
-          // BP_REGION: this.byId("bp_region_person").getValue(),
+          BP_REGION: this.byId("bp_region_organization").getValue(),
         };
 
         this.byId("bp_company_code_organization").setValueState("None");
@@ -355,6 +356,13 @@ sap.ui.define(
       onCancelDialog_organization: function () {
         this.byId("bp_organizationDialog").destroy();
       },
+
+
+      // 뷰 : '조직 생성(대량)' 화면 기능
+      onMassCreate_organization: function(){
+        this.getOwnerComponent().getRouter().navTo("MassCreateBusinessPartner_organization");
+      },
+
 
       // '정렬 아이콘' 클릭 시
       onSort: function () {
@@ -520,7 +528,7 @@ sap.ui.define(
             // Set key fields for filtering in the Define Conditions Tab
             oDialog.setRangeKeyFields([
               {
-                label: "COUNTRY_CODE",
+                label: "국가/지역 코드",
                 key: "COUNTRY_CODE",
                 type: "string",
                 typeInstance: new TypeString(
@@ -558,13 +566,13 @@ sap.ui.define(
                   });
                   oTable.addColumn(
                     new UIColumn({
-                      label: "COUNTRY_CODE",
+                      label:"국가/지역 코드",
                       template: "Country>COUNTRY_CODE",
                     })
                   );
                   oTable.addColumn(
                     new UIColumn({
-                      label: "COUNTRY_NAME",
+                      label:"국가/지역 이름",
                       template: "Country>COUNTRY_NAME",
                     })
                   );

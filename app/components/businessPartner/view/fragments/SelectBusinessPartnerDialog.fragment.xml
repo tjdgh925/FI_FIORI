@@ -9,7 +9,15 @@
 		icon="sap-icon://employee"
 		press="onCreate_person" />
 	<Button
+		text="개인 생성(대량)"
+		icon="sap-icon://company-view"
+		press="onMassCreate_person" />
+	<Button
 		text="조직 생성"
-		icon="sap-icon://building"
+		icon="sap-icon://home"
 		press="onCreate_organization" />
+	<Button
+		text="조직 생성(대량)"
+		icon="sap-icon://building"
+		press="onMassCreate_organization" />
 </ActionSheet>

@@ -125,6 +125,20 @@
           "target": [
             "ChartBusinessPartner"
           ]
+        },
+        {
+          "name": "MassCreateBusinessPartner_person",
+          "pattern": "MassCreateBusinessPartner_person",
+          "target": [
+            "MassCreateBusinessPartner_person"
+          ]
+        },
+        {
+          "name": "MassCreateBusinessPartner_organization",
+          "pattern": "MassCreateBusinessPartner_organization",
+          "target": [
+            "MassCreateBusinessPartner_organization"
+          ]
         }
       ],
       "targets": {
@@ -155,6 +169,20 @@
           "clearControlAggregation": false,
           "viewId": "ChartBusinessPartner",
           "viewName": "ChartBusinessPartner"
+        },
+        "MassCreateBusinessPartner_person": {
+          "viewType": "XML",
+          "transition": "show",
+          "clearControlAggregation": false,
+          "viewId": "MassCreateBusinessPartner_person",
+          "viewName": "MassCreateBusinessPartner_person"
+        },
+        "MassCreateBusinessPartner_organization": {
+          "viewType": "XML",
+          "transition": "show",
+          "clearControlAggregation": false,
+          "viewId": "MassCreateBusinessPartner_organization",
+          "viewName": "MassCreateBusinessPartner_organization"
         }
       }
     },
