@@ -48,50 +48,50 @@ height="100%">
 					<Column width="11rem">
 						<m:Label text="이름" />
 						<template>
-							<m:Input value="{Id_bp_name_organization}"/>
+							<m:Input value="{bp_name_organization}"/>
 						</template>
 					</Column>
 					<Column width="20rem">
 						<m:Label text="도로 주소" />
 						<template>
-							<m:Input value="{Id_bp_address_organization}"/>
+							<m:Input value="{bp_address_organization}"/>
 						</template>
 					</Column>
 					<Column width="6rem">
 						<m:Label text="번지" />
 						<template>
-							<m:Input value="{Id_bp_specific_address_organization}"/>
+							<m:Input value="{bp_specific_address_organization}"/>
 						</template>
 					</Column>
 					<Column width="6rem">
 						<m:Label text="우편번호" />
 						<template>
-							<m:Input value="{Id_bp_postCode_organization}"/>
+							<m:Input value="{bp_postCode_organization}"/>
 						</template>
 					</Column>
 					<Column width="11rem">
 						<m:Label text="도시" />
 						<template>
-							<m:Input value="{Id_bp_city_organization}"/>
+							<m:Input value="{bp_city_organization}"/>
 						</template>
 					</Column>
 					<Column width="11rem">
 						<m:Label text="국가/지역" />
 						<template>
-							<m:Input value="{Id_bp_country_organization}"/>
+							<m:Input value="{bp_country_organization}"/>
 						</template>
 					</Column>
 					<Column width="11rem">
 						<m:Label text="지역" />
 						<template>
-							<m:Input value="{Id_bp_region_organization}"/>
+							<m:Input value="{bp_region_organization}"/>
 						</template>
 					</Column>
                     <!-- 필수값 설정 필요(회사코드) -->
 					<Column width="11rem">
 						<m:Label text="회사코드" />
 						<template>
-							<m:Input value="{Id_bp_company_code_organization}"/>
+							<m:Input value="{bp_company_code_organization}"/>
 						</template>
 					</Column>
 				</columns>
