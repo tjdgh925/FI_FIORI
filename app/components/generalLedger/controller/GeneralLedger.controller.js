@@ -39,6 +39,17 @@ sap.ui.define(
     var accGroupFilter = [];
     return Controller.extend("projectGL.controller.GeneralLedger", {
       onInit: async function () {
+        //formatter
+        var data = [
+          { key: "P", name: "P(1차 원가 또는 수익)" },
+          { key: "S", name: "S(2차 원가)" },
+          { key: "X", name: "X(대차대조표 계정)" },
+          { key: "N", name: "N(영업 외 비용 또는 수익)" },
+          { key: "C", name: "C(현금 계정)" },
+        ];
+        var oModel = new JSONModel(data);
+        this.getView().setModel(oModel, "selectAccountType");
+
         //GL 라우터 이동했을 경우
         this.getOwnerComponent()
           .getRouter()
@@ -53,7 +64,7 @@ sap.ui.define(
         let GeneralLedgerModel = new JSONModel(GeneralLedger.value);
         this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
 
-        //총계정원자 개수 계산
+        //총계정원장 개수 계산
         var sum = this.getView().getModel("GeneralLedgerModel").oData.length;
 
         this.byId("TableName").setText("총계정원장(" + sum + ")");
@@ -110,6 +121,14 @@ sap.ui.define(
           return acGroup.mProperties.key;
         });
         // this.byId("accountGroup").getValue();
+
+        this.byId("coaMulti").setValueState("None");
+
+        if (COA.length === 0) {
+          this.byId("coaMulti").setValueState("Error");
+          this.byId("coaMulti").setValueStateText("계정과목표를 입력해주세요.");
+          return 0;
+        }
 
         console.log(accountTypes);
 
@@ -215,11 +234,20 @@ sap.ui.define(
           .getRouter()
           .navTo("GeneralLedgerDetail", { num: SelectedNum });
       },
+      onCreateButtonGL: function (oEvent) {
+        var oButton = oEvent.getSource();
+        this.byId("actionSheet").openBy(oButton);
+      },
 
       onCreateGL: function () {
         this.getOwnerComponent().getRouter().navTo("CreateGeneralLedger");
       },
-
+      onCopyCreateGL: function () {
+        this.getOwnerComponent().getRouter().navTo("CopyCreateGeneralLedger");
+      },
+      onMassCreateGL: function () {
+        this.getOwnerComponent().getRouter().navTo("MassCreateGeneralLedger");
+      },
       onDeleteGL: async function () {
         var totalNumber =
           this.getView().getModel("GeneralLedgerModel").oData.length;

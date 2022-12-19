@@ -30,8 +30,8 @@
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="계정 과목표"
-                                labelFor="multiInput" />
+                            <Label text="계정과목표"
+                                labelFor="multiInput" required="true" />
                             <MultiInput id="coaMulti"
                                 valueHelpRequest="onValueHelpRequested"
                                 required="true">
@@ -63,19 +63,16 @@
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="G/L 계정유형:" />
+                            <Label text="G/L 계정 유형:" />
                             <MultiComboBox width="100%"
-                                id="accountType">
-                                <core:Item key="P"
-                                    text="P(1차 원가 또는 수익)" />
-                                <core:Item key="S"
-                                    text="S(2차 원가)" />
-                                <core:Item key="X"
-                                    text="X(대차대조표 계정)" />
-                                <core:Item key="N"
-                                    text="N(영업 외 비용 또는 수익)" />
-                                <core:Item key="C"
-                                    text="C(현금 계정)" />
+                                id="accountType"
+                                items="{
+                                path : 'selectAccountType>/',
+                                sorter : {path:'name'}
+                                }">
+                                <core:Item text="{selectAccountType>name}"
+                                    key="{selectAccountType>key}"/>
+
                             </MultiComboBox>
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12" />
@@ -147,8 +144,13 @@
                         <Title id="TableName" />
                         <ToolbarSpacer />
                         <Button text="생성"
-                            press=".onCreateGL"
-                            type="Transparent" />
+                            press=".onCreateButtonGL"
+                            type="Transparent">
+                            <dependents>
+                                <core:Fragment fragmentName="projectGL.view.fragments.CreateGeneralLedgerDialog"
+                                    type="XML" />
+                            </dependents>
+                        </Button>
                         <Button icon="sap-icon://delete"
                             tooltip="삭제"
                             press=".onDeleteGL"
@@ -199,7 +201,12 @@
                     <t:Column>
                         <Label text="G/L 계정 유형" />
                         <t:template>
-                            <Text text="{GeneralLedgerModel>GL_ACCOUNTTYPE}" />
+                            <ObjectStatus text="{
+                                path : 'GeneralLedgerModel>GL_ACCOUNTTYPE',
+                                formatter : '.formatter.statusText'
+                                }" />
+
+
                         </t:template>
                     </t:Column>
 
