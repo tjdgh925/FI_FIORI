@@ -13,9 +13,9 @@ entity GeneralLedger {
         GL_COA            : String not null;
         GL_ACCOUNTTYPE    : String not null;
         GL_ACCOUNTGROUP   : String not null;
-        GL_PL_ACCOUNTTYPE : String; 
+        GL_PL_ACCOUNTTYPE : String;
         GL_TRADINGPARTNER : String;
-
+        GL_COMPANY_CODE   : String;
 };
 
 entity ChartOfAccount {
@@ -35,3 +35,4 @@ entity CompanyCode {
         CC_CURRENCY     : String;
         CC_COA          : String not null;
 };
+﻿
