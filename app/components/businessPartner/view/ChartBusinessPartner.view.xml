@@ -1,4 +1,55 @@
 <mvc:View controllerName="projectBP.controller.ChartBusinessPartner"
-    xmlns="sap.m">
-    <Text text="비즈니스파트너 차트"/>
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:t="sap.ui.table"
+    xmlns:grid="sap.ui.layout.cssgrid"
+    xmlns:micro="sap.suite.ui.microchart"
+    xmlns:card="sap.f.cards" height="100%">
+   
+     <f:DynamicPage id="ChartBusinessPartnerPage">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <HBox>
+                        <Button icon="sap-icon://nav-back" press="onBusinessPartnerHome" type="Transparent" class= "sapUiTinyMarginTop" />
+                        <Title text="국가 별 고객 마스터 현황" />
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:content class="sapUiSmallMargin">
+            <grid:CSSGrid class="cssgridpadding">
+                <grid:customLayout>
+                    <grid:ResponsiveColumnLayout />
+                </grid:customLayout>
+
+                <f:Card class="sapUiMediumMarginBeginEnd sapUiTinyMarginTop">
+                    <f:header>
+                        <card:Header title="국가 별 고객 마스터 생성 현황"  subtitle="총 국가 수 : {BP_COUNTRY_REGION>/Sum} 개" iconSrc="sap-icon://donut-chart" />
+                        
+                    </f:header>
+                    <f:content>
+                        <micro:InteractiveDonutChart class="sapUiMediumMarginTop" displayedSegments="4">
+                            <micro:segments>
+                                <micro:InteractiveDonutChartSegment label="KR(KOREA)" value="{BP_COUNTRY_REGION>/First}" 
+                                displayedValue="{BP_COUNTRY_REGION>/First} 개" />
+                                <micro:InteractiveDonutChartSegment label="JP(JAPAN)" value="{BP_COUNTRY_REGION>/Second}" 
+                                displayedValue="{BP_COUNTRY_REGION>/Second} 개" />
+                                <micro:InteractiveDonutChartSegment label="CN(CHINA)" value="{BP_COUNTRY_REGION>/Third}" 
+                                displayedValue="{BP_COUNTRY_REGION>/Third} 개" />
+                                <micro:InteractiveDonutChartSegment label="ECT(OTHERS)" value="{BP_COUNTRY_REGION>/Others}" 
+                                displayedValue="{BP_COUNTRY_REGION>/Others} 개" />
+                            </micro:segments>
+                        </micro:InteractiveDonutChart>
+                    </f:content>
+                    <f:layoutData>
+                        <grid:ResponsiveColumnItemLayoutData columns="6" rows="1" />
+                    </f:layoutData>
+                </f:Card>
+
+ </grid:CSSGrid>
+        </f:content>
+    </f:DynamicPage>
 </mvc:View>
