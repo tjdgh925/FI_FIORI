@@ -1,0 +1,183 @@
+<mvc:View controllerName="projectGL.controller.CopyCreateGeneralLedger" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.f" xmlns:t="sap.ui.table" xmlns:form="sap.ui.layout.form" xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" height="100%">
+    <uxap:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" upperCaseAnchorBar="false">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:heading>
+                    <Title text="{GeneralLedgerModel>/GL_CODE}" />
+                </uxap:heading>
+                <uxap:snappedTitleOnMobile>
+                    <Title text="여기는 뭔가 싶어서 찾아보는곳" />
+                </uxap:snappedTitleOnMobile>
+                <uxap:actions>
+                    <Button type="Emphasized" text="확인" press="onTest"/>
+                    <Button type="Default" text="취소" press="onTest3"/>
+                </uxap:actions>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+
+        <uxap:sections>
+            <uxap:ObjectPageSection titleUppercase="false" title="my section">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="일반" mode="Expanded" id="Section1" titleUppercase="false">
+                        <uxap:blocks>
+                            <uxap:ObjectPageLazyLoader stashed="true" id="Section1stashed">
+                                <VBox class="sapUiSmallMargin">
+                                    <form:SimpleForm
+                                        minWidth="1024"
+                                        maxContainerCols="7"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        title="기본 정보"
+                                        labelSpanL="10"
+                                        labelSpanM="5"
+                                        emptySpanL="1"
+                                        emptySpanM="1"
+                                        columnsL="3"
+                                        columnsM="6"
+                                        width="auto"
+                                        class="sapUxAPObjectPageSubSectionAlignContent"
+                                    >
+                                        <!-- <Text id="GL_CODE" text="{GeneralLedgerModel>/GL_CODE}" /> -->
+                                        <form:content>
+                                            <core:Title text="관리" />
+                                            <VBox>
+                                                <Label text="G/L 계정" labelFor="GL_CODE" />
+                                                <Input id="GL_CODE" required="true" />
+                                                <!-- <Text id="GL_CODE" text="{GeneralLedgerModel>/GL_CODE}" /> -->
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+                                            <VBox>
+                                                <Label text="계정과목표" labelFor="GL_COA" />
+                                                
+                                                <Input id="GL_COA" required="true" value="{GeneralLedgerModel>/GL_COA}"  />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+
+                                            <VBox>
+                                                <Label text="G/L 계정 유형" labelFor="GL_ACCOUNTTYPE" />
+                                                
+                                                <Input id="GL_ACCOUNTTYPE" required="true" value="{GeneralLedgerModel>/GL_ACCOUNTTYPE}"  />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+
+                                            <VBox>
+                                                <Label text="계정 그룹" labelFor="GL_ACCOUNTGROUP" />
+                                                
+                                                <Input id="GL_ACCOUNTGROUP" required="true" value="{GeneralLedgerModel>/GL_ACCOUNTGROUP}"/>
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+
+                                            <VBox>
+                                                <Label text="손익 계산서 계정 유형" />
+                                                
+                                                <Input id="GL_PL_ACCOUNTTYPE" value="{GeneralLedgerModel>/GL_PL_ACCOUNTTYPE}"/>
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+
+                                            <core:Title text="내역(유지보수 언어)(EN)" />
+                                            <VBox>
+                                                <Label text="내역" labelFor="GL_NAME" />
+                                                <Input id="GL_NAME" required="true" value="{GeneralLedgerModel>/GL_NAME}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+
+                                            <VBox>
+                                                <Label text="G/L 계정 설명" />
+                                                <Input id="GL_DESCRIPTION" value="{GeneralLedgerModel>/GL_DESCRIPTION}"/>
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+
+                                            <core:Title text="연결데이터" />
+                                            <VBox>
+                                                <Label text="관계사 번호" />
+                                                <Input id="GL_TRADINGPARTNER" value="{GeneralLedgerModel>/GL_TRADINGPARTNER}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+                                        </form:content>
+                                    </form:SimpleForm>
+                                </VBox>
+                            </uxap:ObjectPageLazyLoader>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+
+            <uxap:ObjectPageSection titleUppercase="false" title="my section">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection title="회사 코드 데이터" mode="Expanded" id="Section2" titleUppercase="false">
+                        <uxap:blocks>
+                            <uxap:ObjectPageLazyLoader stashed="true" id="Section2stashed">
+                                <VBox class="sapUiSmallMargin">
+                                    <form:SimpleForm minWidth="1024" editable="false" layout="ResponsiveGridLayout" title="회사 코드 지정" width="auto" class="sapUxAPObjectPageSubSectionAlignContent">
+                                        <form:content>
+                                            <t:Table width="100%" id="table" rows="{GeneralLedgerTableModel>/}" selectionMode="MultiToggle" rowActionCount="1" visibleRowCount="7" ariaLabelledBy="title">
+                                                <t:extension>
+                                                    <OverflowToolbar style="Clear">
+                                                        <ToolbarSpacer />
+                                                        <ToggleButton type="Emphasized" text="생성" press="onNavIndicatorsToggle" />
+                                                    </OverflowToolbar>
+                                                </t:extension>
+
+                                                <t:columns>
+                                                    <t:Column>
+                                                        <Label text="회사 코드" />
+                                                        <t:template>
+                                                            <Text id="cc_company_code" text="{GeneralLedgerTableModel>CC_COMPANY_CODE}" wrapping="false" />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column>
+                                                        <Label text="회사 이름" />
+                                                        <t:template>
+                                                            <Text text="{GeneralLedgerTableModel>CC_COMPANY_NAME}" wrapping="false" />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column>
+                                                        <Label text="계정 통화" />
+                                                        <t:template>
+                                                            <Text text="{GeneralLedgerTableModel>CC_CURRENCY}" wrapping="false" />
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column>
+                                                        <Label text="계정과목표" />
+                                                        <t:template>
+                                                            <Text text="{GeneralLedgerTableModel>CC_COA}" wrapping="false" />
+                                                        </t:template>
+                                                    </t:Column>
+                                                </t:columns>
+
+                                                <t:rowActionTemplate>
+                                                    <t:RowAction>
+                                                        <t:items>
+                                                            <t:RowActionItem type="Navigation" press="onNavToDetail" />
+                                                        </t:items>
+                                                    </t:RowAction>
+                                                </t:rowActionTemplate>
+                                            </t:Table>
+                                        </form:content>
+                                        <form:content />
+                                    </form:SimpleForm>
+                                </VBox>
+                            </uxap:ObjectPageLazyLoader>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+</mvc:View>
