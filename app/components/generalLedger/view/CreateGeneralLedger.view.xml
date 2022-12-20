@@ -1,8 +1,16 @@
-<mvc:View controllerName="projectGL.controller.CreateGeneralLedger" 
-xmlns="sap.m" 
-xmlns:mvc="sap.ui.core.mvc" xmlns:f="sap.f" xmlns:t="sap.ui.table" xmlns:form="sap.ui.layout.form" 
-xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" height="100%">
-<uxap:ObjectPageLayout id="ObjectPageLayout" enableLazyLoading="true" upperCaseAnchorBar="false">
+<mvc:View controllerName="projectGL.controller.CreateGeneralLedger"
+    xmlns="sap.m"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns:f="sap.f"
+    xmlns:t="sap.ui.table"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:uxap="sap.uxap"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    height="100%">
+    <uxap:ObjectPageLayout id="ObjectPageLayout"
+        enableLazyLoading="true"
+        upperCaseAnchorBar="false">
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:heading>
@@ -12,24 +20,29 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
                     <Title text="여기는 뭔가 싶어서 찾아보는곳" />
                 </uxap:snappedTitleOnMobile>
                 <uxap:actions>
-                <Button type="Emphasized"
-                    text="생성" press=".onCreate"/>
-                <Button type="Default"
-                    text="취소"
-                    press=".onBack"/>
+                    <Button type="Emphasized"
+                        text="생성"
+                        press=".onCreate"/>
+                    <Button type="Default"
+                        text="취소"
+                        press=".onBack"/>
                 </uxap:actions>
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
 
         <uxap:sections>
-            <uxap:ObjectPageSection titleUppercase="false" title="my section">
+            <uxap:ObjectPageSection titleUppercase="false"
+                title="my section">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="헤더" mode="Expanded" id="Section1" titleUppercase="false">
+                    <uxap:ObjectPageSubSection title="헤더"
+                        mode="Expanded"
+                        id="Section1"
+                        titleUppercase="false">
                         <uxap:blocks>
-                            <uxap:ObjectPageLazyLoader stashed="true" id="Section1stashed">
+                            <uxap:ObjectPageLazyLoader stashed="true"
+                                id="Section1stashed">
                                 <VBox class="sapUiSmallMargin">
-                                    <form:SimpleForm
-                                        minWidth="1024"
+                                    <form:SimpleForm minWidth="1024"
                                         maxContainerCols="1"
                                         editable="false"
                                         layout="ResponsiveGridLayout"
@@ -41,13 +54,12 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
                                         columnsL="1"
                                         columnsM="1"
                                         width="auto"
-                                        class="sapUxAPObjectPageSubSectionAlignContent"
-                                    >
+                                        class="sapUxAPObjectPageSubSectionAlignContent">
                                         <form:content>
                                             <core:Title text="GL 계정 정보" />
                                             <Label text="GL 계정" />
                                             <Input id="GL_CODE" />
-                                            
+
                                         </form:content>
                                     </form:SimpleForm>
                                 </VBox>
@@ -58,14 +70,18 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
             </uxap:ObjectPageSection>
 
 
-            <uxap:ObjectPageSection titleUppercase="false" title="my section">
+            <uxap:ObjectPageSection titleUppercase="false"
+                title="my section">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="일반" mode="Expanded" id="Section2" titleUppercase="false">
+                    <uxap:ObjectPageSubSection title="일반"
+                        mode="Expanded"
+                        id="Section2"
+                        titleUppercase="false">
                         <uxap:blocks>
-                            <uxap:ObjectPageLazyLoader stashed="true" id="Section2stashed">
+                            <uxap:ObjectPageLazyLoader stashed="true"
+                                id="Section2stashed">
                                 <VBox class="sapUiSmallMargin">
-                                    <form:SimpleForm
-                                        minWidth="1024"
+                                    <form:SimpleForm minWidth="1024"
                                         maxContainerCols="2"
                                         editable="false"
                                         layout="ResponsiveGridLayout"
@@ -77,20 +93,61 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
                                         columnsL="3"
                                         columnsM="1"
                                         width="auto"
-                                        class="sapUxAPObjectPageSubSectionAlignContent"
-                                    >
+                                        class="sapUxAPObjectPageSubSectionAlignContent">
                                         <form:content>
                                             <core:Title text="내역" />
-                                                                                        
 
-                                            <Label text="계정과목표" />
-                                            <Input id="GL_COA" />
+                                            <Label text="계정과목표"
+                                                labelFor="coaMulti"
+                                                required="true" />
+                                            <MultiInput id="coaMulti"
+                                                valueHelpRequest="onValueHelpRequested"
+                                                required="true"
+                                                maxTokens="1">
+                                                <suggestionColumns>
+                                                    <Column>
+                                                        <Label text="COA Code" />
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="COA Name" />
+                                                    </Column>
+                                                </suggestionColumns>
+                                                <suggestionRows>
+                                                    <ColumnListItem>
+                                                        <Label text="{COA_CODE}" />
+                                                        <Label text="{COA_NAME}" />
+                                                    </ColumnListItem>
+                                                </suggestionRows>
+                                            </MultiInput>
 
                                             <Label text="G/L 계정 유형" />
                                             <Input id="GL_ACCOUNTTYPE" />
 
-                                            <Label text="계정 그룹" />
-                                            <Input id="GL_ACCOUNTGROUP" />
+                                            <Label text="계정 그룹"
+                                                labelFor="accGroupMulti" />
+                                            <MultiInput id="accGroupMulti"
+                                                valueHelpRequest="onAccGroupValueHelpRequested"
+                                                required="true"
+                                                maxTokens="1">
+                                                <suggestionColumns>
+                                                    <Column>
+                                                        <Label text="Group Code" />
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Group COA" />
+                                                    </Column>
+                                                    <Column>
+                                                        <Label text="Group Name" />
+                                                    </Column>
+                                                </suggestionColumns>
+                                                <suggestionRows>
+                                                    <ColumnListItem>
+                                                        <Label text="{AC_GROUP_CODE}" />
+                                                        <Label text="{AC_COA}" />
+                                                        <Label text="{AC_NAME}" />
+                                                    </ColumnListItem>
+                                                </suggestionRows>
+                                            </MultiInput>
 
                                             <Label text="손익 계산서 계정 유형" />
                                             <Input id="GL_PL_ACCOUNTTYPE" />
@@ -114,39 +171,55 @@ xmlns:uxap="sap.uxap" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" heig
                 </uxap:subSections>
             </uxap:ObjectPageSection>
 
-            <uxap:ObjectPageSection titleUppercase="false" title="my section">
+            <uxap:ObjectPageSection titleUppercase="false"
+                title="my section">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="회사 코드 데이터" mode="Expanded" id="Section3" titleUppercase="false">
+                    <uxap:ObjectPageSubSection title="회사 코드 데이터"
+                        mode="Expanded"
+                        id="Section3"
+                        titleUppercase="false">
                         <uxap:blocks>
-                            <uxap:ObjectPageLazyLoader stashed="true" id="Section3stashed">
+                            <uxap:ObjectPageLazyLoader stashed="true"
+                                id="Section3stashed">
                                 <VBox class="sapUiSmallMargin">
-                                    <form:SimpleForm minWidth="1024" editable="false" layout="ResponsiveGridLayout" title="회사 코드 지정" width="auto" class="sapUxAPObjectPageSubSectionAlignContent">
+                                    <form:SimpleForm minWidth="1024"
+                                        editable="false"
+                                        layout="ResponsiveGridLayout"
+                                        title="회사 코드 지정"
+                                        width="auto"
+                                        class="sapUxAPObjectPageSubSectionAlignContent">
                                         <form:content>
-                                            <t:Table width="100%" id="table" rows="{/ProductCollection}" selectionMode="MultiToggle" rowActionCount="1" visibleRowCount="7" ariaLabelledBy="title">                                                
+                                            <t:Table width="100%"
+                                                id="companyCodeTable"
+                                                rows="{CompanyData>/}"
+                                                selectionMode="MultiToggle"
+                                                rowActionCount="1"
+                                                visibleRowCount="7"
+                                                ariaLabelledBy="title">
 
                                                 <t:columns>
                                                     <t:Column>
                                                         <Label text="회사 코드" />
                                                         <t:template>
-                                                            <Input id="cc_company_code" />
+                                                            <Text text="{CompanyData>CC_COMPANY_CODE}"/>
                                                         </t:template>
                                                     </t:Column>
                                                     <t:Column>
                                                         <Label text="회사 이름" />
                                                         <t:template>
-                                                            <Input id="cc_company_name" />
+                                                            <Text text="{CompanyData>CC_COMPANY_NAME}"/>
                                                         </t:template>
                                                     </t:Column>
                                                     <t:Column>
                                                         <Label text="계정 통화" />
                                                         <t:template>
-                                                            <Input id="cc_currency" />
+                                                            <Text text="{CompanyData>CC_CURRENCY}"/>
                                                         </t:template>
                                                     </t:Column>
                                                     <t:Column>
                                                         <Label text="계정과목표" />
                                                         <t:template>
-                                                            <Input id="cc_coa" />
+                                                            <Text text="{CompanyData>CC_COA}"/>
                                                         </t:template>
                                                     </t:Column>
                                                 </t:columns>
