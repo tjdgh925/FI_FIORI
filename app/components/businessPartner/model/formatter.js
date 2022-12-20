@@ -4,9 +4,9 @@ sap.ui.define([], function () {
       statusText: function (sStatus) {
         switch (sStatus) {
           case "A":
-            return "개인(1)";
+            return "개인 (1)";
           case "B":
-            return "조직(2)";        
+            return "조직 (2)";        
           default:
             return sStatus;
         }

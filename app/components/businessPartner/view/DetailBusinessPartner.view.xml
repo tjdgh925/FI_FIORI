@@ -105,7 +105,7 @@
                         renderType="Bare">
                         <m:Label text="비즈니스 파트너 범주 :"
                             class="sapUiTinyMarginEnd" />
-                        <!-- <m:Text width="150px" text="{BusinessPartnerModel>/BP_CATEGORY}"/> -->
+
 
                         <m:ObjectStatus id="Status"
                             text="{
@@ -188,57 +188,81 @@
                                     <m:Label text="조직 구분 "
                                         visible="{visibleModel>/organization}" />
                                     <m:Text id="bp_org_division"
-                                        text="{BusinessPartnerModel>/BP_ORG_DIVISION}"
+                                        text="{= ${BusinessPartnerModel>/BP_ORG_DIVISION} ? ${BusinessPartnerModel>/BP_ORG_DIVISION} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
-                                    <m:Input id="bp_org_division2"
-                                        value="{BusinessPartnerModel>/BP_ORG_DIVISION}"
-                                        visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
+
+                                    <m:Select id="bp_org_division2"
+                                        width="100%"
+                                        visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}">
+                                        <core:Item text="알수없음"
+                                            key="알수없음" />
+                                        <core:Item text="개인"
+                                            key="개인" />
+                                        <core:Item text="법인"
+                                            key="법인" />
+
+                                    </m:Select>
+
+                                    <!-- <m:Input id="bp_org_division2" value="{BusinessPartnerModel>/BP_ORG_DIVISION}" visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" /> -->
 
                                     <m:Label text="개인 칭호 "
                                         visible="{visibleModel>/personal}" />
                                     <m:Text id="bp_name_title"
-                                        text="{BusinessPartnerModel>/BP_NAME_TITLE}"
+                                        text="{= ${BusinessPartnerModel>/BP_NAME_TITLE} ? ${BusinessPartnerModel>/BP_NAME_TITLE} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}" />
 
                                     <m:Select id="bp_name_title2"
                                         width="100%"
                                         visible="{=${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}">
+                                        <core:Item text="알수없음"
+                                            key="알수없음" />
                                         <core:Item text="Mr"
-                                            key="Mrkey" />
+                                            key="Mr" />
                                         <core:Item text="Mrs"
-                                            key="Mrskey" />
+                                            key="Mrs" />
                                     </m:Select>
 
                                     <!--                                     
                                     <m:Input id="bp_name_title2" value="{BusinessPartnerModel>/BP_NAME_TITLE}" visible="{=${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}" />
                                          -->
 
-                                    <m:Label text="이름 " />
+                                    <m:Label text="이름 "
+                                        required="true"/>
                                     <m:Text id="bp_name"
-                                        text="{BusinessPartnerModel>/BP_NAME}"
+                                        text="{= ${BusinessPartnerModel>/BP_NAME} ? ${BusinessPartnerModel>/BP_NAME} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_name2"
                                         value="{BusinessPartnerModel>/BP_NAME}"
                                         visible="{=${editModel>/edit}}" />
 
+                                    <m:Label text="사업자등록번호 "
+                                        required="true"/>
+                                    <m:Text id="bp_registration_number"
+                                        text="{= ${BusinessPartnerModel>/BP_REGISTRATION_NUMBER} ? ${BusinessPartnerModel>/BP_REGISTRATION_NUMBER} : 'ㅡ'}"
+                                        visible="{=!${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
+                                    <m:Input id="bp_registration_number2"
+                                        value="{BusinessPartnerModel>/BP_REGISTRATION_NUMBER}"
+                                        visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
+
                                     <core:Title text="" />
                                     <m:Label text="검색어 1 " />
                                     <m:Text id="bp_search"
-                                        text="{BusinessPartnerModel>/BP_SEARCH}"
+                                        text="{= ${BusinessPartnerModel>/BP_SEARCH} ? ${BusinessPartnerModel>/BP_SEARCH} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_search2"
                                         value="{BusinessPartnerModel>/BP_SEARCH}"
                                         visible="{=${editModel>/edit}}" />
-                                    <!-- <m:Input value="{Url}" /> -->
+
                                     <m:Label text="권한 그룹 " />
-                                    <!-- <m:Text id="bp_auth_group" text="{BusinessPartnerModel>/BP_AUTH_GROUP}" visible="{=!${editModel>/edit}}" /> -->
+                                    <m:Text id="bp_auth_group"
+                                        text="{= ${BusinessPartnerModel>/BP_AUTH_GROUP} ? ${BusinessPartnerModel>/BP_AUTH_GROUP} : 'ㅡ'}"
+                                        visible="{=!${editModel>/edit}}" />
+                                    <m:Input id="bp_auth_group2"
+                                        value="{BusinessPartnerModel>/BP_AUTH_GROUP}"
+                                        visible="{=${editModel>/edit}}" />
 
-                                    <!-- <m:ObjectStatus id="Status2" text="{path: 'BusinessPartnerModel>/BP_AUTH_GROUP'}" state="{= ${BusinessPartnerModel>/BP_AUTH_GROUP} === 'null' ? 'Error' :
-                            ${BusinessPartnerModel>/BP_AUTH_GROUP} === '조직(2)' ? '조직(2)' :
-                            'None'
-                        }" /> /> -->
 
-                                    <!-- <m:Input id="bp_auth_group2" value="{BusinessPartnerModel>/BP_AUTH_GROUP}" visible="{=${editModel>/edit}}" /> -->
+
 
 
 
@@ -246,15 +270,26 @@
                                     <m:Label text="법적 형태 "
                                         visible="{visibleModel>/organization}" />
                                     <m:Text id="bp_legal_from"
-                                        text="{BusinessPartnerModel>/BP_LEGAL_FORM}"
+                                        text="{= ${BusinessPartnerModel>/BP_LEGAL_FORM} ? ${BusinessPartnerModel>/BP_LEGAL_FORM} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
-                                    <m:Input id="bp_legal_from2"
-                                        value="{BusinessPartnerModel>/BP_LEGAL_FORM}"
-                                        visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" />
+
+                                    <m:Select id="bp_legal_from2"
+                                        width="100%"
+                                        visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}">
+                                        <core:Item text="알수없음"
+                                            key="알수없음" />
+                                        <core:Item text="법인(01)"
+                                            key="법인(01)" />
+                                        <core:Item text="개인 사업자(02)"
+                                            key="개인 사업자(02)" />
+
+                                    </m:Select>
+
+                                    <!-- <m:Input id="bp_legal_from2" value="{BusinessPartnerModel>/BP_LEGAL_FORM}" visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}" /> -->
 
                                     <m:Label text="아카이빙 플래그 " />
                                     <m:Text id="bp_archiving_flag"
-                                        text="{BusinessPartnerModel>/BP_ARCHIVING_FLAG}"
+                                        text="{= ${BusinessPartnerModel>/BP_ARCHIVING_FLAG} ? ${BusinessPartnerModel>/BP_ARCHIVING_FLAG} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_archiving_flag2"
                                         value="{BusinessPartnerModel>/BP_ARCHIVING_FLAG}"
@@ -265,7 +300,7 @@
 
                                     <m:Label text="생성일 " />
                                     <m:Text id="bp_createdAt"
-                                        text="{BusinessPartnerModel>/createdAt}"
+                                        text="{= ${BusinessPartnerModel>/createdAt} ? ${BusinessPartnerModel>/createdAt} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Text id="bp_createdAt2"
                                         text="{BusinessPartnerModel>/createdAt}"
@@ -273,7 +308,7 @@
 
                                     <m:Label text="최종 변경자 " />
                                     <m:Text id="bp_modifiedBy"
-                                        text="{BusinessPartnerModel>/modifiedBy}"
+                                        text="{= ${BusinessPartnerModel>/modifiedBy} ? ${BusinessPartnerModel>/modifiedBy} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Text id="bp_modifiedBy2"
                                         text="{BusinessPartnerModel>/modifiedBy}"
@@ -282,7 +317,7 @@
 
                                     <m:Label text="최종 변경일 " />
                                     <m:Text id="bp_modifiedAt"
-                                        text="{BusinessPartnerModel>/modifiedAt}"
+                                        text="{= ${BusinessPartnerModel>/modifiedAt} ? ${BusinessPartnerModel>/modifiedAt} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Text id="bp_modifiedAt2"
                                         text="{BusinessPartnerModel>/modifiedAt}"
@@ -309,21 +344,21 @@
                                     <core:Title text="" />
                                     <m:Label text="BP 코드 " />
                                     <m:Text id="bp_code"
-                                        text="{BusinessPartnerModel>/BP_CODE}"
+                                        text="{= ${BusinessPartnerModel>/BP_CODE} ? ${BusinessPartnerModel>/BP_CODE} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
-                                    <m:Input id="bp_code2"
-                                        value="{BusinessPartnerModel>/BP_CODE}"
+                                    <m:Text id="bp_code2"
+                                        text="{BusinessPartnerModel>/BP_CODE}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="고객 계정 그룹 " />
                                     <m:Text id="bp_cust_account_group"
-                                        text="{BusinessPartnerModel>/BP_CUST_ACCOUNT_GROUP}"
+                                        text="{= ${BusinessPartnerModel>/BP_CUST_ACCOUNT_GROUP} ? ${BusinessPartnerModel>/BP_CUST_ACCOUNT_GROUP} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_cust_account_group2"
                                         value="{BusinessPartnerModel>/BP_CUST_ACCOUNT_GROUP}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="고객 권한 그룹 " />
                                     <m:Text id="bp_cust_auth_group"
-                                        text="{BusinessPartnerModel>/BP_CUST_AUTH_GROUP}"
+                                        text="{= ${BusinessPartnerModel>/BP_CUST_AUTH_GROUP} ? ${BusinessPartnerModel>/BP_CUST_AUTH_GROUP} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_cust_auth_group2"
                                         value="{BusinessPartnerModel>/BP_CUST_AUTH_GROUP}"
@@ -332,21 +367,21 @@
                                     <core:Title text="" />
                                     <m:Label text="납품일 규칙 " />
                                     <m:Text id="bp_deliver_rule"
-                                        text="{BusinessPartnerModel>/BP_DELIVER_RULE}"
+                                        text="{= ${BusinessPartnerModel>/BP_DELIVER_RULE} ? ${BusinessPartnerModel>/BP_DELIVER_RULE} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_deliver_rule2"
                                         value="{BusinessPartnerModel>/BP_DELIVER_RULE}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="중앙 삭제 플래그 " />
                                     <m:Text id="bp_delete_flag"
-                                        text="{BusinessPartnerModel>/BP_DELETE_FLAG}"
+                                        text="{= ${BusinessPartnerModel>/BP_DELETE_FLAG} ? ${BusinessPartnerModel>/BP_DELETE_FLAG} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_delete_flag2"
                                         value="{BusinessPartnerModel>/BP_DELETE_FLAG}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="그룹 키 " />
                                     <m:Text id="bp_group_key"
-                                        text="{BusinessPartnerModel>/BP_GROUP_KEY}"
+                                        text="{= ${BusinessPartnerModel>/BP_GROUP_KEY} ? ${BusinessPartnerModel>/BP_GROUP_KEY} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_group_key2"
                                         value="{BusinessPartnerModel>/BP_GROUP_KEY}"
@@ -355,21 +390,21 @@
                                     <core:Title text="" />
                                     <m:Label text="공급업체 " />
                                     <m:Text id="bp_supplier"
-                                        text="{BusinessPartnerModel>/BP_SUPPLIER}"
+                                        text="{= ${BusinessPartnerModel>/BP_SUPPLIER} ? ${BusinessPartnerModel>/BP_SUPPLIER} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_supplier2"
                                         value="{BusinessPartnerModel>/BP_SUPPLIER}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="대리 지급인 " />
                                     <m:Text id="bp_proxy_payment"
-                                        text="{BusinessPartnerModel>/BP_PROXY_PAYMENT}"
+                                        text="{= ${BusinessPartnerModel>/BP_PROXY_PAYMENT} ? ${BusinessPartnerModel>/BP_PROXY_PAYMENT} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_proxy_payment2"
                                         value="{BusinessPartnerModel>/BP_PROXY_PAYMENT}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="지급 사유 " />
                                     <m:Text id="bp_payment_reason"
-                                        text="{BusinessPartnerModel>/BP_PAYMENT_REASON}"
+                                        text="{= ${BusinessPartnerModel>/BP_PAYMENT_REASON} ? ${BusinessPartnerModel>/BP_PAYMENT_REASON} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_payment_reason2"
                                         value="{BusinessPartnerModel>/BP_PAYMENT_REASON}"
@@ -378,21 +413,21 @@
                                     <core:Title text="" />
                                     <m:Label text="오더 보류 " />
                                     <m:Text id="bp_order_hold"
-                                        text="{BusinessPartnerModel>/BP_ORDER_HOLD}"
+                                        text="{= ${BusinessPartnerModel>/BP_ORDER_HOLD} ? ${BusinessPartnerModel>/BP_ORDER_HOLD} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_order_hold2"
                                         value="{BusinessPartnerModel>/BP_ORDER_HOLD}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="청구 보류 " />
                                     <m:Text id="bp_claim_hold"
-                                        text="{BusinessPartnerModel>/BP_CLAIM_HOLD}"
+                                        text="{= ${BusinessPartnerModel>/BP_CLAIM_HOLD} ? ${BusinessPartnerModel>/BP_CLAIM_HOLD} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_claim_hold2"
                                         value="{BusinessPartnerModel>/BP_CLAIM_HOLD}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="납품 보류 " />
                                     <m:Text id="bp_deliver_hole"
-                                        text="{BusinessPartnerModel>/BP_DELIVER_HOLD}"
+                                        text="{= ${BusinessPartnerModel>/BP_DELIVER_HOLD} ? ${BusinessPartnerModel>/BP_DELIVER_HOLD} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_deliver_hole2"
                                         value="{BusinessPartnerModel>/BP_DELIVER_HOLD}"
@@ -421,14 +456,14 @@
                                     <core:Title text="" />
                                     <m:Label text="도로 주소 " />
                                     <m:Text id="bp_address"
-                                        text="{BusinessPartnerModel>/BP_ADDRESS}"
+                                        text="{= ${BusinessPartnerModel>/BP_ADDRESS} ? ${BusinessPartnerModel>/BP_ADDRESS} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_address2"
                                         value="{BusinessPartnerModel>/BP_ADDRESS}"
                                         visible="{=${editModel>/edit}}" />
                                     <m:Label text="번지 " />
                                     <m:Text id="bp_specific_address"
-                                        text="{BusinessPartnerModel>/BP_SPECIFIC_ADDRESS}"
+                                        text="{= ${BusinessPartnerModel>/BP_SPECIFIC_ADDRESS} ? ${BusinessPartnerModel>/BP_SPECIFIC_ADDRESS} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_specific_address2"
                                         value="{BusinessPartnerModel>/BP_SPECIFIC_ADDRESS}"
@@ -437,7 +472,7 @@
                                     <core:Title text="" />
                                     <m:Label text="우편 번호 " />
                                     <m:Text id="bp_postcode"
-                                        text="{BusinessPartnerModel>/BP_POSTCODE}"
+                                        text="{= ${BusinessPartnerModel>/BP_POSTCODE} ? ${BusinessPartnerModel>/BP_POSTCODE} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_postcode2"
                                         value="{BusinessPartnerModel>/BP_POSTCODE}"
@@ -445,7 +480,7 @@
 
                                     <m:Label text="도시 " />
                                     <m:Text id="bp_city"
-                                        text="{BusinessPartnerModel>/BP_CITY}"
+                                        text="{= ${BusinessPartnerModel>/BP_CITY} ? ${BusinessPartnerModel>/BP_CITY} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_city2"
                                         value="{BusinessPartnerModel>/BP_CITY}"
@@ -454,7 +489,7 @@
                                     <core:Title text="" />
                                     <m:Label text="국가/지역 " />
                                     <m:Text id="bp_country"
-                                        text="{BusinessPartnerModel>/BP_COUNTRY}"
+                                        text="{= ${BusinessPartnerModel>/BP_COUNTRY} ? ${BusinessPartnerModel>/BP_COUNTRY} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_country2"
                                         value="{BusinessPartnerModel>/BP_COUNTRY}"
@@ -462,7 +497,7 @@
 
                                     <m:Label text="지역 " />
                                     <m:Text id="bp_region"
-                                        text="{BusinessPartnerModel>/BP_REGION}"
+                                        text="{= ${BusinessPartnerModel>/BP_REGION} ? ${BusinessPartnerModel>/BP_REGION} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
                                     <m:Input id="bp_region2"
                                         value="{BusinessPartnerModel>/BP_REGION}"
