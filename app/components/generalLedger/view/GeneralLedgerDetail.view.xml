@@ -3,11 +3,16 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:heading>
-                    <Title text="{GeneralLedgerModel>/GL_CODE}" />
+                    <VBox>
+                        <HBox>
+                            <Button icon="sap-icon://nav-back/" press=".onBack" type="Transparent" visible="{=!${editModel>/edit}}" />
+                            <Title text="{GeneralLedgerModel>/GL_CODE}" />
+                        </HBox>
+                        <HBox>
+                            <Text text="{GeneralLedgerModel>/GL_COA}" />
+                        </HBox>
+                    </VBox>
                 </uxap:heading>
-                <uxap:snappedTitleOnMobile>
-                    <Title text="여기는 뭔가 싶어서 찾아보는곳" />
-                </uxap:snappedTitleOnMobile>
                 <uxap:actions>
                     <Button type="Emphasized" text="확인" press="onTest" visible="{= ${editModel>/edit}}" />
                     <Button type="Emphasized" text="편집" press="onTest2" visible="{= !${editModel>/edit}}" />
@@ -16,6 +21,12 @@
             </uxap:ObjectPageDynamicHeaderTitle>
         </uxap:headerTitle>
 
+        <!-- <uxap:headerContent >
+                <VBox>
+                    <Text text="{GeneralLedgerModel>/GL_COA}" />
+                </VBox>
+        </uxap:headerContent> -->
+        <!-- pinable 만드는것 -->
         <uxap:sections>
             <uxap:ObjectPageSection titleUppercase="false" title="my section">
                 <uxap:subSections>
@@ -25,53 +36,93 @@
                                 <VBox class="sapUiSmallMargin">
                                     <form:SimpleForm
                                         minWidth="1024"
-                                        maxContainerCols="2"
+                                        maxContainerCols="7"
                                         editable="false"
                                         layout="ResponsiveGridLayout"
                                         title="기본 정보"
-                                        labelSpanL="3"
-                                        labelSpanM="3"
-                                        emptySpanL="4"
-                                        emptySpanM="4"
+                                        labelSpanL="10"
+                                        labelSpanM="5"
+                                        emptySpanL="1"
+                                        emptySpanM="1"
                                         columnsL="3"
-                                        columnsM="1"
+                                        columnsM="6"
                                         width="auto"
                                         class="sapUxAPObjectPageSubSectionAlignContent"
                                     >
+                                        <!-- <Text id="GL_CODE" text="{GeneralLedgerModel>/GL_CODE}" /> -->
                                         <form:content>
-                                            <core:Title text="내역" />
-                                            <Label text="GL 계정" />
-                                            <Text id="GL_CODE" text="{GeneralLedgerModel>/GL_CODE}" />
+                                            <core:Title text="관리" />
+                                            <VBox>
+                                                <Label text="G/L 계정" labelFor="GL_CODE" />
+                                                <Text id="GL_CODE" text="{GeneralLedgerModel>/GL_CODE}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
+                                            <VBox>
+                                                <Label text="계정과목표" labelFor="GL_COA" />
+                                                <Text text="{GeneralLedgerModel>/GL_COA}" visible="{=!${editModel>/edit}}" />
+                                                <Input id="GL_COA" required="true" value="{GeneralLedgerModel>/GL_COA}" visible="{=${editModel>/edit}}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
 
-                                            <Label text="계정과목표" />
-                                            <Text text="{GeneralLedgerModel>/GL_COA}" visible="{=!${editModel>/edit}}" />
-                                            <Input id="GL_COA" value="{GeneralLedgerModel>/GL_COA}" visible="{=${editModel>/edit}}" />
+                                            <VBox>
+                                                <Label text="G/L 계정 유형" labelFor="GL_ACCOUNTTYPE" />
+                                                <Text text="{GeneralLedgerModel>/GL_ACCOUNTTYPE}" visible="{=!${editModel>/edit}}" />
+                                                <Input id="GL_ACCOUNTTYPE" required="true" value="{GeneralLedgerModel>/GL_ACCOUNTTYPE}" visible="{=${editModel>/edit}}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
 
-                                            <Label text="G/L 계정 유형" />
-                                            <Text text="{GeneralLedgerModel>/GL_ACCOUNTTYPE}" visible="{=!${editModel>/edit}}" />
-                                            <Input id="GL_ACCOUNTTYPE" value="{GeneralLedgerModel>/GL_ACCOUNTTYPE}" visible="{=${editModel>/edit}}" />
+                                            <VBox>
+                                                <Label text="계정 그룹" labelFor="GL_ACCOUNTGROUP" />
+                                                <Text text="{GeneralLedgerModel>/GL_ACCOUNTGROUP}" visible="{=!${editModel>/edit}}" />
+                                                <Input id="GL_ACCOUNTGROUP" required="true" value="{GeneralLedgerModel>/GL_ACCOUNTGROUP}" visible="{=${editModel>/edit}}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
 
-                                            <Label text="계정 그룹" />
-                                            <Text text="{GeneralLedgerModel>/GL_ACCOUNTGROUP}" visible="{=!${editModel>/edit}}" />
-                                            <Input id="GL_ACCOUNTGROUP" value="{GeneralLedgerModel>/GL_ACCOUNTGROUP}" visible="{=${editModel>/edit}}" />
-
-                                            <Label text="손익 계산서 계정 유형" />
-                                            <Text text="{GeneralLedgerModel>/GL_PL_ACCOUNTTYPE}" visible="{=!${editModel>/edit}}" />
-                                            <Input id="GL_PL_ACCOUNTTYPE" value="{GeneralLedgerModel>/GL_PL_ACCOUNTTYPE}" visible="{=${editModel>/edit}}" />
+                                            <VBox>
+                                                <Label text="손익 계산서 계정 유형" />
+                                                <Text text="{GeneralLedgerModel>/GL_PL_ACCOUNTTYPE}" visible="{=!${editModel>/edit}}" />
+                                                <Input id="GL_PL_ACCOUNTTYPE" value="{GeneralLedgerModel>/GL_PL_ACCOUNTTYPE}" visible="{=${editModel>/edit}}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
 
                                             <core:Title text="내역(유지보수 언어)(EN)" />
-                                            <Label text="내역" />
-                                            <Text text="{GeneralLedgerModel>/GL_NAME}" visible="{=!${editModel>/edit}}" />
-                                            <Input id="GL_NAME" value="{GeneralLedgerModel>/GL_NAME}" visible="{=${editModel>/edit}}" />
+                                            <VBox>
+                                                <Label text="내역" labelFor="GL_NAME" />
+                                                <Text text="{GeneralLedgerModel>/GL_NAME}" visible="{=!${editModel>/edit}}" />
+                                                <Input id="GL_NAME" required="true" value="{GeneralLedgerModel>/GL_NAME}" visible="{=${editModel>/edit}}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
 
-                                            <Label text="G/L 계정 설명" />
-                                            <Text text="{GeneralLedgerModel>/GL_DESCRIPTION}" visible="{=!${editModel>/edit}}" />
-                                            <Input id="GL_DESCRIPTION" value="{GeneralLedgerModel>/GL_DESCRIPTION}" visible="{=${editModel>/edit}}" />
+                                            <VBox>
+                                                <Label text="G/L 계정 설명" />
+                                                <Text text="{GeneralLedgerModel>/GL_DESCRIPTION}" visible="{=!${editModel>/edit}}" />
+                                                <Input id="GL_DESCRIPTION" value="{GeneralLedgerModel>/GL_DESCRIPTION}" visible="{=${editModel>/edit}}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
 
                                             <core:Title text="연결데이터" />
-                                            <Label text="관계사 번호" />
-                                            <Text text="{GeneralLedgerModel>/GL_TRADINGPARTNER}" visible="{=!${editModel>/edit}}" />
-                                            <Input id="GL_TRADINGPARTNER" value="{GeneralLedgerModel>/GL_TRADINGPARTNER}" visible="{=${editModel>/edit}}" />
+                                            <VBox>
+                                                <Label text="관계사 번호" />
+                                                <Text text="{GeneralLedgerModel>/GL_TRADINGPARTNER}" visible="{=!${editModel>/edit}}" />
+                                                <Input id="GL_TRADINGPARTNER" value="{GeneralLedgerModel>/GL_TRADINGPARTNER}" visible="{=${editModel>/edit}}" />
+                                                <layoutData>
+                                                    <layout:GridData span="XL12 L12 M12 S12" />
+                                                </layoutData>
+                                            </VBox>
                                         </form:content>
                                     </form:SimpleForm>
                                 </VBox>
@@ -91,11 +142,11 @@
                                         <form:content>
                                             <t:Table width="100%" id="table" rows="{GeneralLedgerTableModel>/}" selectionMode="MultiToggle" rowActionCount="1" visibleRowCount="7" ariaLabelledBy="title">
                                                 <t:extension>
-                                                        <OverflowToolbar style="Clear">
-                                                            <ToolbarSpacer />
-                                                            <ToggleButton type="Emphasized" text="생성" press="onNavIndicatorsToggle" />
-                                                        </OverflowToolbar>
-                                                    </t:extension>
+                                                    <OverflowToolbar style="Clear">
+                                                        <ToolbarSpacer />
+                                                        <ToggleButton type="Emphasized" text="생성" press="onNavIndicatorsToggle" />
+                                                    </OverflowToolbar>
+                                                </t:extension>
 
                                                 <t:columns>
                                                     <t:Column>
@@ -131,9 +182,6 @@
                                                         </t:items>
                                                     </t:RowAction>
                                                 </t:rowActionTemplate>
-                                                
-                                                
-                                                
                                             </t:Table>
                                         </form:content>
                                         <form:content />

@@ -9,13 +9,12 @@ sap.ui.define(['sap/ui/core/mvc/Controller',
     'use strict';
   
     return Controller.extend('projectGL.controller.CreateGeneralLedger', {
-      // onBack: function () {
-
-      //   this.getOwnerComponent().getRouter().navTo("GeneralLedger");
-      // },
+      
+      onBack: function () {
+        this.getOwnerComponent().getRouter().navTo("GeneralLedger");
+      },
   
       onCreate: async function () {
-
         var temp = {
           GL_CODE: this.byId("GL_CODE").getValue(),
           GL_COA: this.byId("GL_COA").getValue(),
@@ -26,6 +25,46 @@ sap.ui.define(['sap/ui/core/mvc/Controller',
           GL_DESCRIPTION: this.byId("GL_DESCRIPTION").getValue(),
           GL_TRADINGPARTNER: this.byId("GL_TRADINGPARTNER").getValue(),
         }
+
+        this.byId("GL_CODE").setValueState("None");
+        this.byId("GL_COA").setValueState("None");
+        this.byId("GL_ACCOUNTTYPE").setValueState("None");
+        this.byId("GL_ACCOUNTGROUP").setValueState("None");
+        this.byId("GL_NAME").setValueState("None");
+        if (!temp.GL_CODE || !temp.GL_COA || !temp.GL_ACCOUNTTYPE || !temp.GL_ACCOUNTGROUP || !temp.GL_NAME) {
+          if (!temp.GL_CODE) {
+            this.byId("GL_CODE").setValueState("Error");
+            this.byId("GL_CODE").setValueStateText(
+              "G/L 계정을 입력해주세요."
+              );
+            }
+          if (!temp.GL_COA) {
+            this.byId("GL_COA").setValueState("Error");
+            this.byId("GL_COA").setValueStateText(
+              "계정과목표를 입력해주세요."
+              );
+            }
+          if (!temp.GL_ACCOUNTTYPE) {
+            this.byId("GL_ACCOUNTTYPE").setValueState("Error");
+            this.byId("GL_ACCOUNTTYPE").setValueStateText(
+              "계정 유형을 입력해주세요."
+            );
+          }
+          if (!temp.GL_ACCOUNTGROUP) {
+            this.byId("GL_ACCOUNTGROUP").setValueState("Error");
+            this.byId("GL_ACCOUNTGROUP").setValueStateText(
+              "계정 그룹을 입력해주세요."
+            );
+          }
+          if (!temp.GL_NAME) {
+            this.byId("GL_NAME").setValueState("Error");
+            this.byId("GL_NAME").setValueStateText(
+              "내역을 입력해주세요."
+            );
+          }
+          return 0;
+        }
+       
         console.log(temp);
         await $.ajax({
           type: "POST",

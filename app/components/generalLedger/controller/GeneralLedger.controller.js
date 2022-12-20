@@ -92,7 +92,7 @@ sap.ui.define(
           url: "/general-ledger/AccountGroup",
         });
 
-        console.log(accGroupData);
+        //console.log(accGroupData);
         this.getView().setModel(new JSONModel(accGroupData.value), "accGroup");
       },
 
@@ -239,15 +239,41 @@ sap.ui.define(
         this.byId("actionSheet").openBy(oButton);
       },
 
-      onCreateGL: function () {
+      onCreateGL: function () {        
         this.getOwnerComponent().getRouter().navTo("CreateGeneralLedger");
       },
+
       onCopyCreateGL: function () {
-        this.getOwnerComponent().getRouter().navTo("CopyCreateGeneralLedger");
+        var totalNumber =
+          this.getView().getModel("GeneralLedgerModel").oData.length;
+        let model = this.getView().getModel("GeneralLedgerModel");
+        let i;
+        let GL_CODE;
+        //for문 바깥으로 꺼내서 선언(let GL_CODE)
+        for (i = 0; i < totalNumber; i++) {
+          let chk = "/" + i + "/CHK";
+          let key = "/" + i + "/GL_CODE";
+          if (model.getProperty(chk) === true) {
+            model.getProperty(key);
+            GL_CODE = model.getProperty(key);
+          
+            // let test = this.getView().byId("GeneralLedgerTable").getBinding("rows");  // 테이블 바인딩
+            // let GL_CODE;  // 변수 GL_CODE 선언
+            // for (let i=0; i< test.oList.length; i++) {  // 테이블 바인딩 데이터 for문 순회
+            //   if (test.oList[i].CHK) {    // 만약 CHK 필드 값(선택)이 true일 때
+            //     GL_CODE = test.oList[i].GL_CODE;  // 변수 GL_CODE에 값 할당
+            //     break;   // GL_CODE에 값을 할당하면 for문 탈출
+            //   }
+            // }
+          this.getOwnerComponent()
+            .getRouter()
+            .navTo("CopyCreateGeneralLedger", { num: GL_CODE });
+            //num: GL_CODE를 for문 안으로 넣어서 돌려버린다는 마인드 중괄호로 묶어묶어!
+          }
+          // 복사 생성 페이지로 이동
+        }
       },
-      onMassCreateGL: function () {
-        this.getOwnerComponent().getRouter().navTo("MassCreateGeneralLedger");
-      },
+
       onDeleteGL: async function () {
         var totalNumber =
           this.getView().getModel("GeneralLedgerModel").oData.length;
@@ -260,6 +286,7 @@ sap.ui.define(
           if (model.getProperty(chk) === true) {
             model.getProperty(key);
             let GL_CODE = model.getProperty(key);
+
             let url = "/general-ledger/GL/" + GL_CODE;
             await $.ajax({
               type: "DELETE",
@@ -267,6 +294,7 @@ sap.ui.define(
             });
           }
         }
+
         this.onMyRoutePatternMatched();
       },
 

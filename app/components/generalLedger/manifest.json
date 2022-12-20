@@ -120,6 +120,13 @@
           ]
         },
         {
+          "name": "CopyCreateGeneralLedger",
+          "pattern": "CopyCreateGeneralLedger/{num}",
+          "target": [
+            "CopyCreateGeneralLedger"
+          ]
+        },
+        {
           "name": "GeneralLedgerDetail",
           "pattern": "GeneralLedgerDetail/{num}",
           "target": [
@@ -152,6 +159,12 @@
           "transition": "show",
           "viewId": "CreateGeneralLedger",
           "viewName": "CreateGeneralLedger"
+        },
+        "CopyCreateGeneralLedger": {
+          "viewType": "XML",
+          "transition": "show",
+          "viewId": "CopyCreateGeneralLedger",
+          "viewName": "CopyCreateGeneralLedger"
         },
         "GeneralLedgerDetail": {
           "viewType": "XML",
