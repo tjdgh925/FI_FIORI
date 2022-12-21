@@ -37,6 +37,7 @@ sap.ui.define(
   ) {
     "use strict";
     let totalNumber;
+    var bp_code;
     let that;
     const EdmType = library.EdmType;
 
@@ -70,11 +71,18 @@ sap.ui.define(
         let BusinessPartnerModel = new JSONModel(BusinessPartner.value);
         this.getView().setModel(BusinessPartnerModel, "BusinessPartnerModel");
         var sum = this.getView().getModel("BusinessPartnerModel").oData.length;
-
         this.byId("bp_tableName").setText("고객 (" + sum + ")");
       },
 
       onMyRoutePatternMatched: async function () {
+        const firstData = await $.ajax({
+          type: "GET",
+          url: "/business-partner/BP?$orderby=BP_CODE desc&$top=1",
+        });
+
+        bp_code = firstData.value[0].BP_CODE;
+
+        this.getView().setModel(new JSONModel({ code: bp_code }), "BP_CODE");
         that = this;
 
         const BusinessPartner = await $.ajax({
@@ -93,6 +101,10 @@ sap.ui.define(
           new JSONModel(countryData.value),
           "CountryData"
         );
+
+        var sum = this.getView().getModel("BusinessPartnerModel").oData.length;
+        this.byId("bp_tableName").setText("고객 (" + sum + ")");
+        this.onReset();
       },
 
       onCellClick: function (e) {
@@ -119,19 +131,53 @@ sap.ui.define(
           return country.mProperties.key;
         });
 
-        console.log("Tokens = ", countryTokens);
-
         var aFilter = [];
         var countryFilter = [];
         var nameFilter = [];
 
+        var countryArr = this.getView().getModel("Country").oData;
+        countryArr = countryArr.map((country) => {
+          return country.COUNTRY_CODE;
+        });
+
+        let ETCcount = false;
+        let notSelectedCountry;
+
         if (countryTokens.length > 0) {
           countryTokens.forEach((country) => {
-            countryFilter.push(
-              new Filter("BP_COUNTRY", FilterOperator.Contains, country)
-            );
+            if (country === "ETC") {
+                ETCcount = true;
+            } 
           });
-          aFilter.push(new Filter(countryFilter, false));
+
+          if (ETCcount) {
+            countryArr.forEach((tokenKey) => {
+              notSelectedCountry = false;
+
+              countryTokens.forEach((countryKey) => {
+                if (tokenKey === countryKey) {
+                  notSelectedCountry = true;
+                  return;
+                }
+              });
+
+              if (!notSelectedCountry) {
+                countryFilter.push(
+                  new Filter("BP_COUNTRY", FilterOperator.NE, tokenKey)
+                )
+              }
+            });
+            aFilter.push(new Filter(countryFilter, true));
+              
+          } else {
+            countryTokens.forEach((countryKey) => {
+              countryFilter.push(
+                new Filter("BP_COUNTRY", FilterOperator.EQ, countryKey)
+              )
+            });
+            aFilter.push(new Filter(countryFilter, false));
+          }
+
         }
 
         if (bp_postCode) {
@@ -217,14 +263,14 @@ sap.ui.define(
 
       onCreateDialog_person: async function () {
         let categorySelect = this.byId("bp_category_person").getText();
-        if (categorySelect == "개인(1)") {
+        if (categorySelect == "개인 (1)") {
           categorySelect = "A";
         } else {
           categorySelect = "B";
         }
 
         var temp = {
-          BP_CODE: this.byId("bp_code_person").getValue(),
+          BP_CODE: (bp_code++).toString(),
           BP_ADDRESS: this.byId("bp_address_person").getValue(),
           BP_COMPANY_CODE: this.byId("bp_company_code_person").getValue(),
           BP_CATEGORY: categorySelect,
@@ -235,20 +281,14 @@ sap.ui.define(
           BP_POSTCODE: this.byId("bp_postCode_person").getValue(),
           BP_NAME: this.byId("bp_name_person").getValue(),
           BP_CITY: this.byId("bp_city_person").getValue(),
-          BP_COUNTRY: this.byId("bp_country_person").getSelectedItem().getText(),
+          BP_COUNTRY: this.byId("bp_country_person").getSelectedKey(),
           BP_REGION: this.byId("bp_region_person").getValue(),
         };
 
-        this.byId("bp_code_person").setValueState("None");
         this.byId("bp_company_code_person").setValueState("None");
         this.byId("bp_name_person").setValueState("None");
         this.byId("bp_country_person").setValueState("None");
-        if (
-          !temp.BP_COMPANY_CODE ||
-          !temp.BP_CODE ||
-          !temp.BP_NAME ||
-          !temp.BP_COUNTRY
-        ) {
+        if (!temp.BP_COMPANY_CODE || !temp.BP_NAME || !temp.BP_COUNTRY) {
           if (!temp.BP_COMPANY_CODE) {
             this.byId("bp_company_code_person").setValueState("Error");
             this.byId("bp_company_code_person").setValueStateText(
@@ -256,12 +296,6 @@ sap.ui.define(
             );
           }
 
-          if (!temp.BP_CODE) {
-            this.byId("bp_code_person").setValueState("Error");
-            this.byId("bp_code_person").setValueStateText(
-              "BP 코드를 입력해주세요."
-            );
-          }
           if (!temp.BP_NAME) {
             this.byId("bp_name_person").setValueState("Error");
             this.byId("bp_name_person").setValueStateText(
@@ -321,14 +355,14 @@ sap.ui.define(
       // '삭제 아이콘' 클릭 시 정렬
       onCreateDialog_organization: async function () {
         let categorySelect = this.byId("bp_category_organization").getText();
-        if (categorySelect == "개인(1)") {
+        if (categorySelect == "개인 (1)") {
           categorySelect = "A";
         } else {
           categorySelect = "B";
         }
 
         var temp = {
-          BP_CODE: this.byId("bp_code_organization").getValue(),
+          BP_CODE: (bp_code++).toString(),
           BP_ADDRESS: this.byId("bp_address_organization").getValue(),
           BP_COMPANY_CODE: this.byId("bp_company_code_organization").getValue(),
           BP_CATEGORY: categorySelect,
@@ -341,7 +375,7 @@ sap.ui.define(
           BP_POSTCODE: this.byId("bp_postCode_organization").getValue(),
           BP_NAME: this.byId("bp_name_organization").getValue(),
           BP_CITY: this.byId("bp_city_organization").getValue(),
-          BP_COUNTRY: this.byId("bp_country_organization").getSelectedItem().getText(),
+          BP_COUNTRY: this.byId("bp_country_organization").getSelectedKey(),
           BP_REGION: this.byId("bp_region_organization").getValue(),
           BP_REGISTRATION_NUMBER: this.byId(
             "bp_registration_number_organization"
@@ -349,13 +383,11 @@ sap.ui.define(
         };
 
         this.byId("bp_company_code_organization").setValueState("None");
-        this.byId("bp_code_organization").setValueState("None");
         this.byId("bp_name_organization").setValueState("None");
         this.byId("bp_registration_number_organization").setValueState("None");
         this.byId("bp_country_organization").setValueState("None");
         if (
           !temp.BP_COMPANY_CODE ||
-          !temp.BP_CODE ||
           !temp.BP_NAME ||
           !temp.BP_REGISTRATION_NUMBER ||
           !temp.BP_COUNTRY
@@ -364,13 +396,6 @@ sap.ui.define(
             this.byId("bp_company_code_organization").setValueState("Error");
             this.byId("bp_company_code_organization").setValueStateText(
               "회사 코드를 입력해주세요."
-            );
-          }
-
-          if (!temp.BP_CODE) {
-            this.byId("bp_code_organization").setValueState("Error");
-            this.byId("bp_code_organization").setValueStateText(
-              "BP 코드를 입력해주세요."
             );
           }
           if (!temp.BP_NAME) {
@@ -490,10 +515,10 @@ sap.ui.define(
 
         for (let i = 0; i < oList.length; i++) {
           if (oList[i].BP_CATEGORY === "A") {
-            oList[i].BP_CATEGORY2 = "개인(1)";
+            oList[i].BP_CATEGORY2 = "개인 (1)";
           }
           if (oList[i].BP_CATEGORY === "B") {
-            oList[i].BP_CATEGORY2 = "조직(2)";
+            oList[i].BP_CATEGORY2 = "조직 (2)";
           }
         }
 

@@ -28,7 +28,7 @@
                     </VBox>
                     <VBox>
                         <Label text="BP 코드" labelFor="bp_code_person" />
-                        <Input id="bp_code_person" required="true" />
+                        <Text text="{BP_CODE>/code}" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
@@ -49,7 +49,7 @@
                     </VBox>
                     <VBox>
                         <Label text="BP 범주" />
-                        <Text id="bp_category_person" text="개인(1)" />
+                        <Text id="bp_category_person" text="개인 (1)" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>

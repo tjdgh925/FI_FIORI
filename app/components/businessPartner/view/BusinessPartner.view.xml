@@ -1,7 +1,7 @@
 <mvc:View controllerName="projectBP.controller.BusinessPartner" xmlns="sap.m" xmlns:f="sap.f" xmlns:mvc="sap.ui.core.mvc" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core" height="100%">
-    <f:DynamicPage id="BusinessPartnerPage">
+    <f:DynamicPage id="BusinessPartnerPage" >
         <f:title>
-            <f:DynamicPageTitle>
+            <f:DynamicPageTitle >
                 <f:heading>
                     <HBox>
                         <Title text="Customer MasterData List" />
@@ -10,21 +10,21 @@
             </f:DynamicPageTitle>
         </f:title>
         <f:header>
-            <f:DynamicPageHeader pinnable="true">
+            <f:DynamicPageHeader pinnable="false">
                 <form:SimpleForm layout="ResponsiveGridLayout">
                     <form:content>
-                        <VBox>
-                            <Label text="우편번호 : " />
-                            <Input id="bp_postCode" />
-                            <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
-                            </layoutData>
-                        </VBox>
                         <VBox>
                             <Label text="비즈니스 파트너 : " />
                             <Input id="bp_name" />
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12" />
+                            </layoutData>
+                        </VBox>
+                        <VBox>
+                            <Label text="회사코드 : " />
+                            <Input id="bp_company_code" />
+                            <layoutData>
+                                <layout:GridData span="XL1 L1 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
@@ -39,6 +39,13 @@
                             <Input id="bp_city" />
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12" />
+                            </layoutData>
+                        </VBox>
+                        <VBox>
+                            <Label text="우편번호 : " />
+                            <Input id="bp_postCode" />
+                            <layoutData>
+                                <layout:GridData span="XL1 L1 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
@@ -60,23 +67,16 @@
                                 </suggestionRows>
                             </MultiInput>
                             <layoutData>
-                                <layout:GridData span="XL2 L2 M6 S12" />
+                                <layout:GridData span="XL1 L1 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
                             <Label text="비즈니스 파트너 범주 : " />
                             <Select width="100%" id="bp_category">
                                 <core:Item text="전체" />
-                                <core:Item text="개인(1)" key="A" />
-                                <core:Item text="조직(2)" key="B" />
+                                <core:Item text="개인 (1)" key="A" />
+                                <core:Item text="조직 (2)" key="B" />
                             </Select>
-                            <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
-                            </layoutData>
-                        </VBox>
-                        <VBox>
-                            <Label text="회사코드 : " />
-                            <Input id="bp_company_code" />
                             <layoutData>
                                 <layout:GridData span="XL1 L1 M6 S12" />
                             </layoutData>
@@ -94,7 +94,8 @@
         </f:header>
 
         <f:content class="sapUiSmallMargin">
-            <Table id="BusinessPartnerTable" items="{BusinessPartnerModel>/}" width="auto">
+            <Table id="BusinessPartnerTable" items="{BusinessPartnerModel>/}" width="auto" sticky="ColumnHeaders,HeaderToolbar"
+                growing="true" growingThreshold="100">
                 <headerToolbar>
                     <OverflowToolbar>
                         <content>

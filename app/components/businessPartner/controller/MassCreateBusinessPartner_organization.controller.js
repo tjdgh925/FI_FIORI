@@ -21,8 +21,9 @@ sap.ui.define(
             .attachPatternMatched(this.onMyRoutePatternMatched, this);
         },
         onMyRoutePatternMatched: async function () {
-          var initData = [];
+        var initData = [];
           this.getView().setModel(new JSONModel(initData), "MassCreateModel");
+          console.log(this.getView().getModel( "MassCreateModel"));
 
           const firstData = await $.ajax({
             type: "GET",

@@ -11,19 +11,7 @@
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
-<f:header >
-            <f:DynamicPageHeader pinnable="true">
-                <form:SimpleForm layout="ResponsiveGridLayout">
-                    <form:content>
-                        <VBox>
-                            <Label text="" />
-                            <Title text=""/>
 
-                        </VBox>
-                    </form:content>
-                </form:SimpleForm>
-            </f:DynamicPageHeader>
-        </f:header>
 
         <f:content>
             <t:Table id="massCreate_organization" rows="{MassCreateModel>/}" selectionMode="None" visibleRowCount="20" paste="onPaste" rowsUpdated=".tablevalidate">
@@ -43,7 +31,7 @@
                             <Label text="BP 범주" textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
-                            <Text text="조직(2)" />
+                            <Text text="조직 (2)" />
                         </t:template>
                     </t:Column>
 
