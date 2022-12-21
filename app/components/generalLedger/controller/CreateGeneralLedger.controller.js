@@ -148,7 +148,7 @@ sap.ui.define(
       },
 
       onReset: function () {
-        this.byId("GL_CODE").setValue("");
+
         this.byId("coaMulti").setTokens([]);
         this.byId("GL_ACCOUNTTYPE").setValue("");
         this.byId("accGroupMulti").setTokens([]);
