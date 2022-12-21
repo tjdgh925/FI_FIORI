@@ -36,21 +36,20 @@ sap.ui.define(
           b = 0.0,
           c = 0.0,
           d = 0.0;
-        
+
         for (const data in dataArr) {
-          if (dataArr[data].BP_COUNTRY === "") d = dataArr[data].COUNT;
+          if (dataArr[data].BP_COUNTRY !== "KR" || "JP" || "CN")
+            d = dataArr[data].COUNT;
           if (dataArr[data].BP_COUNTRY === "KR") a = dataArr[data].COUNT;
           if (dataArr[data].BP_COUNTRY === "JP") b = dataArr[data].COUNT;
           if (dataArr[data].BP_COUNTRY === "CN") c = dataArr[data].COUNT;
         }
 
-        view.getModel("BP_COUNTRY_REGION").setProperty("/First", a  );
+        view.getModel("BP_COUNTRY_REGION").setProperty("/First", a);
         view.getModel("BP_COUNTRY_REGION").setProperty("/Second", b);
         view.getModel("BP_COUNTRY_REGION").setProperty("/Third", c);
         view.getModel("BP_COUNTRY_REGION").setProperty("/Others", d);
-        view.getModel("BP_COUNTRY_REGION").setProperty("/Sum", (a + b + c + d));
-
-        
+        view.getModel("BP_COUNTRY_REGION").setProperty("/Sum", a + b + c + d);
       },
     });
   }

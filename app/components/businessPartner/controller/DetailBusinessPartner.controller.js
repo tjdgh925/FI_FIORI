@@ -30,6 +30,7 @@ sap.ui.define(
           .attachPatternMatched(this.onMyRoutePatternMatched, this);
       },
 
+      //편집버튼 눌렀을때 작동하는 기능
       onEdit: function () {
         this.byId("bp_name2").setValueState("None");
         this.byId("bp_registration_number2").setValueState("None");
@@ -65,9 +66,12 @@ sap.ui.define(
         let orgDivision = this.byId("bp_org_division").getText();
         let bpLegalForm = this.byId("bp_legal_from").getText();
         let bpNameTitle = this.byId("bp_name_title").getText();
+        let bpCountry = this.byId("bp_country").getText();
+
         this.byId("bp_org_division2").setSelectedKey(orgDivision);
         this.byId("bp_legal_from2").setSelectedKey(bpLegalForm);
         this.byId("bp_name_title2").setSelectedKey(bpNameTitle);
+        this.byId("bp_country2").setSelectedKey(bpCountry);
       },
 
       onMyRoutePatternMatched: async function (oEvent) {
@@ -159,10 +163,12 @@ sap.ui.define(
         this.getView().setModel(BusinessPartnerModel, "BusinessPartnerModel");
       },
 
+      // > 버튼 -> 뒤로가기 기능 (BP조회 테이블 페이지로 돌아감)
       onBack: function () {
         this.getOwnerComponent().getRouter().navTo("BusinessPartner");
       },
 
+      // 확인 버튼 클릭시 동작되는 기능
       onConfirm: function () {
         let bpStatus = this.byId("Status").getText();
 
@@ -170,7 +176,7 @@ sap.ui.define(
         if (bpStatus === "개인 (1)") {
           validData = {
             BP_NAME: this.byId("bp_name2").getValue(),
-            BP_COUNTRY: this.byId("bp_country2").getValue(),
+            BP_COUNTRY: this.byId("bp_country2").getSelectedKey(),
             BP_CATEGORY: "A",
           };
         } else {
@@ -180,7 +186,7 @@ sap.ui.define(
             BP_REGISTRATION_NUMBER: this.byId(
               "bp_registration_number2"
             ).getValue(),
-            BP_COUNTRY: this.byId("bp_country2").getValue(),
+            BP_COUNTRY: this.byId("bp_country2").getSelectedKey(),
             BP_CATEGORY: "B",
           };
         }
@@ -211,14 +217,14 @@ sap.ui.define(
           if (!validData.BP_NAME) {
             this.byId("bp_name2").setValueState("Error");
             this.byId("bp_name2").setValueStateText("BP 이름을 입력해주세요.");
-          }
+          } else this.byId("bp_name2").setValueState();
 
           if (!validData.BP_REGISTRATION_NUMBER) {
             this.byId("bp_registration_number2").setValueState("Error");
             this.byId("bp_registration_number2").setValueStateText(
               "사업자등록번호를 입력해주세요."
             );
-          }
+          } else this.byId("bp_registration_number2").setValueState();
 
           if (!validData.BP_COUNTRY) {
             this.byId("bp_country2").setValueState("Error");
@@ -232,10 +238,12 @@ sap.ui.define(
         let orgDivision = this.byId("bp_org_division2").getSelectedKey();
         let bpLegalForm = this.byId("bp_legal_from2").getSelectedKey();
         let bpNameTitle = this.byId("bp_name_title2").getSelectedKey();
+        let bpCountry = this.byId("bp_country2").getSelectedKey();
 
         this.byId("bp_org_division").setText(orgDivision);
         this.byId("bp_legal_from").setText(bpLegalForm);
         this.byId("bp_name_title").setText(bpNameTitle);
+        this.byId("bp_country").setText(bpCountry);
 
         this.getView()
           .getModel("FinalSaveModel")
@@ -243,6 +251,7 @@ sap.ui.define(
         this.getView().getModel("editModel").setProperty("/edit", false);
       },
 
+      //최종저장하시겠습니까 -> 최종저장 버튼
       onFinalSave: async function () {
         var temp = {
           BP_CODE: this.byId("bp_code").getText(),
@@ -271,7 +280,7 @@ sap.ui.define(
           BP_SPECIFIC_ADDRESS: this.byId("bp_specific_address2").getValue(),
           BP_POSTCODE: this.byId("bp_postcode2").getValue(),
           BP_CITY: this.byId("bp_city2").getValue(),
-          BP_COUNTRY: this.byId("bp_country2").getValue(),
+          BP_COUNTRY: this.byId("bp_country2").getSelectedKey(),
           BP_REGION: this.byId("bp_region2").getValue(),
         };
 
@@ -288,6 +297,7 @@ sap.ui.define(
         this.onCancel();
       },
 
+      //취소버튼 기능
       onCancel: function () {
         this.getView().getModel("editModel").setProperty("/edit", false);
         this.onMyRoutePatternMatched("?");
@@ -295,9 +305,10 @@ sap.ui.define(
           .getModel("FinalSaveModel")
           .setProperty("/FinalSave", false);
       },
+
+      //아니오버튼 기능
       onGotopage: function () {
         this.getView().getModel("editModel").setProperty("/edit", false);
-
         this.getView().getModel("editModel").setProperty("/edit", true);
       },
     });

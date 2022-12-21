@@ -19,7 +19,7 @@
                             type="Transparent"
                             class="sapUiTinyMarginBottom"
                             press="onBack"
-                            visible="{=!${editModel>/edit}}" />
+                            visible="{=!${editModel>/edit}&amp;&amp;!${FinalSaveModel>/FinalSave}}" />
                         <m:Title wrappingType="Normal"
                             text="{BusinessPartnerModel>/BP_NAME}" />
                     </m:HBox>
@@ -32,7 +32,7 @@
                             type="Transparent"
                             class="sapUiTinyMarginBottom"
                             press="onBack"
-                            visible="{=!${editModel>/edit}}" />
+                            visible="{=!${editModel>/edit}&amp;&amp;!${FinalSaveModel>/FinalSave}}" />
                         <m:Avatar src="sap-icon://building"
                             class="sapUiTinyMarginEnd"
                             visible="{organization_visibleModel>/organization}" />
@@ -45,9 +45,9 @@
                 </snappedHeading>
 
                 <expandedContent>
-                    <m:Text text="         "
+                    <m:Text text="          "
                         renderWhitespace="true"
-                        visible="{=!${editModel>/edit}}"/>
+                        visible="{=!${editModel>/edit}&amp;&amp;!${FinalSaveModel>/FinalSave}}"/>
                     <m:Text text="{BusinessPartnerModel>/BP_CODE}"/>
 
                 </expandedContent>
@@ -204,9 +204,9 @@
 
                                     <m:Select id="bp_org_division2"
                                         width="100%"
+                                       
                                         visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}">
-                                        <core:Item text="알수없음"
-                                            key="알수없음" />
+                                       
                                         <core:Item text="개인"
                                             key="개인" />
                                         <core:Item text="법인"
@@ -223,14 +223,14 @@
 
                                     <m:Select id="bp_name_title2"
                                         width="100%"
+                                       
                                         selectedKey="알수없음"
                                         visible="{=${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}">
-                                        <core:Item text="알수없음"
-                                            key="알수없음" />
+                                       
                                         <core:Item text="Mr"
                                             key="Mr" />
-                                        <core:Item text="Mrs"
-                                            key="Mrs" />
+                                        <core:Item text="Ms"
+                                            key="Ms" />
                                     </m:Select>
 
 
@@ -279,10 +279,10 @@
 
                                     <m:Select id="bp_legal_from2"
                                         width="100%"
+                                       
                                         selectedKey="알수없음"
                                         visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}">
-                                        <core:Item text="알수없음"
-                                            key="알수없음" />
+                                     
                                         <core:Item text="법인(01)"
                                             key="법인(01)" />
                                         <core:Item text="개인 사업자(02)"
@@ -497,9 +497,21 @@
                                     <m:Text id="bp_country"
                                         text="{= ${BusinessPartnerModel>/BP_COUNTRY} ? ${BusinessPartnerModel>/BP_COUNTRY} : 'ㅡ'}"
                                         visible="{=!${editModel>/edit}}" />
-                                    <m:Input id="bp_country2"
-                                        value="{BusinessPartnerModel>/BP_COUNTRY}"
-                                        visible="{=${editModel>/edit}}" />
+
+                                    <m:Select id="bp_country2"
+                                    width="100%"
+                                    
+                                    selectedKey="알수없음"
+                                    visible="{=${editModel>/edit}}" >
+                                    <core:Item text ="CN"
+                                    key="CN"/> 
+                                    <core:Item text ="JP"
+                                    key="JP"/> 
+                                    <core:Item text ="KR"
+                                    key="KR"/>
+                                    <core:Item text ="ETC"
+                                    key="ETC"/>
+                                    </m:Select>
 
                                     <m:Label text="지역 " />
                                     <m:Text id="bp_region"
