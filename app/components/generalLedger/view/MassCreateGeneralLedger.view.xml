@@ -194,11 +194,11 @@
                                 width="100%" />
                             <Label text="회사코드"
                                 textAlign="Center"
-                                width="100%" />
+                                width="100%" required="true" />
                         </t:multiLabels>
 
                         <t:template>
-                            <MultiComboBox width="100%"
+                            <MultiComboBox width="100%" required="true"
                                 id="companyCode"
                                 items="{
                                 path : 'CompanyCode>/',
