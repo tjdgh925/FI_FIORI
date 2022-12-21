@@ -117,6 +117,9 @@ sap.ui.define(
         this.byId("accGroupMulti").addToken(
           new Token({ key: acGroup, text: acGroup })
         );
+        this.byId("GL_ACCOUNTTYPE").setSelectedKey(
+          GeneralLedger.GL_ACCOUNTTYPE
+        );
 
         // //table용 데이터 모델에 저장
         this.onFilterCompanyCode();
@@ -200,10 +203,9 @@ sap.ui.define(
 
         var temp = {
           GL_CODE: this.byId("GL_CODE").getText(),
-          GL_COA: this.byId("coaMulti").getTokens()[0].mProperties.key,
+          GL_COA: this.byId("coaMulti").getTokens(),
           GL_ACCOUNTTYPE: this.byId("GL_ACCOUNTTYPE").getSelectedKey(),
-          GL_ACCOUNTGROUP:
-            this.byId("accGroupMulti").getTokens()[0].mProperties.key,
+          GL_ACCOUNTGROUP: this.byId("accGroupMulti").getTokens(),
           GL_PL_ACCOUNTTYPE: this.byId("GL_PL_ACCOUNTTYPE").getValue(),
           GL_NAME: this.byId("GL_NAME").getValue(),
           GL_DESCRIPTION: this.byId("GL_DESCRIPTION").getValue(),
@@ -211,38 +213,52 @@ sap.ui.define(
           GL_COMPANY_CODE: companyCode,
         };
 
-        // this.byId("GL_COA").setValueState("None");
-        // this.byId("GL_ACCOUNTTYPE").setValueState("None");
-        // this.byId("GL_ACCOUNTGROUP").setValueState("None");
-        // this.byId("GL_NAME").setValueState("None");
-        // if (
-        //   !temp.GL_COA ||
-        //   !temp.GL_ACCOUNTTYPE ||
-        //   !temp.GL_ACCOUNTGROUP ||
-        //   !temp.GL_NAME
-        // ) {
-        //   if (!temp.GL_COA) {
-        //     this.byId("GL_COA").setValueState("Error");
-        //     this.byId("GL_COA").setValueStateText("계정과목표를 입력해주세요.");
-        //   }
-        //   if (!temp.GL_ACCOUNTTYPE) {
-        //     this.byId("GL_ACCOUNTTYPE").setValueState("Error");
-        //     this.byId("GL_ACCOUNTTYPE").setValueStateText(
-        //       "계정 유형을 입력해주세요."
-        //     );
-        //   }
-        //   if (!temp.GL_ACCOUNTGROUP) {
-        //     this.byId("GL_ACCOUNTGROUP").setValueState("Error");
-        //     this.byId("GL_ACCOUNTGROUP").setValueStateText(
-        //       "계정 그룹을 입력해주세요."
-        //     );
-        //   }
-        //   if (!temp.GL_NAME) {
-        //     this.byId("GL_NAME").setValueState("Error");
-        //     this.byId("GL_NAME").setValueStateText("내역을 입력해주세요.");
-        //   }
-        //   return 0;
-        // }
+        this.byId("coaMulti").setValueState("None");
+        this.byId("GL_ACCOUNTTYPE").setValueState("None");
+        this.byId("accGroupMulti").setValueState("None");
+        this.byId("GL_NAME").setValueState("None");
+        this.byId("companyCodeMulti").setValueState("None");
+
+        if (
+          temp.GL_COA.length === 0 ||
+          !temp.GL_ACCOUNTTYPE ||
+          temp.GL_ACCOUNTGROUP.length === 0 ||
+          !temp.GL_NAME ||
+          !temp.GL_COMPANY_CODE
+        ) {
+          if (temp.GL_COA.length === 0) {
+            this.byId("coaMulti").setValueState("Error");
+            this.byId("coaMulti").setValueStateText(
+              "계정과목표를 입력해주세요."
+            );
+          }
+          if (!temp.GL_ACCOUNTTYPE) {
+            this.byId("GL_ACCOUNTTYPE").setValueState("Error");
+            this.byId("GL_ACCOUNTTYPE").setValueStateText(
+              "계정 유형을 입력해주세요."
+            );
+          }
+          if (temp.GL_ACCOUNTGROUP.length === 0) {
+            this.byId("accGroupMulti").setValueState("Error");
+            this.byId("accGroupMulti").setValueStateText(
+              "계정 그룹을 입력해주세요."
+              );
+            }
+            if (!temp.GL_NAME) {
+              this.byId("GL_NAME").setValueState("Error");
+              this.byId("GL_NAME").setValueStateText("내역을 입력해주세요.");
+            }
+            if (!temp.GL_COMPANY_CODE) {
+              this.byId("companyCodeMulti").setValueState("Error");
+              this.byId("companyCodeMulti").setValueStateText(
+                "회사 코드를 선택해주세요."
+              );
+            }
+          return 0;
+        }
+
+        temp.GL_COA = temp.GL_COA[0].mProperties.key;
+        temp.GL_ACCOUNTGROUP = temp.GL_ACCOUNTGROUP[0].mProperties.key;
 
         let url = "/general-ledger/GL/" + temp.GL_CODE;
         console.log(url);
