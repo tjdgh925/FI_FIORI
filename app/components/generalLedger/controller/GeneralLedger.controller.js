@@ -15,6 +15,7 @@ sap.ui.define(
     "sap/ui/core/Fragment",
     "sap/ui/export/Spreadsheet",
     "sap/ui/export/library",
+    "../model/formatter",
   ],
   function (
     Controller,
@@ -31,13 +32,15 @@ sap.ui.define(
     Sorter,
     Fragment,
     Spreadsheet,
-    exportLibrary
+    exportLibrary,
+    formatter
   ) {
     "use strict";
     const EdmType = exportLibrary.EdmType;
 
     var accGroupFilter = [];
     return Controller.extend("projectGL.controller.GeneralLedger", {
+      formatter: formatter,
       onInit: async function () {
         //formatter
         var data = [
@@ -50,11 +53,7 @@ sap.ui.define(
         var oModel = new JSONModel(data);
         this.getView().setModel(oModel, "selectAccountType");
 
-        //GL 라우터 이동했을 경우
-        this.getOwnerComponent()
-          .getRouter()
-          .getRoute("GeneralLedger")
-          .attachPatternMatched(this.onMyRoutePatternMatched, this);
+      
 
         //GL 데이터 가져오는 과정
         const GeneralLedger = await $.ajax({
@@ -94,6 +93,13 @@ sap.ui.define(
 
         //console.log(accGroupData);
         this.getView().setModel(new JSONModel(accGroupData.value), "accGroup");
+        
+          //GL 라우터 이동했을 경우
+          this.getOwnerComponent()
+          .getRouter()
+          .getRoute("GeneralLedger")
+          .attachPatternMatched(this.onMyRoutePatternMatched, this);
+         
       },
 
       // 라우터 이름 일치할 경우 실행 함수
@@ -104,10 +110,17 @@ sap.ui.define(
         });
         let GeneralLedgerModel = new JSONModel(GeneralLedger.value);
         this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
+        
+        var sum = this.getView().getModel("GeneralLedgerModel").oData.length;
+
+        this.byId("TableName").setText("총계정원장(" + sum + ")");
+        this.onReset();
+
       },
 
       // 검색 함수
       onSearch: function () {
+        console.log(this.byId("coaMulti"));
         let coaTokens = this.byId("coaMulti").getTokens();
         let COA = coaTokens.map((token) => {
           return token.mProperties.key;
@@ -122,6 +135,7 @@ sap.ui.define(
         });
         // this.byId("accountGroup").getValue();
 
+        //필수값 지정
         this.byId("coaMulti").setValueState("None");
 
         if (COA.length === 0) {
@@ -198,9 +212,13 @@ sap.ui.define(
         }
         var allFilter = new Filter(aFilter, false);
 
-        if (oEvent.getParameters().clearButtonPressed == true) {
+        if (
+          oEvent.getParameters().clearButtonPressed == true ||
+          !this.byId("search").getValue()
+        ) {
           allFilter = [];
         }
+
         let oTable = this.byId("GeneralLedgerTable").getBinding("rows");
         oTable.filter(allFilter);
 
@@ -219,6 +237,10 @@ sap.ui.define(
         let oTable = this.byId("GeneralLedgerTable").getBinding("rows");
         oTable.filter(aFilter);
         // this.onSearch();
+
+        this.byId("coaMulti").setValueState("None");
+        var sumSearch4 = oTable.aIndices.length;
+        this.byId("TableName").setText("총계정원장(" + sumSearch4 + ")");
       },
 
       onNavToDetail: function (oEvent) {
@@ -234,6 +256,7 @@ sap.ui.define(
           .getRouter()
           .navTo("GeneralLedgerDetail", { num: SelectedNum });
       },
+
       onCreateButtonGL: function (oEvent) {
         var oButton = oEvent.getSource();
         this.byId("actionSheet").openBy(oButton);
@@ -274,6 +297,15 @@ sap.ui.define(
         }
       },
 
+      onCreateGL: function () {
+        this.getOwnerComponent().getRouter().navTo("CreateGeneralLedger");
+      },
+      onCopyCreateGL: function () {
+        this.getOwnerComponent().getRouter().navTo("CopyCreateGeneralLedger");
+      },
+      onMassCreateGL: function () {
+        this.getOwnerComponent().getRouter().navTo("MassCreateGeneralLedger");
+      },
       onDeleteGL: async function () {
         var totalNumber =
           this.getView().getModel("GeneralLedgerModel").oData.length;
@@ -399,6 +431,8 @@ sap.ui.define(
       },
 
       onValueHelpRequested: function () {
+
+
         if (!this._oBasicSearchField)
           this._oBasicSearchField = new SearchField();
         if (!this.pDialog) {
@@ -518,6 +552,14 @@ sap.ui.define(
         });
       },
 
+      getaccGroupMultiTokens: function () {
+        let coaTokens = this.byId("accGroupMulti").getTokens();
+        return coaTokens.map((token) => {
+          return token.mProperties.key;
+        });
+      },
+      
+
       onAccGroupValueHelpRequested: function () {
         var coaTokens = this.getCoaTokens();
         var coaFilter = [];
@@ -528,7 +570,7 @@ sap.ui.define(
           });
           accGroupFilter.push(new Filter(coaFilter, false));
         }
-
+        
         if (!this._oBasicSearchField2)
           this._oBasicSearchField2 = new SearchField();
         if (!this.pDialog2) {
@@ -697,6 +739,28 @@ sap.ui.define(
           );
         });
         this._oMultiInput2.setTokens(arr);
+        
+        var arr2 = [];
+
+        for(let i=0; i<aTokens.length; i++) {
+            arr2.push(
+              new Token({
+                key: aTokens[i].mAggregations.customData[0].getValue()["AC_COA"],
+                text: aTokens[i].mAggregations.customData[0].getValue()["AC_COA"],
+              })
+            );
+            console.log(arr2);
+
+            // 중복제거
+            for (let j=0; j<arr2.length-1; j++) {
+              if (arr2[j].getProperty("key") == aTokens[i].mAggregations.customData[0].getValue()["AC_COA"]) {
+                arr2.pop();
+              }
+            }
+        }
+
+        this._oMultiInput.setTokens(arr2);
+
         this._oVHD2.close();
       },
 

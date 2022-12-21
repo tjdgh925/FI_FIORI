@@ -2,7 +2,7 @@
     xmlns:m="sap.m"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:core="sap.ui.core">
-    <ValueHelpDialog title="Product"
+    <ValueHelpDialog title="계정과목표"
         id="generalLedgerACGroupDialog"
         ok="onACGroupOkPress"
         cancel="onACGroupCancelPress"

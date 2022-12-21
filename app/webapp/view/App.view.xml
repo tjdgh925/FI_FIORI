@@ -11,7 +11,7 @@
                     class="sapUiSmallMargin"
                     src="image/logo.svg" />
                 <MenuButton enabled="true"
-                    text="">
+                    text="Menu">
                     <menu>
                         <Menu>
                             <MenuItem text="비즈니스 파트너" press="onBusinessPartner" />

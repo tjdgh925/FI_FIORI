@@ -11,7 +11,7 @@
             <f:DynamicPageTitle>
                 <f:heading>
                     <HBox>
-                        <Title text="Standard*" />
+                        <Title text="G/L Account" />
                     </HBox>
                 </f:heading>
             </f:DynamicPageTitle>
@@ -124,16 +124,17 @@
                 </form:SimpleForm>
             </f:DynamicPageHeader>
         </f:header>
-        <f:content class="sapUiSmallMargin">
+        <f:content>
             <t:Table id="GeneralLedgerTable"
                 rows="{GeneralLedgerModel>/}"
                 selectionMode="None"
                 rowActionCount="1"
+                visibleRowCount="25"
                 width="auto">
                 <t:rowActionTemplate>
                     <t:RowAction>
                         <t:items>
-                            <t:RowActionItem type="Navigation"
+                            <t:RowActionItem type="Navigation" 
                                 press="onNavToDetail" />
                         </t:items>
                     </t:RowAction>
@@ -180,28 +181,28 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column>
+                    <t:Column sortProperty="GL_CODE" filterProperty="GL_CODE">
                         <Label text="G/L 계정" />
                         <t:template>
                             <Text text="{GeneralLedgerModel>GL_CODE}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column>
+                    <t:Column sortProperty="GL_NAME" filterProperty="GL_NAME">
                         <Label text="내역" />
                         <t:template>
                             <Text text="{GeneralLedgerModel>GL_NAME}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column>
+                    <t:Column sortProperty="GL_COA" filterProperty="GL_COA">
                         <Label text="계정과목표" />
                         <t:template>
                             <Text text="{GeneralLedgerModel>GL_COA}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column>
+                    <t:Column sortProperty="GL_ACCOUNTTYPE" filterProperty="GL_ACCOUNTTYPE">
                         <Label text="G/L 계정 유형" />
                         <t:template>
                             <ObjectStatus text="{
@@ -213,7 +214,7 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column>
+                    <t:Column sortProperty="GL_ACCOUNTGROUP" filterProperty="GL_ACCOUNTGROUP">
                         <Label text="계정 그룹" />
                         <t:template>
                             <Text text="{GeneralLedgerModel>GL_ACCOUNTGROUP}" />
