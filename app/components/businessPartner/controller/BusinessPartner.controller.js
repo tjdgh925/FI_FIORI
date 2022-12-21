@@ -76,6 +76,7 @@ sap.ui.define(
 
       onMyRoutePatternMatched: async function () {
         that = this;
+
         const BusinessPartner = await $.ajax({
           type: "get",
           url: "/business-partner/BP",
@@ -83,6 +84,8 @@ sap.ui.define(
 
         let BusinessPartnerModel = new JSONModel(BusinessPartner.value);
         this.getView().setModel(BusinessPartnerModel, "BusinessPartnerModel");
+
+
       },
 
       onCellClick: function (e) {

@@ -18,13 +18,7 @@
 						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
 					</TileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-					header="BP 상세"
-					press="onDetailBP">
-					<TileContent >
-						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
-					</TileContent>
-				</GenericTile>
+				
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
 					header="BP 차트"
 					press="onChartBP">
