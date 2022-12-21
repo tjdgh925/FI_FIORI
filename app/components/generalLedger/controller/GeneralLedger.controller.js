@@ -239,7 +239,7 @@ sap.ui.define(
         this.byId("actionSheet").openBy(oButton);
       },
 
-      onCreateGL: function () {        
+      onCreateGL: function () {
         this.getOwnerComponent().getRouter().navTo("CreateGeneralLedger");
       },
 
@@ -256,7 +256,7 @@ sap.ui.define(
           if (model.getProperty(chk) === true) {
             model.getProperty(key);
             GL_CODE = model.getProperty(key);
-          
+
             // let test = this.getView().byId("GeneralLedgerTable").getBinding("rows");  // 테이블 바인딩
             // let GL_CODE;  // 변수 GL_CODE 선언
             // for (let i=0; i< test.oList.length; i++) {  // 테이블 바인딩 데이터 for문 순회
@@ -265,9 +265,9 @@ sap.ui.define(
             //     break;   // GL_CODE에 값을 할당하면 for문 탈출
             //   }
             // }
-          this.getOwnerComponent()
-            .getRouter()
-            .navTo("CopyCreateGeneralLedger", { num: GL_CODE });
+            this.getOwnerComponent()
+              .getRouter()
+              .navTo("CopyCreateGeneralLedger", { num: GL_CODE });
             //num: GL_CODE를 for문 안으로 넣어서 돌려버린다는 마인드 중괄호로 묶어묶어!
           }
           // 복사 생성 페이지로 이동

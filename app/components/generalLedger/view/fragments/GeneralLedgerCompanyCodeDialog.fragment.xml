@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core">
+    <ValueHelpDialog title="Product"
+        id="generalLedgerCompanyCodeDialog"
+        ok=".onCompanyCodeOkPress"
+        cancel=".onCompanyCodeCancelPress"
+        supportRanges="true"
+        key="CC_COMPANY_CODE"
+        descriptionKey="ProductName">
+        <filterBar>
+            <fb:FilterBar advancedMode="true"
+                search=".onCompnayCodeFilterBarSearch"
+                isRunningInValueHelpDialog="true">
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem groupName="__$INTERNAL$"
+                        name="CC_COMPANY_CODE"
+                        label="CC_COMPANY_CODE"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="CC_COMPANY_CODE" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem groupName="__$INTERNAL$"
+                        name="CC_COMPANY_NAME"
+                        label="CC_COMPANY_NAME"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="CC_COMPANY_NAME" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem groupName="__$INTERNAL$"
+                        name="CC_CURRENCY"
+                        label="CC_CURRENCY"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="CC_CURRENCY" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem groupName="__$INTERNAL$"
+                        name="CC_COA"
+                        label="CC_COA"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="CC_COA" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+        </filterBar>
+    </ValueHelpDialog>
+</core:FragmentDefinition>

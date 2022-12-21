@@ -30,9 +30,14 @@ sap.ui.define(
   ) {
     "use strict";
 
+    var gl_code;
     var accGroupFilter = [];
     return Controller.extend("projectGL.controller.CreateGeneralLedger", {
       onInit: async function () {
+        this.getOwnerComponent()
+          .getRouter()
+          .getRoute("CreateGeneralLedger")
+          .attachPatternMatched(this.onMyRoutePatternMatched, this);
         //formatter
         var data = [
           { key: "P", name: "P(1차 원가 또는 수익)" },
@@ -54,22 +59,12 @@ sap.ui.define(
           "CompanyData"
         );
         // coa Multi Input 설정
-        var coaMultiInput;
-        coaMultiInput = this.byId("coaMulti");
-        coaMultiInput.addValidator(this._onMultiInputValidate);
-        this._oMultiInput = coaMultiInput;
 
         const coaData = await $.ajax({
           type: "GET",
           url: "/general-ledger/COA",
         });
         this.getView().setModel(new JSONModel(coaData.value), "COA");
-
-        //acc Multi Input 설정
-        var accGroupMultiInput;
-        accGroupMultiInput = this.byId("accGroupMulti");
-        accGroupMultiInput.addValidator(this._onMultiInputValidate);
-        this._oMultiInput2 = accGroupMultiInput;
 
         const accGroupData = await $.ajax({
           type: "GET",
@@ -78,6 +73,29 @@ sap.ui.define(
 
         console.log(accGroupData);
         this.getView().setModel(new JSONModel(accGroupData.value), "accGroup");
+      },
+      onMyRoutePatternMatched: async function (e) {
+        const firstData = await $.ajax({
+          type: "GET",
+          url: "/general-ledger/GL?$orderby=GL_CODE desc&$top=1",
+        });
+
+        gl_code = firstData.value[0].GL_CODE;
+
+        this.getView().setModel(new JSONModel({ code: gl_code }), "GL_CODE");
+        this.onDialogValidation();
+      },
+      onDialogValidation: function () {
+        var coaMultiInput;
+        coaMultiInput = this.byId("coaMulti");
+        console.log(coaMultiInput);
+        coaMultiInput.addValidator(this._onMultiInputValidate);
+        this._oMultiInput = coaMultiInput;
+        //acc Multi Input 설정
+        var accGroupMultiInput;
+        accGroupMultiInput = this.byId("accGroupMulti");
+        accGroupMultiInput.addValidator(this._onMultiInputValidate);
+        this._oMultiInput2 = accGroupMultiInput;
       },
 
       onCreate: async function () {
@@ -99,9 +117,9 @@ sap.ui.define(
         }
 
         var temp = {
-          GL_CODE: this.byId("GL_CODE").getValue(),
+          GL_CODE: gl_code.toString(),
           GL_COA: this.byId("coaMulti").getTokens()[0].mProperties.key,
-          GL_ACCOUNTTYPE: this.byId("GL_ACCOUNTTYPE").getValue(),
+          GL_ACCOUNTTYPE: this.byId("GL_ACCOUNTTYPE").getSelectedKey(),
           GL_ACCOUNTGROUP:
             this.byId("accGroupMulti").getTokens()[0].mProperties.key,
           GL_PL_ACCOUNTTYPE: this.byId("GL_PL_ACCOUNTTYPE").getValue(),
@@ -122,7 +140,7 @@ sap.ui.define(
         this.onReset();
         this.navToGLDetail(temp.GL_CODE);
       },
-      
+
       navToGLDetail: function (GL_CODE) {
         this.getOwnerComponent()
           .getRouter()
@@ -191,6 +209,7 @@ sap.ui.define(
             oDialog.getTableAsync().then(
               function (oTable) {
                 oTable.setModel(this.getView().getModel("COA"));
+                oTable.setSelectionMode("Single");
 
                 // For Desktop and tabled the default table is sap.ui.table.Table
                 if (oTable.bindRows) {
@@ -325,7 +344,7 @@ sap.ui.define(
 
             oDialog2.getTableAsync().then(
               function (oTable2) {
-                console.log(oTable2);
+                oTable2.setSelectionMode("Single");
                 oTable2.setModel(this.getView().getModel("accGroup"));
 
                 // For Desktop and tabled the default table is sap.ui.table.Table

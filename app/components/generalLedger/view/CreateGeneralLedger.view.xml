@@ -58,7 +58,7 @@
                                         <form:content>
                                             <core:Title text="GL 계정 정보" />
                                             <Label text="GL 계정" />
-                                            <Input id="GL_CODE" />
+                                            <Text text="{GL_CODE>/code}" />
 
                                         </form:content>
                                     </form:SimpleForm>
@@ -121,7 +121,20 @@
                                             </MultiInput>
 
                                             <Label text="G/L 계정 유형" />
-                                            <Input id="GL_ACCOUNTTYPE" />
+                                            <Select width="100%"
+                                                        id="GL_ACCOUNTTYPE"
+                                                        items="{
+                                path : 'selectAccountType>/',
+                                sorter : {path:'name'}
+                                }"
+                                                        required="true"
+                                                        selectedKey="{MassCreateModel>GL_ACCOUNTTYPE}"
+                                                        forceSelection="false"
+                                                        visible="{=${editModel>/edit}}">
+                                                        <core:Item text="{selectAccountType>name}"
+                                                            key="{selectAccountType>key}"/>
+                                                    </Select>
+
 
                                             <Label text="계정 그룹"
                                                 labelFor="accGroupMulti" />
@@ -154,8 +167,12 @@
 
                                             <core:Title text="내역(유지보수 언어)(EN)" />
                                             <VBox>
-                                                <Label text="내역" labelFor="GL_NAME" />
-                                                <Input id="GL_NAME" required="true" value="{GeneralLedgerModel>/GL_NAME}" visible="{=${editModel>/edit}}" />
+                                                <Label text="내역"
+                                                    labelFor="GL_NAME" />
+                                                <Input id="GL_NAME"
+                                                    required="true"
+                                                    value="{GeneralLedgerModel>/GL_NAME}"
+                                                    visible="{=${editModel>/edit}}" />
                                                 <layoutData>
                                                     <layout:GridData span="XL12 L12 M12 S12" />
                                                 </layoutData>
@@ -163,7 +180,9 @@
 
                                             <VBox>
                                                 <Label text="G/L 계정 설명" />
-                                                <Input id="GL_DESCRIPTION" value="{GeneralLedgerModel>/GL_DESCRIPTION}" visible="{=${editModel>/edit}}" />
+                                                <Input id="GL_DESCRIPTION"
+                                                    value="{GeneralLedgerModel>/GL_DESCRIPTION}"
+                                                    visible="{=${editModel>/edit}}" />
                                                 <layoutData>
                                                     <layout:GridData span="XL12 L12 M12 S12" />
                                                 </layoutData>
@@ -172,7 +191,9 @@
                                             <core:Title text="연결데이터" />
                                             <VBox>
                                                 <Label text="관계사 번호" />
-                                                <Input id="GL_TRADINGPARTNER" value="{GeneralLedgerModel>/GL_TRADINGPARTNER}" visible="{=${editModel>/edit}}" />
+                                                <Input id="GL_TRADINGPARTNER"
+                                                    value="{GeneralLedgerModel>/GL_TRADINGPARTNER}"
+                                                    visible="{=${editModel>/edit}}" />
                                                 <layoutData>
                                                     <layout:GridData span="XL12 L12 M12 S12" />
                                                 </layoutData>
