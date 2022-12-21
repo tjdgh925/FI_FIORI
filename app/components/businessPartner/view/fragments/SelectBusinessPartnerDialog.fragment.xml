@@ -6,7 +6,7 @@
 	placement="Bottom">
 	<Button
 		text="개인 생성"
-		icon="sap-icon://employee"
+		icon="sap-icon://person-placeholder"
 		press="onCreate_person" />
 	<Button
 		text="개인 생성(대량)"
