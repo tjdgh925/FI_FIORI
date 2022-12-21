@@ -53,8 +53,6 @@ sap.ui.define(
         var oModel = new JSONModel(data);
         this.getView().setModel(oModel, "selectAccountType");
 
-      
-
         //GL 데이터 가져오는 과정
         const GeneralLedger = await $.ajax({
           type: "get",
@@ -93,13 +91,12 @@ sap.ui.define(
 
         //console.log(accGroupData);
         this.getView().setModel(new JSONModel(accGroupData.value), "accGroup");
-        
-          //GL 라우터 이동했을 경우
-          this.getOwnerComponent()
+
+        //GL 라우터 이동했을 경우
+        this.getOwnerComponent()
           .getRouter()
           .getRoute("GeneralLedger")
           .attachPatternMatched(this.onMyRoutePatternMatched, this);
-         
       },
 
       // 라우터 이름 일치할 경우 실행 함수
@@ -110,12 +107,11 @@ sap.ui.define(
         });
         let GeneralLedgerModel = new JSONModel(GeneralLedger.value);
         this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
-        
+
         var sum = this.getView().getModel("GeneralLedgerModel").oData.length;
 
         this.byId("TableName").setText("총계정원장(" + sum + ")");
         this.onReset();
-
       },
 
       // 검색 함수
@@ -374,6 +370,24 @@ sap.ui.define(
           }
         }
 
+        for (let i = 0; i < oList.length; i++) {
+          if (oList[i].GL_ACCOUNTTYPE === "P") {
+            oList[i].GL_ACCOUNTTYPE2 = "P(1차 원가 또는 수익)";
+          }
+          if (oList[i].GL_ACCOUNTTYPE === "S") {
+            oList[i].GL_ACCOUNTTYPE2 = "S(2차 원가)";
+          }
+          if (oList[i].GL_ACCOUNTTYPE === "X") {
+            oList[i].GL_ACCOUNTTYPE2 = "X(대차대조표 계정)";
+          }
+          if (oList[i].GL_ACCOUNTTYPE === "N") {
+            oList[i].GL_ACCOUNTTYPE2 = "N(영업 외 비용 또는 수익)";
+          }
+          if (oList[i].GL_ACCOUNTTYPE === "C") {
+            oList[i].GL_ACCOUNTTYPE2 = "C(현금 계정)";
+          }
+        }
+
         oSettings = {
           workbook: {
             columns: aCols,
@@ -411,7 +425,7 @@ sap.ui.define(
         });
         aCols.push({
           label: "G/L 계정 유형",
-          property: "GL_ACCOUNTTYPE",
+          property: "GL_ACCOUNTTYPE2",
           type: EdmType.String,
         });
         aCols.push({
@@ -431,8 +445,6 @@ sap.ui.define(
       },
 
       onValueHelpRequested: function () {
-
-
         if (!this._oBasicSearchField)
           this._oBasicSearchField = new SearchField();
         if (!this.pDialog) {
@@ -558,7 +570,6 @@ sap.ui.define(
           return token.mProperties.key;
         });
       },
-      
 
       onAccGroupValueHelpRequested: function () {
         var coaTokens = this.getCoaTokens();
@@ -570,7 +581,7 @@ sap.ui.define(
           });
           accGroupFilter.push(new Filter(coaFilter, false));
         }
-        
+
         if (!this._oBasicSearchField2)
           this._oBasicSearchField2 = new SearchField();
         if (!this.pDialog2) {
@@ -739,24 +750,27 @@ sap.ui.define(
           );
         });
         this._oMultiInput2.setTokens(arr);
-        
+
         var arr2 = [];
 
-        for(let i=0; i<aTokens.length; i++) {
-            arr2.push(
-              new Token({
-                key: aTokens[i].mAggregations.customData[0].getValue()["AC_COA"],
-                text: aTokens[i].mAggregations.customData[0].getValue()["AC_COA"],
-              })
-            );
-            console.log(arr2);
+        for (let i = 0; i < aTokens.length; i++) {
+          arr2.push(
+            new Token({
+              key: aTokens[i].mAggregations.customData[0].getValue()["AC_COA"],
+              text: aTokens[i].mAggregations.customData[0].getValue()["AC_COA"],
+            })
+          );
+          console.log(arr2);
 
-            // 중복제거
-            for (let j=0; j<arr2.length-1; j++) {
-              if (arr2[j].getProperty("key") == aTokens[i].mAggregations.customData[0].getValue()["AC_COA"]) {
-                arr2.pop();
-              }
+          // 중복제거
+          for (let j = 0; j < arr2.length - 1; j++) {
+            if (
+              arr2[j].getProperty("key") ==
+              aTokens[i].mAggregations.customData[0].getValue()["AC_COA"]
+            ) {
+              arr2.pop();
             }
+          }
         }
 
         this._oMultiInput.setTokens(arr2);

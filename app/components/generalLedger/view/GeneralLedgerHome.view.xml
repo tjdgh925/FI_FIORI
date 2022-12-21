@@ -25,13 +25,7 @@
 						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
 					</TileContent>
 				</GenericTile>
-				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-					header="GL 상세"
-					press="onDetailGL">
-					<TileContent >
-						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
-					</TileContent>
-				</GenericTile>
+				
 			</content>
 		</Panel>
 	</ScrollContainer>
