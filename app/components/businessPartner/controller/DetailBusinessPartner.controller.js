@@ -150,6 +150,17 @@ sap.ui.define(
         this.byId("bp_name2").setValueState();
         this.byId("bp_country2").setValueState();
         this.byId("bp_registration_number2").setValueState();
+
+
+        const countryData = await $.ajax({
+          type: "GET",
+          url: "/business-partner/Country",
+        });
+
+        this.getView().setModel(
+          new JSONModel(countryData.value),
+          "CountryData"
+        );
       },
 
       getBpData: async function () {
