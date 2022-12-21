@@ -4,15 +4,15 @@ sap.ui.define([],function(){
     statusText: function(sStatus){
         switch(sStatus){
             case "P":
-                return "1차 원가 또는 수익";
+                return "P(1차 원가 또는 수익)";
             case "S":
-                return "2차 원가";
+                return "S(2차 원가)";
             case "X":
-                return "대차대조표 계정";
+                return "X(대차대조표 계정)";
             case "N":
-                return "영업 외 비용 또는 수익";
+                return "N(영업 외 비용 또는 수익)";
             case "C":
-                return "현금 계정";
+                return "C(현금 계정)";
             default:
                 return sStatus;
         }
