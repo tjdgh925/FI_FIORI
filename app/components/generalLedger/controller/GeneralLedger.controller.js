@@ -116,6 +116,7 @@ sap.ui.define(
 
       // 검색 함수
       onSearch: function () {
+        this.onReset2();
         console.log(this.byId("coaMulti"));
         let coaTokens = this.byId("coaMulti").getTokens();
         let COA = coaTokens.map((token) => {
@@ -180,9 +181,12 @@ sap.ui.define(
 
         var sumSearch = oTable.aIndices.length;
         this.byId("TableName").setText("총계정원장(" + sumSearch + ")");
+        
       },
 
       onSearch2: function (oEvent) {
+
+        this.onReset1();
         let search = this.byId("search").getValue();
 
         var aFilter = [];
@@ -221,13 +225,29 @@ sap.ui.define(
         var sumSearch2 = oTable.aIndices.length;
         this.byId("TableName").setText("총계정원장(" + sumSearch2 + ")");
       },
-
       onReset: function () {
-        this.byId("search").setValue(null);
+        this.onReset1();
+        this.onReset2();
+      },
+
+      onReset1: function () {
+        
         this.byId("coaMulti").setTokens([]);
         this.byId("account").setValue(null);
         this.byId("accountType").setSelectedKeys([]);
         this.byId("accGroupMulti").setTokens([]);
+
+        var aFilter = [];
+        let oTable = this.byId("GeneralLedgerTable").getBinding("rows");
+        oTable.filter(aFilter);
+        // this.onSearch();
+
+        this.byId("coaMulti").setValueState("None");
+        var sumSearch4 = oTable.aIndices.length;
+        this.byId("TableName").setText("총계정원장(" + sumSearch4 + ")");
+      },
+      onReset2: function () {
+        this.byId("search").setValue(null);
 
         var aFilter = [];
         let oTable = this.byId("GeneralLedgerTable").getBinding("rows");
