@@ -66,6 +66,13 @@ sap.ui.define(
         });
         this.getView().setModel(new JSONModel(countryData.value), "Country");
 
+        const CompanyCode = await $.ajax({
+          type: "get",
+          url: "/general-ledger/CompanyCode",
+        });
+        let CompanyCodeModel = new JSONModel(CompanyCode.value);
+        this.getView().setModel(CompanyCodeModel, "CompanyCode");
+
         // 고객 테이블 행갯수 카운트
         const BusinessPartner = await $.ajax({
           type: "get",
@@ -273,7 +280,7 @@ sap.ui.define(
         var temp = {
           BP_CODE: (bp_code++).toString(),
           BP_ADDRESS: this.byId("bp_address_person").getValue(),
-          BP_COMPANY_CODE: this.byId("bp_company_code_person").getValue(),
+          BP_COMPANY_CODE: this.byId("bp_company_code_person").getSelectedKey(),
           BP_CATEGORY: categorySelect,
           BP_SPECIFIC_ADDRESS: this.byId(
             "bp_specific_address_person"
@@ -365,7 +372,9 @@ sap.ui.define(
         var temp = {
           BP_CODE: (bp_code++).toString(),
           BP_ADDRESS: this.byId("bp_address_organization").getValue(),
-          BP_COMPANY_CODE: this.byId("bp_company_code_organization").getValue(),
+          BP_COMPANY_CODE: this.byId(
+            "bp_company_code_organization"
+          ).getSelectedKey(),
           BP_CATEGORY: categorySelect,
           BP_SPECIFIC_ADDRESS: this.byId(
             "bp_specific_address_organization"

@@ -42,7 +42,17 @@
                     </VBox>
                     <VBox>
                         <Label text="회사 코드" labelFor="bp_company_code_person" />
-                        <Input id="bp_company_code_person" required="true" />
+                        <Select forceSelection="false"
+                            width="50%"
+                            id="bp_company_code_person"
+                            required="true"
+                            items="{
+                                path : 'CompanyCode>/',
+                                sorter : {path:'CC_COMPANY_CODE'}
+                                }">
+                            <core:Item text="{CompanyCode>CC_COMPANY_CODE}"
+                                key="{CompanyCode>CC_COMPANY_CODE}" />
+                        </Select>
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
