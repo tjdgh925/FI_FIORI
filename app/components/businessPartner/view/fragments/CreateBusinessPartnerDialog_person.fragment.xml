@@ -1,10 +1,5 @@
-<core:FragmentDefinition xmlns="sap.m"
-    xmlns:core="sap.ui.core"
-    xmlns:form="sap.ui.layout.form"
-    xmlns:t="sap.ui.table"
-    xmlns:layout="sap.ui.layout">
-    <Dialog id="bp_personDialog"
-        title="개인 생성">
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:t="sap.ui.table" xmlns:layout="sap.ui.layout">
+    <Dialog id="bp_personDialog" title="Individual Creation">
         <content>
             <form:SimpleForm layout="ResponsiveGridLayout">
                 <form:content>
@@ -14,31 +9,26 @@
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="일반 데이터"
-                            design="Bold" />
+                        <Label text="일반 데이터" design="Bold" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="표준 주소"
-                            design="Bold" />
+                        <Label text="표준 주소" design="Bold" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="회사 코드 데이터"
-                            design="Bold" />
+                        <Label text="회사 코드 데이터" design="Bold" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="BP 코드"
-                            labelFor="bp_code_person"/>
-                        <Input id="bp_code_person"
-                            required="true"/>
+                        <Label text="BP 코드" labelFor="bp_code_person" />
+                        <Text text="{BP_CODE>/code}" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
@@ -51,58 +41,53 @@
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="회사 코드"
-                            labelFor="bp_company_code_person"/>
-                        <Input id="bp_company_code_person"
-                            required="true"/>
+                        <Label text="회사 코드" labelFor="bp_company_code_person" />
+                        <Input id="bp_company_code_person" required="true" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="BP 범주" />
-                        <Text id="bp_category_person"
-                            text="1" />
+                        <Text id="bp_category_person" text="개인 (1)" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="번지" />
-                        <Input id="bp_specific_address_person"
-                            width="50%" />
+                        <Input id="bp_specific_address_person" width="50%" />
                         <layoutData>
                             <layout:GridData span="XL8 L8 M8 S8" />
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="개인 칭호" />
-                        <Input id="bp_name_title_person" />
+                        <Select forceSelection="false" id="bp_name_title_person">
+                            <core:Item text="Mr" />
+                            <core:Item text="Ms" />
+                        </Select>
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="우편 번호" />
-                        <Input id="bp_postCode_person"
-                            width="50%" />
+                        <Input id="bp_postCode_person" width="50%" />
                         <layoutData>
                             <layout:GridData span="XL8 L8 M8 S8" />
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="이름"
-                            labelFor="bp_name_person"/>
-                        <Input id="bp_name_person"
-                            required="true"/>
+                        <Label text="이름" labelFor="bp_name_person" />
+                        <Input id="bp_name_person" required="true" />
                         <layoutData>
                             <layout:GridData span="XL4 L4 M4 S4" />
                         </layoutData>
                     </VBox>
                     <VBox>
                         <Label text="도시" />
-                        <Input id="bp_city_person"
-                            width="50%" />
+                        <Input id="bp_city_person" width="50%" />
                         <layoutData>
                             <layout:GridData span="XL8 L8 M8 S8" />
                         </layoutData>
@@ -113,9 +98,13 @@
                         </layoutData>
                     </VBox>
                     <VBox>
-                        <Label text="국가/지역" />
-                        <Input id="bp_country_person"
-                            width="50%" />
+                        <Label text="국가/지역" labelFor="bp_country_person" />
+                        <Select forceSelection="false" width="50%" id="bp_country_person" required="true" items="{
+                                path : 'CountryData>/',
+                                sorter : {path:'COUNTRY_CODE'}
+                                }">
+                            <core:Item text="{CountryData>COUNTRY_NAME}" key="{CountryData>COUNTRY_CODE}" />
+                        </Select>
                         <layoutData>
                             <layout:GridData span="XL8 L8 M8 S8" />
                         </layoutData>
@@ -137,11 +126,8 @@
         </content>
         <OverflowToolbar>
             <ToolbarSpacer />
-            <Button type="Emphasized"
-                text="생성"
-                press=".onCreateDialog_person" />
-            <Button text="취소"
-                press=".onCancelDialog_person" />
+            <Button type="Emphasized" text="생성" press=".onCreateDialog_person" />
+            <Button text="취소" press=".onCancelDialog_person" />
         </OverflowToolbar>
     </Dialog>
 </core:FragmentDefinition>
