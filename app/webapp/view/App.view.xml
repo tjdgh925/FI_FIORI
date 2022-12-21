@@ -9,7 +9,7 @@
             <tnt:ToolHeader>
                 <Image height="30px"
                     class="sapUiSmallMargin"
-                    src="image/logo.svg" />
+                    src="image/logo.svg"  press=".onHome" />
                 <MenuButton enabled="true"
                     text="Menu">
                     <menu>
