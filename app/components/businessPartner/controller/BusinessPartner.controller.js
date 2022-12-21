@@ -83,7 +83,7 @@ sap.ui.define(
           url: "/business-partner/BP?$orderby=BP_CODE desc&$top=1",
         });
 
-        bp_code = firstData.value[0].BP_CODE;
+        bp_code = parseInt(firstData.value[0].BP_CODE) + 1;
 
         this.getView().setModel(new JSONModel({ code: bp_code }), "BP_CODE");
         that = this;
