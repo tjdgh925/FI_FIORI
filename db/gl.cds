@@ -35,3 +35,4 @@ entity CompanyCode {
         CC_CURRENCY     : String;
         CC_COA          : String not null;
 };
+﻿

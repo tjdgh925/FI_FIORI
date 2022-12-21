@@ -1,0 +1,35 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:l="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:layout="sap.ui.layout">
+    <Dialog id="MassCreateNumberDialog"
+        title="GL 계정 대량 생산 수량">
+        <content class="sapUiSmallMargin">
+            <VBox>
+                <Label text="추가 생성할 계정 개수"
+                    labelFor="massCreationNumber"
+                    class="sapUiSmallMarginBottom" />
+                <Slider value="1"
+                    width="100%"
+                    min="1"
+                    max="20"
+                    id="massCreationNumber"
+                    showAdvancedTooltip="true"
+                    showHandleTooltip="false"
+                    class="sapUiSmallMarginBottom" />
+                <layoutData>
+                    <layout:GridData span="XL10 L10 M10 S10" />
+                </layoutData>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button text="확인"
+                press="onMassCreationDialogApprove" />
+        </beginButton>
+        <endButton>
+            <Button text="취소"
+                press="onMassCreationDialogCancel" />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

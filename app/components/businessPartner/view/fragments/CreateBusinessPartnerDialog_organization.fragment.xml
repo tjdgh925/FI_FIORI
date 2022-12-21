@@ -1,0 +1,125 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core" xmlns:form="sap.ui.layout.form" xmlns:t="sap.ui.table" xmlns:layout="sap.ui.layout">
+    <Dialog id="bp_organizationDialog" title="조직 생성">
+        <content>
+            <form:SimpleForm layout="ResponsiveGridLayout">
+                <form:content>
+                    <VBox>
+                        <layoutData>
+                            <layout:GridData span="XL12 L12 M12 S12" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="일반 데이터" design="Bold" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="표준 주소" design="Bold" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="회사 코드 데이터" design="Bold" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="BP 코드" labelFor="bp_code_organization"/>
+                        <Input id="bp_code_organization" required="true" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="도로 주소" />
+                        <Input id="bp_address_organization" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="회사 코드" labelFor="bp_company_code_organization"/>
+                        <Input id="bp_company_code_organization" required="true"/>
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="BP 범주" />
+                        <Text id="bp_category_organization" text="2" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="번지" />
+                        <Input id="bp_specific_address_organization" width="50%" />
+                        <layoutData>
+                            <layout:GridData span="XL8 L8 M8 S8" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="조직 구분" />
+                        <Input id="bp_org_division_organization" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="우편 번호" />
+                        <Input id="bp_postCode_organization" width="50%" />
+                        <layoutData>
+                            <layout:GridData span="XL8 L8 M8 S8" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="이름" labelFor="bp_name_organization"/>
+                        <Input id="bp_name_organization"  required="true"/>
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="도시" />
+                        <Input id="bp_city_organization" width="50%" />
+                        <layoutData>
+                            <layout:GridData span="XL8 L8 M8 S8" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="국가/지역" />
+                        <Input id="bp_country_organization" width="50%" />
+                        <layoutData>
+                            <layout:GridData span="XL8 L8 M8 S8" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                    <VBox>
+                        <Label text="지역" />
+                        <Input id="bp_region_organization" />
+                        <layoutData>
+                            <layout:GridData span="XL4 L4 M4 S4" />
+                        </layoutData>
+                    </VBox>
+                </form:content>
+            </form:SimpleForm>
+        </content>
+        <OverflowToolbar>
+            <ToolbarSpacer />
+            <Button type="Emphasized" text="생성" press=".onCreateDialog_organization" />
+            <Button text="취소" press=".onCancelDialog_organization" />
+        </OverflowToolbar>
+    </Dialog>
+</core:FragmentDefinition>

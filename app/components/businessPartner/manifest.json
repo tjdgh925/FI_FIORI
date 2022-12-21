@@ -113,10 +113,10 @@
           ]
         },
         {
-          "name": "CreateBusinessPartner",
-          "pattern": "CreateBusinessPartner",
+          "name": "DetailBusinessPartner",
+          "pattern": "DetailBusinessPartner/{num}",
           "target": [
-            "CreateBusinessPartner"
+            "DetailBusinessPartner"
           ]
         },
         {
@@ -124,6 +124,20 @@
           "pattern": "ChartBusinessPartner",
           "target": [
             "ChartBusinessPartner"
+          ]
+        },
+        {
+          "name": "MassCreateBusinessPartner_person",
+          "pattern": "MassCreateBusinessPartner_person",
+          "target": [
+            "MassCreateBusinessPartner_person"
+          ]
+        },
+        {
+          "name": "MassCreateBusinessPartner_organization",
+          "pattern": "MassCreateBusinessPartner_organization",
+          "target": [
+            "MassCreateBusinessPartner_organization"
           ]
         }
       ],
@@ -142,12 +156,12 @@
           "viewId": "BusinessPartner",
           "viewName": "BusinessPartner"
         },
-        "CreateBusinessPartner": {
+        "DetailBusinessPartner": {
           "viewType": "XML",
           "transition": "show",
           "clearControlAggregation": false,
-          "viewId": "CreateBusinessPartner",
-          "viewName": "CreateBusinessPartner"
+          "viewId": "DetailBusinessPartner",
+          "viewName": "DetailBusinessPartner"
         },
         "ChartBusinessPartner": {
           "viewType": "XML",
@@ -155,6 +169,20 @@
           "clearControlAggregation": false,
           "viewId": "ChartBusinessPartner",
           "viewName": "ChartBusinessPartner"
+        },
+        "MassCreateBusinessPartner_person": {
+          "viewType": "XML",
+          "transition": "show",
+          "clearControlAggregation": false,
+          "viewId": "MassCreateBusinessPartner_person",
+          "viewName": "MassCreateBusinessPartner_person"
+        },
+        "MassCreateBusinessPartner_organization": {
+          "viewType": "XML",
+          "transition": "show",
+          "clearControlAggregation": false,
+          "viewId": "MassCreateBusinessPartner_organization",
+          "viewName": "MassCreateBusinessPartner_organization"
         }
       }
     },

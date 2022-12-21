@@ -19,8 +19,8 @@
 					</TileContent>
 				</GenericTile>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-					header="BP 생성"
-					press="onCreateBP">
+					header="BP 상세"
+					press="onDetailBP">
 					<TileContent >
 						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
 					</TileContent>
@@ -29,7 +29,7 @@
 					header="BP 차트"
 					press="onChartBP">
 					<TileContent >
-						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
+						<ImageContent src="sap-icon://donut-chart"></ImageContent>
 					</TileContent>
 				</GenericTile>
 			</content>

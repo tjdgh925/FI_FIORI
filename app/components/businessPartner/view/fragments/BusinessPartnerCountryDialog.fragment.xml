@@ -1,0 +1,37 @@
+<core:FragmentDefinition xmlns="sap.ui.comp.valuehelpdialog"
+    xmlns:m="sap.m"
+    xmlns:fb="sap.ui.comp.filterbar"
+    xmlns:core="sap.ui.core">
+    <ValueHelpDialog title="Product"
+        id="businessPartnerCountryDialog"
+        ok=".onValueHelpOkPress"
+        cancel=".onValueHelpCancelPress"
+        supportRanges="true"
+        key="COUNTRY_CODE"
+        descriptionKey="ProductName">
+        <filterBar>
+            <fb:FilterBar advancedMode="true"
+                search=".onFilterBarSearch"
+                isRunningInValueHelpDialog="true">
+                <fb:filterGroupItems>
+                    <fb:FilterGroupItem groupName="$INTERNAL$"
+                        name="COUNTRY_CODE"
+                        label="국가/지역 코드"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="COUNTRY_CODE" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                    <fb:FilterGroupItem groupName="$INTERNAL$"
+                        name="COUNTRY_NAME"
+                        label="국가/지역 이름"
+                        visibleInFilterBar="true">
+                        <fb:control>
+                            <m:Input name="COUNTRY Name" />
+                        </fb:control>
+                    </fb:FilterGroupItem>
+                </fb:filterGroupItems>
+            </fb:FilterBar>
+        </filterBar>
+    </ValueHelpDialog>
+</core:FragmentDefinition>
