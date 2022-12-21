@@ -4,7 +4,7 @@
             <f:DynamicPageTitle>
                 <f:heading>
                     <HBox>
-                        <Title text="고객마스터" />
+                        <Title text="Customer MasterData List" />
                     </HBox>
                 </f:heading>
             </f:DynamicPageTitle>
@@ -17,7 +17,7 @@
                             <Label text="우편번호 : " />
                             <Input id="bp_postCode" />
                             <layoutData>
-                                <layout:GridData span="XL2 L2 M6 S12" />
+                                <layout:GridData span="XL1 L1 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
@@ -71,14 +71,14 @@
                                 <core:Item text="조직(2)" key="B" />
                             </Select>
                             <layoutData>
-                                <layout:GridData span="XL2 L2 M6 S12" />
+                                <layout:GridData span="XL1 L1 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
                             <Label text="회사코드 : " />
                             <Input id="bp_company_code" />
                             <layoutData>
-                                <layout:GridData span="XL2 L2 M6 S12" />
+                                <layout:GridData span="XL1 L1 M6 S12" />
                             </layoutData>
                         </VBox>
                         <HBox justifyContent="End">
@@ -143,16 +143,27 @@
                     <ColumnListItem vAlign="Middle" press="onCellClick" type="Navigation">
                         <cells>
                             <CheckBox selected="{BusinessPartnerModel>CHK}" textAlign="Center" select="oncheckselect" />
+                            <!-- TEST1 -->
                             <ObjectIdentifier title="{BusinessPartnerModel>BP_CODE}" text="{BusinessPartnerModel>BP_NAME}" />
                             <Text text="{BusinessPartnerModel>BP_COMPANY_CODE}" />
                             <Text text="{BusinessPartnerModel>BP_ADDRESS}" />
                             <Text text="{BusinessPartnerModel>BP_CITY}" />
                             <Text text="{BusinessPartnerModel>BP_POSTCODE}" />
                             <Text text="{BusinessPartnerModel>BP_COUNTRY}" />
+                            <!-- <VBox> -->
+                            <!-- <Text text="BP 범주" /> -->
+                            <!-- <Select id ="sStatus" items="{
+                            path: 'BusinessPartnerModel>BP_CATEGORY',
+                            formatter: '.formatter.statusText'
+                            }">
+                              <core:Item key="{BusinessPartnerModel>BP_CATEGORY}" text="{BusinessPartnerModel>BP_CATEGORY}" /> -->
+                            <!-- TEST2 -->
                             <ObjectStatus text="{
                             path: 'BusinessPartnerModel>BP_CATEGORY',
                             formatter: '.formatter.statusText'
                             }" />
+                            <!-- </Select> -->
+                            <!-- </VBox> -->
                         </cells>
                     </ColumnListItem>
                 </items>

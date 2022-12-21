@@ -1,102 +1,178 @@
-<mvc:View 
-controllerName="projectBP.controller.MassCreateBusinessPartner_organization"
-xmlns="sap.ui.table"
-xmlns:mvc="sap.ui.core.mvc"
-xmlns:u="sap.ui.unified"
-xmlns:c="sap.ui.core"
-xmlns:m="sap.m"
-height="100%">
+<mvc:View controllerName="projectBP.controller.MassCreateBusinessPartner_organization" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core">
+    <f:DynamicPage showFooter="true">
+        <f:title>
+    <f:DynamicPageTitle>
+                <f:heading>
+                    <HBox>
+                    
+                        <Title text="Organization Creation (Mass)" />
+                    </HBox>
+                    
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+<f:header >
+            <f:DynamicPageHeader pinnable="true">
+                <form:SimpleForm layout="ResponsiveGridLayout">
+                    <form:content>
+                        <VBox>
+                            <Label text="" />
+                            <Title text=""/>
 
-<!-- +버튼을 추가해서 model에 담아야댐(테이블 헤더에 엑셀 추가했던 것 참고하기) -->
+                        </VBox>
+                    </form:content>
+                </form:SimpleForm>
+            </f:DynamicPageHeader>
+        </f:header>
 
-<m:Page
-		showHeader="false"
-		enableScrolling="false"
-		class="sapUiContentPadding">
-		<m:content>
-			<Table
-				rows="{/MassCollection_organization}"
-				selectionMode="MultiToggle"
-				visibleRowCount="7"
-				ariaLabelledBy="title">
-				<extension>
-					<m:OverflowToolbar style="Clear">
-						<m:Title id="title" text="조직 생성(대량)"/>
-					</m:OverflowToolbar>
-				</extension>
-				<columns>
-                    <!-- 필수값 설정 필요(BP코드) -->
-					<Column width="8rem">
-						<m:Label text="BP 코드" />
-						<template>
-						<m:Input value="{bp_code_organization}"/>
-						</template>
-					</Column>
-					<Column width="8rem">
-						<m:Label text="BP 범주" />
-						<template>
-						<m:Input value="{bp_category_organization}"/>
-						</template>
-					</Column>
-					<Column width="8rem">
-						<m:Label text="조직 구분" />
-						<template>
-						<m:Input value="{bp_org_division_organization}"/>
-						</template>
-					</Column>
-                    <!-- 필수값 설정 필요(이름) -->
-					<Column width="11rem">
-						<m:Label text="이름" />
-						<template>
-							<m:Input value="{bp_name_organization}"/>
-						</template>
-					</Column>
-					<Column width="20rem">
-						<m:Label text="도로 주소" />
-						<template>
-							<m:Input value="{bp_address_organization}"/>
-						</template>
-					</Column>
-					<Column width="6rem">
-						<m:Label text="번지" />
-						<template>
-							<m:Input value="{bp_specific_address_organization}"/>
-						</template>
-					</Column>
-					<Column width="6rem">
-						<m:Label text="우편번호" />
-						<template>
-							<m:Input value="{bp_postCode_organization}"/>
-						</template>
-					</Column>
-					<Column width="11rem">
-						<m:Label text="도시" />
-						<template>
-							<m:Input value="{bp_city_organization}"/>
-						</template>
-					</Column>
-					<Column width="11rem">
-						<m:Label text="국가/지역" />
-						<template>
-							<m:Input value="{bp_country_organization}"/>
-						</template>
-					</Column>
-					<Column width="11rem">
-						<m:Label text="지역" />
-						<template>
-							<m:Input value="{bp_region_organization}"/>
-						</template>
-					</Column>
-                    <!-- 필수값 설정 필요(회사코드) -->
-					<Column width="11rem">
-						<m:Label text="회사코드" />
-						<template>
-							<m:Input value="{bp_company_code_organization}"/>
-						</template>
-					</Column>
-				</columns>
-			</Table>
-		</m:content>
-	</m:Page>
+        <f:content>
+            <t:Table id="massCreate_organization" rows="{MassCreateModel>/}" selectionMode="None" visibleRowCount="20" paste="onPaste" rowsUpdated=".tablevalidate">
+                <t:extension>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button press="onMassCreationNumber" type="Transparent" tooltip="추가" icon="sap-icon://create-form" />
+                    </OverflowToolbar>
+                </t:extension>
+
+                <t:columns>
+                    <!-- 멀티헤더로 헤더/기본정보/회사코드데이터 탭 나누고 -->
+
+                    <t:Column width="8rem" hAlign="Center" headerSpan="4,1">
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" />
+                            <Label text="BP 범주" textAlign="Center" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Text text="조직(2)" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="8rem" hAlign="Center" headerSpan="4,1">
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" />
+                            <Label text="조직 구분" textAlign="Center" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Select forceSelection="false"
+                            id="bp_org_division" selectedKey="{MassCreateModel>BP_ORG_DIVISION}">
+                                <core:Item text="국내" />
+                                <core:Item text="해외" />
+                            </Select>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="16rem" hAlign="Center" headerSpan="4,1">
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" />
+                            <Label text="이름" textAlign="Center" required="true" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input id="bp_name_organization" value="{MassCreateModel>BP_NAME}" required="true" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="11rem" hAlign="Center" headerSpan="4,1">
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" />
+                            <Label text="사업자등록번호" textAlign="Center" required="true" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input id="bp_registration_number_organization" value="{MassCreateModel>BP_REGISTRATION_NUMBER}" required="true"/>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="43rem" hAlign="Center" headerSpan="7,1">
+                        <t:multiLabels>
+                            <Label text="회사 코드 데이터" textAlign="Center" />
+                            <Label text="도로 주소" textAlign="Center" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input value="{MassCreateModel>BP_ADDRESS}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="8rem" hAlign="Center" headerSpan="7,1">
+                        <t:multiLabels>
+                            <Label text="회사 코드 데이터" textAlign="Center" />
+                            <Label text="번지" textAlign="Center" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input value="{MassCreateModel>BP_SPECIFIC_ADDRESS}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="8rem" hAlign="Center" headerSpan="7,1">
+                        <t:multiLabels>
+                            <Label text="회사 코드 데이터" textAlign="Center" />
+                            <Label text="우편번호" textAlign="Center" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input value="{MassCreateModel>BP_POSTCODE}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="11rem" hAlign="Center" headerSpan="7,1">
+                        <t:multiLabels>
+                            <Label text="회사 코드 데이터" textAlign="Center" />
+                            <Label text="도시" textAlign="Center" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input value="{MassCreateModel>BP_CITY}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="16rem" hAlign="Center" headerSpan="7,1">
+                        <t:multiLabels>
+                            <Label text="회사 코드 데이터" textAlign="Center" />
+                            <Label text="국가/지역" textAlign="Center" required="true" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Select id="bp_country_organization" required="true" forceSelection="false" width="100%"  items="{
+                                path : 'CountryData>/',
+                                sorter : {path:'COUNTRY_CODE'}
+                                }" selectedKey="{MassCreateModel>BP_COUNTRY}">
+                                <core:Item text="{CountryData>COUNTRY_NAME}" key="{CountryData>COUNTRY_CODE}" />
+                            </Select>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="16rem" hAlign="Center" headerSpan="7,1">
+                        <t:multiLabels>
+                            <Label text="회사 코드 데이터" textAlign="Center" />
+                            <Label text="지역" textAlign="Center" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input value="{MassCreateModel>BP_REGION}" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="8rem" hAlign="Center" headerSpan="7,1">
+                        <t:multiLabels>
+                            <Label text="회사 코드 데이터" textAlign="Center" />
+                            <Label text="회사 코드" textAlign="Center" required="true" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input id="bp_company_code_organization" value="{MassCreateModel>BP_COMPANY_CODE}" required="true" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column width="5rem" hAlign="Center">
+                        <Label text="삭제" />
+                        <t:template>
+                            <Button icon="sap-icon://clear-all" press="onClearMassCreate" tooltip="삭제" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button type="Emphasized" press="onMassCreationApprove" text="생성" />
+                <Button type="Default" text="취소" press="onBack" />
+            </OverflowToolbar>
+        </f:footer>
+    
+    </f:DynamicPage>
 
 </mvc:View>
