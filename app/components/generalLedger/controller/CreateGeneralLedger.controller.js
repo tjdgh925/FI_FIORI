@@ -80,7 +80,7 @@ sap.ui.define(
           url: "/general-ledger/GL?$orderby=GL_CODE desc&$top=1",
         });
 
-        gl_code = firstData.value[0].GL_CODE;
+        gl_code = parseInt(firstData.value[0].GL_CODE) + 1;
 
         this.getView().setModel(new JSONModel({ code: gl_code }), "GL_CODE");
         this.onDialogValidation();
