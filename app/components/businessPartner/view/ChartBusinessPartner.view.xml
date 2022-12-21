@@ -39,7 +39,7 @@
                                 displayedValue="{BP_COUNTRY_REGION>/Second} 개" />
                                 <micro:InteractiveDonutChartSegment label="CN(CHINA)" value="{BP_COUNTRY_REGION>/Third}" 
                                 displayedValue="{BP_COUNTRY_REGION>/Third} 개" />
-                                <micro:InteractiveDonutChartSegment label="ECT(OTHERS)" value="{BP_COUNTRY_REGION>/Others}" 
+                                <micro:InteractiveDonutChartSegment label="ETC(OTHERS)" value="{BP_COUNTRY_REGION>/Others}" 
                                 displayedValue="{BP_COUNTRY_REGION>/Others} 개" />
                             </micro:segments>
                         </micro:InteractiveDonutChart>

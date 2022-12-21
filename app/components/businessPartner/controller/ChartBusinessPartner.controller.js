@@ -25,7 +25,7 @@ sap.ui.define(
 
         const BusinessPartner = await $.ajax({
           type: "get",
-          url: "/business-partner/BP?$apply=groupby((BP_COUNTRY),aggregate($count%20as%20COUNT))&$orderby=COUNT%20desc&$top=4",
+          url: "/business-partner/BP?$apply=groupby((BP_COUNTRY),aggregate($count%20as%20COUNT))&$orderby=COUNT%20desc",
         });
 
         let BusinessPartnerModel = new JSONModel(BusinessPartner.value);
@@ -37,19 +37,22 @@ sap.ui.define(
           c = 0.0,
           d = 0.0;
 
+          var countryCnt = 3;
         for (const data in dataArr) {
-          if (dataArr[data].BP_COUNTRY !== "KR" || "JP" || "CN")
-            d = dataArr[data].COUNT;
           if (dataArr[data].BP_COUNTRY === "KR") a = dataArr[data].COUNT;
-          if (dataArr[data].BP_COUNTRY === "JP") b = dataArr[data].COUNT;
-          if (dataArr[data].BP_COUNTRY === "CN") c = dataArr[data].COUNT;
+          else if (dataArr[data].BP_COUNTRY === "JP") b = dataArr[data].COUNT;
+          else if (dataArr[data].BP_COUNTRY === "CN") c = dataArr[data].COUNT;
+          else {
+            d += dataArr[data].COUNT;
+            countryCnt++;
+          }
         }
 
         view.getModel("BP_COUNTRY_REGION").setProperty("/First", a);
         view.getModel("BP_COUNTRY_REGION").setProperty("/Second", b);
         view.getModel("BP_COUNTRY_REGION").setProperty("/Third", c);
         view.getModel("BP_COUNTRY_REGION").setProperty("/Others", d);
-        view.getModel("BP_COUNTRY_REGION").setProperty("/Sum", a + b + c + d);
+        view.getModel("BP_COUNTRY_REGION").setProperty("/Sum", countryCnt);
       },
     });
   }
