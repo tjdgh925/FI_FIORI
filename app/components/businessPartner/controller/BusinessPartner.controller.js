@@ -60,7 +60,10 @@ sap.ui.define(
           type: "GET",
           url: "/business-partner/Country",
         });
-        console.log(countryData);
+        countryData.value.push({
+          COUNTRY_CODE: "ETC",
+          COUNTRY_NAME: "OTHERS",
+        });
         this.getView().setModel(new JSONModel(countryData.value), "Country");
 
         // 고객 테이블 행갯수 카운트
@@ -146,8 +149,8 @@ sap.ui.define(
         if (countryTokens.length > 0) {
           countryTokens.forEach((country) => {
             if (country === "ETC") {
-                ETCcount = true;
-            } 
+              ETCcount = true;
+            }
           });
 
           if (ETCcount) {
@@ -164,20 +167,18 @@ sap.ui.define(
               if (!notSelectedCountry) {
                 countryFilter.push(
                   new Filter("BP_COUNTRY", FilterOperator.NE, tokenKey)
-                )
+                );
               }
             });
             aFilter.push(new Filter(countryFilter, true));
-              
           } else {
             countryTokens.forEach((countryKey) => {
               countryFilter.push(
                 new Filter("BP_COUNTRY", FilterOperator.EQ, countryKey)
-              )
+              );
             });
             aFilter.push(new Filter(countryFilter, false));
           }
-
         }
 
         if (bp_postCode) {
