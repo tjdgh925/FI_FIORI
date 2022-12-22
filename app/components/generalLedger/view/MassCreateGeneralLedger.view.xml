@@ -1,0 +1,174 @@
+<mvc:View controllerName="projectGL.controller.MassCreateGeneralLedger" xmlns:mvc="sap.ui.core.mvc" xmlns:core="sap.ui.core" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout">
+    <f:DynamicPage showFooter="true">
+        <f:title>
+            <f:DynamicPageTitle>
+                <f:heading>
+                    <HBox>
+                        <Button icon="sap-icon://nav-back/" press=".onBack" type="Transparent" />
+                        <Title text="G/L Account Creation (Mass)" />
+                    </HBox>
+                </f:heading>
+            </f:DynamicPageTitle>
+        </f:title>
+
+        <f:content>
+            <t:Table id="massCreateTable" rows="{MassCreateModel>/}" selectionMode="None" visibleRowCount="30" paste="onPaste" rowsUpdated=".tablevalidate" alternateRowColors="true">
+                <t:extension>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <Button press="onMassCreationNumber" type="Transparent" tooltip="추가" icon="sap-icon://create-form" />
+                    </OverflowToolbar>
+                </t:extension>
+
+                <t:columns>
+                    <!-- 멀티헤더로 헤더/기본정보/회사코드데이터 탭 나누고 -->
+                    <t:Column headerSpan="7">
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" width="100%" />
+                            <Label text="계정과목표" textAlign="Center" width="100%" required="true" />
+                        </t:multiLabels>
+
+                        <t:template>
+                            <Select
+                                width="100%"
+                                id="coaSelect"
+                                required="true"
+                                items="{
+                                path : 'CoaModel>/',
+                                sorter : {path:'COA_CODE'}
+                                }"
+                                selectedKey="{MassCreateModel>GL_COA}"
+                                change="getAccountGroupData"
+                                forceSelection="false"
+                            >
+                                <core:Item text="{CoaModel>COA_CODE}" key="{CoaModel>COA_CODE}" />
+                            </Select>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" width="100%" />
+                            <Label text="G/L 계정 유형" textAlign="Center" width="100%" required="true" />
+                        </t:multiLabels>
+
+                        <t:template>
+                            <Select
+                                width="100%"
+                                id="accountType"
+                                items="{
+                                path : 'selectAccountType>/',
+                                sorter : {path:'name'}
+                                }"
+                                required="true"
+                                selectedKey="{MassCreateModel>GL_ACCOUNTTYPE}"
+                                forceSelection="false"
+                            >
+                                <core:Item text="{selectAccountType>name}" key="{selectAccountType>key}" />
+                            </Select>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" width="100%" />
+                            <Label text="계정 그룹" textAlign="Center" width="100%" required="true" />
+                        </t:multiLabels>
+
+                        <t:template>
+                            <Select
+                                width="100%"
+                                required="true"
+                                id="accGroupMulti"
+                                items="{
+                                path : 'AccountGroup>/',
+                                sorter : {path:'AC_COA'}
+                                }"
+                                selectedKey="{MassCreateModel>GL_ACCOUNTGROUP}"
+                                forceSelection="false"
+                            >
+                                <core:Item text="{AccountGroup>AC_GROUP_CODE}" key="{AccountGroup>AC_GROUP_CODE}" />
+                            </Select>
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" width="100%" />
+                            <Label text="손익계산서 계정 유형" textAlign="Center" width="100%" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input value="{MassCreateModel>GL_PL_ACCOUNTTYPE}" id="PL_accountType" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" width="100%" />
+                            <Label text="내역" textAlign="Center" width="100%" required="true" />
+                        </t:multiLabels>
+                        <t:template>
+                            <Input value="{MassCreateModel>GL_NAME}" required="true" id="name" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" width="100%" />
+                            <Label text="G/L 계정 설명" textAlign="Center" width="100%" required="true" />
+                        </t:multiLabels>
+
+                        <t:template>
+                            <Input value="{MassCreateModel>GL_DESCRIPTION}" id="description" required="true" />
+                        </t:template>
+                    </t:Column>
+
+                    <t:Column>
+                        <t:multiLabels>
+                            <Label text="일반 데이터" textAlign="Center" width="100%" />
+                            <Label text="관계사 번호" textAlign="Center" width="100%" />
+                        </t:multiLabels>
+
+                        <t:template>
+                            <Input value="{MassCreateModel>GL_TRADINGPARTNER}" id="tradingPartner" />
+                        </t:template>
+                    </t:Column>
+                    <t:Column>
+                        <t:multiLabels>
+                            <Label text="회사코드 데이터" textAlign="Center" width="100%" />
+                            <Label text="회사코드" textAlign="Center" width="100%" required="true" />
+                        </t:multiLabels>
+
+                        <t:template>
+                            <MultiComboBox
+                                width="100%"
+                                required="true"
+                                id="companyCode"
+                                items="{
+                                path : 'CompanyCode>/',
+                                sorter : {path:'CC_COMPANY_CODE'}
+                                }"
+                                selectedKeys="{MassCreateModel>GL_COMPANY_CODE}"
+                            >
+                                <core:Item text="{CompanyCode>CC_COMPANY_CODE}" key="{CompanyCode>CC_COMPANY_CODE}" />
+                            </MultiComboBox>
+                        </t:template>
+                    </t:Column>
+                    <t:Column hAlign="Center" width="5rem">
+                        <Label text="삭제" />
+                        <t:template>
+                            <Button icon="sap-icon://clear-all" press="onClearMassCreate" tooltip="삭제" />
+                        </t:template>
+                    </t:Column>
+                </t:columns>
+            </t:Table>
+        </f:content>
+        <f:footer>
+            <OverflowToolbar>
+                <ToolbarSpacer />
+                <Button type="Emphasized" press="onMassCreationApprove" text="생성" />
+                <Button type="Default" text="취소" press="onBack" />
+            </OverflowToolbar>
+        </f:footer>
+    </f:DynamicPage>
+</mvc:View>

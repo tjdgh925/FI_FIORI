@@ -13,7 +13,15 @@ sap.ui.define(
     return Controller.extend(
       "projectBP.controller.MassCreateBusinessPartner_person",
       {
-        onInit() {
+        onInit: async function () {
+
+          var data = [
+            { key: "Mr", name: "Mr" },
+            { key: "Ms", name: "Ms" },
+                    ];
+          var oModel = new JSONModel(data);
+          this.getView().setModel(oModel, "selectNameTitle_person");
+          
           this.getOwnerComponent()
             .getRouter()
             .getRoute("MassCreateBusinessPartner_person")

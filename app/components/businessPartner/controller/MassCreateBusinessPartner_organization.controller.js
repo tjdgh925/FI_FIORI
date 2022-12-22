@@ -15,6 +15,13 @@ sap.ui.define(
       "projectBP.controller.MassCreateBusinessPartner_organization",
       {
         onInit() {
+          var data = [
+            { key: "국내", name: "국내" },
+            { key: "해외", name: "해외" },
+                    ];
+          var oModel = new JSONModel(data);
+          this.getView().setModel(oModel, "selectNameTitle_organization");
+
           this.getOwnerComponent()
             .getRouter()
             .getRoute("MassCreateBusinessPartner_organization")

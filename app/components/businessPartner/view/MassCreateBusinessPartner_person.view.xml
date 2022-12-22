@@ -2,14 +2,12 @@
     <!-- +버튼을 추가해서 model에 담아야댐(테이블 헤더에 엑셀 추가했던 것 참고하기) -->
 
     <f:DynamicPage showFooter="true">
-  <f:title>
-    <f:DynamicPageTitle>
+        <f:title>
+            <f:DynamicPageTitle>
                 <f:heading>
                     <HBox>
-                    
                         <Title text="Individual Creation (Mass)" />
                     </HBox>
-                    
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -40,10 +38,18 @@
                             <Label text="개인 칭호" textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
-                            <Select forceSelection="false"
-                            id="bp_name_title_person" selectedKey="{MassCreateModel>BP_NAME_TITLE}">
-                                <core:Item text="Mr" />
-                                <core:Item text="Ms" />
+                            <Select
+                                id="bp_name_title_person"
+                                required="true"
+                                forceSelection="false"
+                                width="100%"
+                                items="{
+                                path : 'selectNameTitle_person>/',
+                                sorter : {path:'name'}
+                                }"
+                                selectedKey="{MassCreateModel>BP_NAME_TITLE}"
+                            >
+                                <core:Item text="{selectNameTitle_person>name}" key="{selectNameTitle_person>key}" />
                             </Select>
                         </t:template>
                     </t:Column>
@@ -51,10 +57,10 @@
                     <t:Column width="16rem" hAlign="Center" headerSpan="3,1">
                         <t:multiLabels>
                             <Label text="일반 데이터" textAlign="Center" />
-                            <Label text="이름" textAlign="Center" required="true"/>
+                            <Label text="이름" textAlign="Center" required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Input id="bp_name_person" value="{MassCreateModel>BP_NAME}" required="true"/>
+                            <Input id="bp_name_person" value="{MassCreateModel>BP_NAME}" required="true" />
                         </t:template>
                     </t:Column>
 
@@ -104,10 +110,17 @@
                             <Label text="국가/지역" textAlign="Center" required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Select id="bp_country_person" required="true" forceSelection="false" width="100%" items="{
+                            <Select
+                                id="bp_country_person"
+                                required="true"
+                                forceSelection="false"
+                                width="100%"
+                                items="{
                                 path : 'CountryData>/',
                                 sorter : {path:'COUNTRY_CODE'}
-                                }" selectedKey="{MassCreateModel>BP_COUNTRY}">
+                                }"
+                                selectedKey="{MassCreateModel>BP_COUNTRY}"
+                            >
                                 <core:Item text="{CountryData>COUNTRY_NAME}" key="{CountryData>COUNTRY_CODE}" />
                             </Select>
                         </t:template>
@@ -126,7 +139,7 @@
                     <t:Column width="8rem" hAlign="Center" headerSpan="7,1">
                         <t:multiLabels>
                             <Label text="회사 코드 데이터" textAlign="Center" />
-                            <Label text="회사 코드" textAlign="Center" required="true"/>
+                            <Label text="회사 코드" textAlign="Center" required="true" />
                         </t:multiLabels>
                         <t:template>
                             <Input id="bp_company_code_person" value="{MassCreateModel>BP_COMPANY_CODE}" required="true" />
@@ -148,7 +161,5 @@
                 <Button type="Default" text="취소" press="onBack" />
             </OverflowToolbar>
         </f:footer>
-    
     </f:DynamicPage>
-
 </mvc:View>
