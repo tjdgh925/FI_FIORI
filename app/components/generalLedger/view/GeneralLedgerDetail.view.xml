@@ -124,8 +124,9 @@
                                 path : 'selectAccountType>/',
                                 sorter : {path:'name'}
                                 }"
+
                                                         required="true"
-                                                        selectedKey="{MassCreateModel>GL_ACCOUNTTYPE}"
+                                                        selectedKey="{GeneralLedgerModel>/GL_ACCOUNTTYPE}"
                                                         forceSelection="false"
                                                         visible="{=${editModel>/edit}}">
                                                         <core:Item text="{selectAccountType>name}"

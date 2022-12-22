@@ -70,7 +70,7 @@ sap.ui.define(['sap/ui/core/mvc/Controller'], function (Controller) {
             // set flag that the dialog is initialized
             this._bDialogInitialized = true;
             oDialog.open();
-          }.bind(this)
+        .bind(this)
         );
       },
 
