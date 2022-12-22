@@ -132,6 +132,7 @@ sap.ui.define(
           url: url,
         });
 
+        console.log(GeneralLedger);
         let GeneralLedgerModel = new JSONModel(GeneralLedger);
         this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
       },
@@ -291,15 +292,24 @@ sap.ui.define(
         this.onTest3();
         //await this.onUpdate(url,temp);
       },
-
+      
       onTest2: function () {
         this.getView().getModel("editModel").setProperty("/edit", true);
         this.onFilterCompanyCode(true);
       },
-
+      
       onTest3: function () {
         this.getView().getModel("editModel").setProperty("/edit", false);
-        //this.onReset();
+        this.byId("coaMulti").setValueState("None");
+        this.byId("GL_ACCOUNTTYPE").setValueState("None");
+        this.byId("accGroupMulti").setValueState("None");
+        this.byId("GL_NAME").setValueState("None");
+        this.byId("companyCodeMulti").setValueState("None");
+        console.log("$$$$$$$$$$")
+        this.getRefreshedData();
+        this.onFilterCompanyCode();
+
+        // this.onReset();
 
         // this.byId("GL_COA").setText();
         // this.byId("GL_ACCOUNTTYPE").setText();
@@ -886,7 +896,7 @@ sap.ui.define(
       onAcGroupFilterBarSearch: function () {
         var sSearchQuery = this._oBasicSearchField2.getValue();
 
-        var accGroupFilter = [];
+
 
         if (sSearchQuery.length > 0) {
           accGroupFilter.push(

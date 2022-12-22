@@ -93,6 +93,7 @@
                                                 <Text text="{GeneralLedgerModel>/GL_COA}"
                                                     visible="{=!${editModel>/edit}}" />
                                                 <MultiInput id="coaMulti"
+                                                    valueHelpOnly="true"
                                                     valueHelpRequest="onValueHelpRequested"
                                                     required="true"
                                                     visible="{=${editModel>/edit}}">
@@ -123,8 +124,9 @@
                                 path : 'selectAccountType>/',
                                 sorter : {path:'name'}
                                 }"
+
                                                         required="true"
-                                                        selectedKey="{MassCreateModel>GL_ACCOUNTTYPE}"
+                                                        selectedKey="{GeneralLedgerModel>/GL_ACCOUNTTYPE}"
                                                         forceSelection="false"
                                                         visible="{=${editModel>/edit}}">
                                                         <core:Item text="{selectAccountType>name}"
@@ -141,6 +143,7 @@
                                                 <Text text="{GeneralLedgerModel>/GL_ACCOUNTGROUP}"
                                                     visible="{=!${editModel>/edit}}" />
                                                 <MultiInput id="accGroupMulti"
+                                                    valueHelpOnly="true"
                                                     valueHelpRequest="onAccGroupValueHelpRequested"
                                                     required="true"
                                                     visible="{=${editModel>/edit}}">
@@ -258,6 +261,7 @@
                                                     <MultiInput id="companyCodeMulti"
                                                         valueHelpRequest="onCompanyCodeValueHelpRequest"
                                                         required="true"
+                                                        valueHelpOnly="true"
                                                         visible="{=${editModel>/edit}}"
                                                         width="25%">
                                                         <suggestionColumns>

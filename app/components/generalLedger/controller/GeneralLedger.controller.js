@@ -861,7 +861,6 @@ sap.ui.define(
       onAcGroupFilterBarSearch: function () {
         var sSearchQuery = this._oBasicSearchField2.getValue();
 
-        var accGroupFilter = [];
        
         if (sSearchQuery.length > 0) {
           accGroupFilter.push(
