@@ -171,7 +171,7 @@
                 <m:VBox class="sapUiSmallMarginEnd sapUiSmallMarginBottom">
                     <m:Title text="회사 코드"
                         class="sapUiTinyMarginBottom" />
-                    <m:Text width="150px"
+                    <m:Text width="250px"
                         text="{BusinessPartnerModel>/BP_COMPANY_CODE}" />
                 </m:VBox>
             </layout:VerticalLayout>
