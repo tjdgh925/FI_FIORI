@@ -30,50 +30,6 @@ sap.ui.define(
           .attachPatternMatched(this.onMyRoutePatternMatched, this);
       },
 
-      //편집버튼 눌렀을때 작동하는 기능
-      onEdit: function () {
-        this.byId("bp_name2").setValueState("None");
-        this.byId("bp_registration_number2").setValueState("None");
-
-        var test2 = this.getView().getModel("BusinessPartnerModel").oData
-          .createdAt;
-        if (test2) {
-          var date2 = test2.substring(0, 10);
-          var year2 = date2.substring(0, 4);
-          var month2 = date2.substring(5, 7);
-          var day2 = date2.substring(8, 10);
-
-          this.byId("bp_createdAt2").setText(
-            year2 + "년 " + month2 + "월 " + day2 + "일"
-          );
-        }
-
-        var test = this.getView().getModel("BusinessPartnerModel").oData
-          .modifiedAt;
-        if (test) {
-          var date = test.substring(0, 10);
-          var year = date.substring(0, 4);
-          var month = date.substring(5, 7);
-          var day = date.substring(8, 10);
-
-          this.byId("bp_modifiedAt2").setText(
-            year + "년 " + month + "월 " + day + "일"
-          );
-        }
-
-        this.getView().getModel("editModel").setProperty("/edit", true);
-
-        let orgDivision = this.byId("bp_org_division").getText();
-        let bpLegalForm = this.byId("bp_legal_from").getText();
-        let bpNameTitle = this.byId("bp_name_title").getText();
-        let bpCountry = this.byId("bp_country").getText();
-
-        this.byId("bp_org_division2").setSelectedKey(orgDivision);
-        this.byId("bp_legal_from2").setSelectedKey(bpLegalForm);
-        this.byId("bp_name_title2").setSelectedKey(bpNameTitle);
-        this.byId("bp_country2").setSelectedKey(bpCountry);
-      },
-
       onMyRoutePatternMatched: async function (oEvent) {
         var oData = {
           edit: false,
@@ -98,7 +54,9 @@ sap.ui.define(
           url: url,
         });
 
+        console.log(BP);
         let BusinessPartnerModel = new JSONModel(BP);
+
         this.getView().setModel(BusinessPartnerModel, "BusinessPartnerModel");
 
         var visible = { personal: false };
@@ -151,17 +109,71 @@ sap.ui.define(
         this.byId("bp_country2").setValueState();
         this.byId("bp_registration_number2").setValueState();
 
-
         const countryData = await $.ajax({
           type: "GET",
           url: "/business-partner/Country",
         });
-
+        var countryjsonmodel = new JSONModel(countryData.value);
+        countryjsonmodel.setSizeLimit(500);
         this.getView().setModel(
-          new JSONModel(countryData.value),
+          countryjsonmodel,
           "CountryData"
         );
+        console.log(this.getView().getModel("CountryData"));
+        this.byId("")
       },
+      //편집버튼 눌렀을때 작동하는 기능
+      onEdit: function () {
+        this.byId("bp_name2").setValueState("None");
+        this.byId("bp_registration_number2").setValueState("None");
+
+        var test2 = this.getView().getModel("BusinessPartnerModel").oData
+          .createdAt;
+        if (test2) {
+          var date2 = test2.substring(0, 10);
+          var year2 = date2.substring(0, 4);
+          var month2 = date2.substring(5, 7);
+          var day2 = date2.substring(8, 10);
+
+          this.byId("bp_createdAt2").setText(
+            year2 + "년 " + month2 + "월 " + day2 + "일"
+          );
+        }
+
+        var test = this.getView().getModel("BusinessPartnerModel").oData
+          .modifiedAt;
+        if (test) {
+          var date = test.substring(0, 10);
+          var year = date.substring(0, 4);
+          var month = date.substring(5, 7);
+          var day = date.substring(8, 10);
+
+          this.byId("bp_modifiedAt2").setText(
+            year + "년 " + month + "월 " + day + "일"
+          );
+        }
+
+        this.getView().getModel("editModel").setProperty("/edit", true);
+
+        console.log(this.byId("bp_country2").getSelectedKey())
+
+        let orgDivision = this.byId("bp_org_division").getText();
+        let bpLegalForm = this.byId("bp_legal_from").getText();
+        let bpNameTitle = this.byId("bp_name_title").getText();
+        let bpCountry = this.byId("bp_country").getText();
+        // console.log(bpCountry);
+        console.log(this.byId("bp_country2"))
+        this.byId("bp_org_division2").setSelectedKey(orgDivision);
+        this.byId("bp_legal_from2").setSelectedKey(bpLegalForm);
+        this.byId("bp_name_title2").setSelectedKey(bpNameTitle);
+        this.byId("bp_country2").setSelectedKey(bpCountry);
+
+        console.log(this.getView().getModel("BusinessPartnerModel"))
+        console.log(this.getView().getModel("CountryData"));
+
+        console.log(this.byId("bp_country2").getSelectedKey())
+      },
+
 
       getBpData: async function () {
         const BP = await $.ajax({

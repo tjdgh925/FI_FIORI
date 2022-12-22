@@ -16,7 +16,6 @@
                             type="Transparent" />
                         <Title text="G/L Account Creation (Mass)" />
                     </HBox>
-
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
@@ -30,14 +29,12 @@
                 rowsUpdated=".tablevalidate"
                 alternateRowColors="true">
                 <t:extension>
-                    <OverflowToolbar >
-
+                    <OverflowToolbar>
                         <ToolbarSpacer />
                         <Button press="onMassCreationNumber"
                             type="Transparent"
                             tooltip="추가"
-                            icon="sap-icon://create-form">
-                        </Button>
+                            icon="sap-icon://create-form" />
                     </OverflowToolbar>
                 </t:extension>
 
@@ -66,9 +63,8 @@
                                 change="getAccountGroupData"
                                 forceSelection="false">
                                 <core:Item text="{CoaModel>COA_CODE}"
-                                    key="{CoaModel>COA_CODE}"/>
+                                    key="{CoaModel>COA_CODE}" />
                             </Select>
-
                         </t:template>
                     </t:Column>
 
@@ -81,11 +77,9 @@
                                 textAlign="Center"
                                 width="100%"
                                 required="true" />
-
                         </t:multiLabels>
 
                         <t:template>
-
                             <Select width="100%"
                                 id="accountType"
                                 items="{
@@ -96,7 +90,7 @@
                                 selectedKey="{MassCreateModel>GL_ACCOUNTTYPE}"
                                 forceSelection="false">
                                 <core:Item text="{selectAccountType>name}"
-                                    key="{selectAccountType>key}"/>
+                                    key="{selectAccountType>key}" />
                             </Select>
                         </t:template>
                     </t:Column>
@@ -123,7 +117,7 @@
                                 selectedKey="{MassCreateModel>GL_ACCOUNTGROUP}"
                                 forceSelection="false">
                                 <core:Item text="{AccountGroup>AC_GROUP_CODE}"
-                                    key="{AccountGroup>AC_GROUP_CODE}"/>
+                                    key="{AccountGroup>AC_GROUP_CODE}" />
                             </Select>
                         </t:template>
                     </t:Column>
@@ -139,7 +133,7 @@
                         </t:multiLabels>
                         <t:template>
                             <Input value="{MassCreateModel>GL_PL_ACCOUNTTYPE}"
-                                id="PL_accountType"/>
+                                id="PL_accountType" />
                         </t:template>
                     </t:Column>
 
@@ -151,7 +145,7 @@
                             <Label text="내역"
                                 textAlign="Center"
                                 width="100%"
-                                required="true"/>
+                                required="true" />
                         </t:multiLabels>
                         <t:template>
                             <Input value="{MassCreateModel>GL_NAME}"
@@ -214,7 +208,7 @@
                                 }"
                                 selectedKeys="{MassCreateModel>GL_COMPANY_CODE}">
                                 <core:Item text="{CompanyCode>CC_COMPANY_CODE}"
-                                    key="{CompanyCode>CC_COMPANY_CODE}"/>
+                                    key="{CompanyCode>CC_COMPANY_CODE}" />
                             </MultiComboBox>
                         </t:template>
                     </t:Column>
@@ -228,12 +222,11 @@
                         </t:template>
                     </t:Column>
                 </t:columns>
-
             </t:Table>
         </f:content>
         <f:footer>
             <OverflowToolbar>
-                <ToolbarSpacer/>
+                <ToolbarSpacer />
                 <Button type="Emphasized"
                     press="onMassCreationApprove"
                     text="생성" />
@@ -241,9 +234,6 @@
                     text="취소"
                     press="onBack" />
             </OverflowToolbar>
-
         </f:footer>
-
     </f:DynamicPage>
-
 </mvc:View>
