@@ -615,6 +615,9 @@ sap.ui.define(
               oDialog.setTokens(this._oMultiInput.getTokens());
               oDialog.update();
 
+              this._oBasicSearchField.setValue("");
+              this.onFilterBarSearch();
+
               oDialog.open();
               return;
             }
