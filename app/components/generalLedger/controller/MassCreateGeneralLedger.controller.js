@@ -34,7 +34,6 @@ sap.ui.define(
     return Controller.extend("projectGL.controller.MassCreateGeneralLedger", {
       async onInit() {
         var data = [
-          { key: "", name: "" },
           { key: "P", name: "P(1차 원가 또는 수익)" },
           { key: "S", name: "S(2차 원가)" },
           { key: "X", name: "X(대차대조표 계정)" },

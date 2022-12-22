@@ -12,7 +12,7 @@
                 <f:heading>
                     <HBox>
                         <Button icon="sap-icon://nav-back/"
-                            press=".onBack" 
+                            press=".onBack"
                             type="Transparent" />
                         <Title text="G/L Account Creation (Mass)" />
                     </HBox>
@@ -20,7 +20,7 @@
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
-        
+
         <f:content>
             <t:Table id="massCreateTable"
                 rows="{MassCreateModel>/}"
@@ -50,13 +50,14 @@
                                 width="100%" />
                             <Label text="계정과목표"
                                 textAlign="Center"
-                                width="100%" required="true"
-                               />
+                                width="100%"
+                                required="true" />
                         </t:multiLabels>
 
                         <t:template>
                             <Select width="100%"
-                                id="coaSelect"  required="true"
+                                id="coaSelect"
+                                required="true"
                                 items="{
                                 path : 'CoaModel>/',
                                 sorter : {path:'COA_CODE'}
@@ -78,8 +79,8 @@
                                 width="100%" />
                             <Label text="G/L 계정 유형"
                                 textAlign="Center"
-                                width="100%" required="true"
-                                />
+                                width="100%"
+                                required="true" />
 
                         </t:multiLabels>
 
@@ -90,7 +91,8 @@
                                 items="{
                                 path : 'selectAccountType>/',
                                 sorter : {path:'name'}
-                                }"  required="true"
+                                }"
+                                required="true"
                                 selectedKey="{MassCreateModel>GL_ACCOUNTTYPE}"
                                 forceSelection="false">
                                 <core:Item text="{selectAccountType>name}"
@@ -106,12 +108,13 @@
                                 width="100%" />
                             <Label text="계정 그룹"
                                 textAlign="Center"
-                                width="100%" required="true"
-                                />
+                                width="100%"
+                                required="true" />
                         </t:multiLabels>
 
                         <t:template>
-                            <Select width="100%"  required="true"
+                            <Select width="100%"
+                                required="true"
                                 id="accGroupMulti"
                                 items="{
                                 path : 'AccountGroup>/',
@@ -132,7 +135,7 @@
                                 width="100%" />
                             <Label text="손익계산서 계정 유형"
                                 textAlign="Center"
-                                width="100%"  />
+                                width="100%" />
                         </t:multiLabels>
                         <t:template>
                             <Input value="{MassCreateModel>GL_PL_ACCOUNTTYPE}"
@@ -143,7 +146,7 @@
                     <t:Column>
                         <t:multiLabels>
                             <Label text="일반 데이터"
-                                textAlign="Center" 
+                                textAlign="Center"
                                 width="100%" />
                             <Label text="내역"
                                 textAlign="Center"
@@ -151,7 +154,8 @@
                                 required="true"/>
                         </t:multiLabels>
                         <t:template>
-                            <Input value="{MassCreateModel>GL_NAME}" required="true"
+                            <Input value="{MassCreateModel>GL_NAME}"
+                                required="true"
                                 id="name" />
                         </t:template>
                     </t:Column>
@@ -163,12 +167,14 @@
                                 width="100%" />
                             <Label text="G/L 계정 설명"
                                 textAlign="Center"
-                                width="100%" required="true" />
+                                width="100%"
+                                required="true" />
                         </t:multiLabels>
 
                         <t:template>
                             <Input value="{MassCreateModel>GL_DESCRIPTION}"
-                                id="description" required="true" />
+                                id="description"
+                                required="true" />
                         </t:template>
                     </t:Column>
 
@@ -194,11 +200,13 @@
                                 width="100%" />
                             <Label text="회사코드"
                                 textAlign="Center"
-                                width="100%" required="true" />
+                                width="100%"
+                                required="true" />
                         </t:multiLabels>
 
                         <t:template>
-                            <MultiComboBox width="100%" required="true"
+                            <MultiComboBox width="100%"
+                                required="true"
                                 id="companyCode"
                                 items="{
                                 path : 'CompanyCode>/',

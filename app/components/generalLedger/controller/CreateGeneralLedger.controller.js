@@ -645,8 +645,14 @@ sap.ui.define(
           oVHD2.update();
         });
       },
+      onBack: function () {
+        this.onReset();
+       
+        this.getOwnerComponent().getRouter().navTo("GeneralLedger");
+      },
 
       onCheckSelect() {},
     });
+    
   }
 );
