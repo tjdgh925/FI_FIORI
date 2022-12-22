@@ -358,7 +358,6 @@ sap.ui.define(
         } else {
           this.byId("SortDialog").open("filter");
         }
-        this.onSearch();
       },
 
       onConfirmSortDialog: function (oEvent) {
