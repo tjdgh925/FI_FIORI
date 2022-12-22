@@ -35,7 +35,7 @@
                     <t:Column width="8rem" hAlign="Center" headerSpan="3,1">
                         <t:multiLabels>
                             <Label text="일반 데이터" textAlign="Center" />
-                            <Label text="개인 칭호" textAlign="Center" />
+                            <Label text="개인 칭호" textAlign="Center" labelFor="bp_name_title_person"/>
                         </t:multiLabels>
                         <t:template>
                             <Select
@@ -142,7 +142,18 @@
                             <Label text="회사 코드" textAlign="Center" required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Input id="bp_company_code_person" value="{MassCreateModel>BP_COMPANY_CODE}" required="true" />
+                        <Select forceSelection="false"
+                            width="100%"
+                            id="bp_company_code_person"
+                            required="true"
+                            selectedKey="{MassCreateModel>BP_COMPANY_CODE}"
+                            items="{
+                                path : 'CompanyCode>/',
+                                sorter : {path:'CC_COMPANY_CODE'}
+                                }">
+                            <core:Item text="{CompanyCode>CC_COMPANY_CODE}"
+                                key="{CompanyCode>CC_COMPANY_CODE}" />
+                        </Select>
                         </t:template>
                     </t:Column>
                     <t:Column width="5rem" hAlign="Center">

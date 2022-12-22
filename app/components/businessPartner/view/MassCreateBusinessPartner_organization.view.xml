@@ -1,4 +1,11 @@
-<mvc:View controllerName="projectBP.controller.MassCreateBusinessPartner_organization" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core">
+<mvc:View controllerName="projectBP.controller.MassCreateBusinessPartner_organization"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:t="sap.ui.table"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core">
     <f:DynamicPage showFooter="true">
         <f:title>
             <f:DynamicPageTitle>
@@ -11,35 +18,51 @@
         </f:title>
 
         <f:content>
-            <t:Table id="massCreate_organization" rows="{MassCreateModel>/}" selectionMode="None" visibleRowCount="20" paste="onPaste" rowsUpdated=".tablevalidate">
+            <t:Table id="massCreate_organization"
+                rows="{MassCreateModel>/}"
+                selectionMode="None"
+                visibleRowCount="20"
+                paste="onPaste"
+                rowsUpdated=".tablevalidate">
                 <t:extension>
                     <OverflowToolbar>
                         <ToolbarSpacer />
-                        <Button press="onMassCreationNumber" type="Transparent" tooltip="추가" icon="sap-icon://create-form" />
+                        <Button press="onMassCreationNumber"
+                            type="Transparent"
+                            tooltip="추가"
+                            icon="sap-icon://create-form" />
                     </OverflowToolbar>
                 </t:extension>
 
                 <t:columns>
                     <!-- 멀티헤더로 헤더/기본정보/회사코드데이터 탭 나누고 -->
 
-                    <t:Column width="8rem" hAlign="Center" headerSpan="4,1">
+                    <t:Column width="8rem"
+                        hAlign="Center"
+                        headerSpan="4,1">
                         <t:multiLabels>
-                            <Label text="일반 데이터" textAlign="Center" />
-                            <Label text="BP 범주" textAlign="Center" />
+                            <Label text="일반 데이터"
+                                textAlign="Center" />
+                            <Label text="BP 범주"
+                                textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
                             <Text text="조직 (2)" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="8rem" hAlign="Center" headerSpan="4,1">
+                    <t:Column width="8rem"
+                        hAlign="Center"
+                        headerSpan="4,1">
                         <t:multiLabels>
-                            <Label text="일반 데이터" textAlign="Center" />
-                            <Label text="조직 구분" textAlign="Center" />
+                            <Label text="일반 데이터"
+                                textAlign="Center" />
+                            <Label text="조직 구분"
+                                labelFor="bp_name_title_organization"
+                                textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
-                            <Select
-                                id="bp_name_title_organization"
+                            <Select id="bp_name_title_organization"
                                 required="true"
                                 forceSelection="false"
                                 width="100%"
@@ -47,81 +70,115 @@
                                 path : 'selectNameTitle_organization>/',
                                 sorter : {path:'name'}
                                 }"
-                                selectedKey="{MassCreateModel>BP_ORG_DIVISION}"
-                            >
-                                <core:Item text="{selectNameTitle_organization>name}" key="{selectNameTitle_organization>key}" />
+                                selectedKey="{MassCreateModel>BP_ORG_DIVISION}">
+                                <core:Item text="{selectNameTitle_organization>name}"
+                                    key="{selectNameTitle_organization>key}" />
                             </Select>
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="16rem" hAlign="Center" headerSpan="4,1">
+                    <t:Column width="16rem"
+                        hAlign="Center"
+                        headerSpan="4,1">
                         <t:multiLabels>
-                            <Label text="일반 데이터" textAlign="Center" />
-                            <Label text="이름" textAlign="Center" required="true" />
+                            <Label text="일반 데이터"
+                                textAlign="Center" />
+                            <Label text="이름"
+                                textAlign="Center"
+                                required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Input id="bp_name_organization" value="{MassCreateModel>BP_NAME}" required="true" />
+                            <Input id="bp_name_organization"
+                                value="{MassCreateModel>BP_NAME}"
+                                required="true" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="11rem" hAlign="Center" headerSpan="4,1">
+                    <t:Column width="11rem"
+                        hAlign="Center"
+                        headerSpan="4,1">
                         <t:multiLabels>
-                            <Label text="일반 데이터" textAlign="Center" />
-                            <Label text="사업자등록번호" textAlign="Center" required="true" />
+                            <Label text="일반 데이터"
+                                textAlign="Center" />
+                            <Label text="사업자등록번호"
+                                textAlign="Center"
+                                required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Input id="bp_registration_number_organization" value="{MassCreateModel>BP_REGISTRATION_NUMBER}" required="true" />
+                            <Input id="bp_registration_number_organization"
+                                value="{MassCreateModel>BP_REGISTRATION_NUMBER}"
+                                required="true" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="43rem" hAlign="Center" headerSpan="7,1">
+                    <t:Column width="43rem"
+                        hAlign="Center"
+                        headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터" textAlign="Center" />
-                            <Label text="도로 주소" textAlign="Center" />
+                            <Label text="회사 코드 데이터"
+                                textAlign="Center" />
+                            <Label text="도로 주소"
+                                textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
                             <Input value="{MassCreateModel>BP_ADDRESS}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="8rem" hAlign="Center" headerSpan="7,1">
+                    <t:Column width="8rem"
+                        hAlign="Center"
+                        headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터" textAlign="Center" />
-                            <Label text="번지" textAlign="Center" />
+                            <Label text="회사 코드 데이터"
+                                textAlign="Center" />
+                            <Label text="번지"
+                                textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
                             <Input value="{MassCreateModel>BP_SPECIFIC_ADDRESS}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="8rem" hAlign="Center" headerSpan="7,1">
+                    <t:Column width="8rem"
+                        hAlign="Center"
+                        headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터" textAlign="Center" />
-                            <Label text="우편번호" textAlign="Center" />
+                            <Label text="회사 코드 데이터"
+                                textAlign="Center" />
+                            <Label text="우편번호"
+                                textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
                             <Input value="{MassCreateModel>BP_POSTCODE}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="11rem" hAlign="Center" headerSpan="7,1">
+                    <t:Column width="11rem"
+                        hAlign="Center"
+                        headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터" textAlign="Center" />
-                            <Label text="도시" textAlign="Center" />
+                            <Label text="회사 코드 데이터"
+                                textAlign="Center" />
+                            <Label text="도시"
+                                textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
                             <Input value="{MassCreateModel>BP_CITY}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="16rem" hAlign="Center" headerSpan="7,1">
+                    <t:Column width="16rem"
+                        hAlign="Center"
+                        headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터" textAlign="Center" />
-                            <Label text="국가/지역" textAlign="Center" required="true" />
+                            <Label text="회사 코드 데이터"
+                                textAlign="Center" />
+                            <Label text="국가/지역"
+                                textAlign="Center"
+                                required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Select
-                                id="bp_country_organization"
+                            <Select id="bp_country_organization"
                                 required="true"
                                 forceSelection="false"
                                 width="100%"
@@ -129,37 +186,60 @@
                                 path : 'CountryData>/',
                                 sorter : {path:'COUNTRY_CODE'}
                                 }"
-                                selectedKey="{MassCreateModel>BP_COUNTRY}"
-                            >
-                                <core:Item text="{CountryData>COUNTRY_NAME}" key="{CountryData>COUNTRY_CODE}" />
+                                selectedKey="{MassCreateModel>BP_COUNTRY}">
+                                <core:Item text="{CountryData>COUNTRY_NAME}"
+                                    key="{CountryData>COUNTRY_CODE}" />
                             </Select>
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="16rem" hAlign="Center" headerSpan="7,1">
+                    <t:Column width="16rem"
+                        hAlign="Center"
+                        headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터" textAlign="Center" />
-                            <Label text="지역" textAlign="Center" />
+                            <Label text="회사 코드 데이터"
+                                textAlign="Center" />
+                            <Label text="지역"
+                                textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
                             <Input value="{MassCreateModel>BP_REGION}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="8rem" hAlign="Center" headerSpan="7,1">
+                    <t:Column width="8rem"
+                        hAlign="Center"
+                        headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터" textAlign="Center" />
-                            <Label text="회사 코드" textAlign="Center" required="true" />
+                            <Label text="회사 코드 데이터"
+                                textAlign="Center" />
+                            <Label text="회사 코드"
+                                textAlign="Center"
+                                required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Input id="bp_company_code_organization" value="{MassCreateModel>BP_COMPANY_CODE}" required="true" />
+                            <Select forceSelection="false"
+                                width="100%"
+                                id="bp_company_code_organization"
+                                required="true"
+                                selectedKey="{MassCreateModel>BP_COMPANY_CODE}"
+                                items="{
+                                path : 'CompanyCode>/',
+                                sorter : {path:'CC_COMPANY_CODE'}
+                                }">
+                                <core:Item text="{CompanyCode>CC_COMPANY_CODE}"
+                                    key="{CompanyCode>CC_COMPANY_CODE}" />
+                            </Select>
                         </t:template>
                     </t:Column>
 
-                    <t:Column width="5rem" hAlign="Center">
+                    <t:Column width="5rem"
+                        hAlign="Center">
                         <Label text="삭제" />
                         <t:template>
-                            <Button icon="sap-icon://clear-all" press="onClearMassCreate" tooltip="삭제" />
+                            <Button icon="sap-icon://clear-all"
+                                press="onClearMassCreate"
+                                tooltip="삭제" />
                         </t:template>
                     </t:Column>
                 </t:columns>
@@ -168,8 +248,12 @@
         <f:footer>
             <OverflowToolbar>
                 <ToolbarSpacer />
-                <Button type="Emphasized" press="onMassCreationApprove" text="생성" />
-                <Button type="Default" text="취소" press="onBack" />
+                <Button type="Emphasized"
+                    press="onMassCreationApprove"
+                    text="생성" />
+                <Button type="Default"
+                    text="취소"
+                    press="onBack" />
             </OverflowToolbar>
         </f:footer>
     </f:DynamicPage>

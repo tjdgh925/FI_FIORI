@@ -48,6 +48,13 @@ sap.ui.define(
             new JSONModel(countryData.value),
             "CountryData"
           );
+
+          const CompanyCode = await $.ajax({
+            type: "get",
+            url: "/general-ledger/CompanyCode",
+          });
+          let CompanyCodeModel = new JSONModel(CompanyCode.value);
+          this.getView().setModel(CompanyCodeModel, "CompanyCode");
           //화면 라우팅될때마다 생성시 변한 값 초기화
           tablecheckflag=false;
           this.tablevalidateclear("massCreate_organization");
@@ -141,11 +148,13 @@ sap.ui.define(
           }
 
           let inputData = this.getView().getModel("MassCreateModel").oData;
+
           var cnt = 0;
           await inputData.forEach((data) => {
             Object.assign(data, {
               BP_ORG_DIVISION: inputData[cnt].BP_ORG_DIVISION,
               BP_COUNTRY: inputData[cnt].BP_COUNTRY,
+              BP_COMPANY_CODE: inputData[cnt].BP_COMPANY_CODE,
               BP_CODE: (parseInt(bp_code) + ++cnt).toString(),
             });
 

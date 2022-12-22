@@ -9,19 +9,18 @@ sap.ui.define(
     "use strict";
 
     var bp_code;
-    var tablecheckflag=false;
+    var tablecheckflag = false;
     return Controller.extend(
       "projectBP.controller.MassCreateBusinessPartner_person",
       {
         onInit: async function () {
-
           var data = [
             { key: "Mr", name: "Mr" },
             { key: "Ms", name: "Ms" },
-                    ];
+          ];
           var oModel = new JSONModel(data);
           this.getView().setModel(oModel, "selectNameTitle_person");
-          
+
           this.getOwnerComponent()
             .getRouter()
             .getRoute("MassCreateBusinessPartner_person")
@@ -47,8 +46,16 @@ sap.ui.define(
             new JSONModel(countryData.value),
             "CountryData"
           );
+
+          const CompanyCode = await $.ajax({
+            type: "get",
+            url: "/general-ledger/CompanyCode",
+          });
+          let CompanyCodeModel = new JSONModel(CompanyCode.value);
+          this.getView().setModel(CompanyCodeModel, "CompanyCode");
+
           //화면 라우팅될때마다 생성시 변한 값 초기화
-          tablecheckflag=false;
+          tablecheckflag = false;
           this.tablevalidateclear("massCreate_person");
         },
 
@@ -127,7 +134,7 @@ sap.ui.define(
         },
 
         onMassCreationApprove: async function () {
-          tablecheckflag=true;
+          tablecheckflag = true;
 
           var check = await this.tablevalidate("massCreate_person");
           if (check == true) {
@@ -141,8 +148,9 @@ sap.ui.define(
           var cnt = 0;
           await inputData.forEach((data) => {
             Object.assign(data, {
-              BP_NAME_TITLE: inputData[cnt].BP_NAME_TITLE,
+              BP_ORG_DIVISION: inputData[cnt].BP_ORG_DIVISION,
               BP_COUNTRY: inputData[cnt].BP_COUNTRY,
+              BP_COMPANY_CODE: inputData[cnt].BP_COMPANY_CODE,
               BP_CODE: (parseInt(bp_code) + ++cnt).toString(),
             });
 
@@ -158,13 +166,14 @@ sap.ui.define(
         },
 
         tablevalidate: function (tableid) {
-          if(tablecheckflag==false){
+          if (tablecheckflag == false) {
             return;
           }
           var check = false;
-          var datalength = this.getView().getModel("MassCreateModel").oData.length;
-          if(datalength>20){
-            datalength=20;
+          var datalength =
+            this.getView().getModel("MassCreateModel").oData.length;
+          if (datalength > 20) {
+            datalength = 20;
           }
           var rows = this.byId("massCreate_person").mAggregations.rows;
           for (var i = 0; i < datalength; i++) {
@@ -219,10 +228,13 @@ sap.ui.define(
           for (var i = 0; i < 20; i++) {
             var cells = rows[i].mAggregations.cells;
             for (var j = 0; j < cells.length; j++) {
-              var element = cells[j].getMetadata().getElementName().split(".")[2];
+              var element = cells[j]
+                .getMetadata()
+                .getElementName()
+                .split(".")[2];
               if (
-                element == "Input"  ||
-                element == "Combobox"  ||
+                element == "Input" ||
+                element == "Combobox" ||
                 element == "DatePicker"
               ) {
                 cells[j].setValueState("None");

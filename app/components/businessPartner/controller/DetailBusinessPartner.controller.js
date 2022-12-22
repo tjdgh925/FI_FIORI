@@ -135,7 +135,7 @@ sap.ui.define(
           var month2 = date2.substring(5, 7);
           var day2 = date2.substring(8, 10);
 
-          this.byId("bp_createdAt2").setText(
+          this.byId("bp_createdAt").setText(
             year2 + "년 " + month2 + "월 " + day2 + "일"
           );
         }
@@ -148,7 +148,7 @@ sap.ui.define(
           var month = date.substring(5, 7);
           var day = date.substring(8, 10);
 
-          this.byId("bp_modifiedAt2").setText(
+          this.byId("bp_modifiedAt").setText(
             year + "년 " + month + "월 " + day + "일"
           );
         }
