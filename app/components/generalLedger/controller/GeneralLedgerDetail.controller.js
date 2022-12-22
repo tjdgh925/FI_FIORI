@@ -801,25 +801,10 @@ sap.ui.define(
       },
 
       // #endregion
-      onFilterBarSearch: function (oEvent) {
-        var sSearchQuery = this._oBasicSearchField.getValue(),
-          aSelectionSet = oEvent.getParameter("selectionSet");
+      onFilterBarSearch: function () {
+        var sSearchQuery = this._oBasicSearchField.getValue();
 
-        var filter = [];
-
-        var aFilters = aSelectionSet.reduce(function (aResult, oControl) {
-          if (oControl.getValue()) {
-            aResult.push(
-              new Filter({
-                path: oControl.getName(),
-                operator: FilterOperator.Contains,
-                value1: oControl.getValue(),
-              })
-            );
-          }
-
-          return aResult;
-        }, []);
+        var aFilters = [];
 
         aFilters.push(
           new Filter({
@@ -846,25 +831,10 @@ sap.ui.define(
           })
         );
       },
-      onCompnayCodeFilterBarSearch: function (oEvent) {
-        var sSearchQuery = this._oBasicSearchField3.getValue(),
-          aSelectionSet = oEvent.getParameter("selectionSet");
+      onCompnayCodeFilterBarSearch: function () {
+        var sSearchQuery = this._oBasicSearchField3.getValue();
 
-        var filter = [];
-
-        var aFilters = aSelectionSet.reduce(function (aResult, oControl) {
-          if (oControl.getValue()) {
-            aResult.push(
-              new Filter({
-                path: oControl.getName(),
-                operator: FilterOperator.Contains,
-                value1: oControl.getValue(),
-              })
-            );
-          }
-
-          return aResult;
-        }, []);
+        var aFilters = [];
 
         aFilters.push(
           new Filter({
@@ -902,25 +872,10 @@ sap.ui.define(
         );
       },
 
-      onAcGroupFilterBarSearch: function (oEvent) {
-        var sSearchQuery = this._oBasicSearchField2.getValue(),
-          aSelectionSet = oEvent.getParameter("selectionSet");
+      onAcGroupFilterBarSearch: function () {
+        var sSearchQuery = this._oBasicSearchField2.getValue();
 
-        console.log(aSelectionSet);
-        console.log(sSearchQuery);
-
-        var filter = [];
-        aSelectionSet.reduce(function (aResult, oControl) {
-          if (oControl.getValue()) {
-            accGroupFilter.push(
-              new Filter({
-                path: oControl.getName(),
-                operator: FilterOperator.Contains,
-                value1: oControl.getValue(),
-              })
-            );
-          }
-        }, []);
+        var accGroupFilter = [];
 
         if (sSearchQuery.length > 0) {
           accGroupFilter.push(

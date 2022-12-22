@@ -578,6 +578,10 @@ sap.ui.define(
         var sSearchQuery = this._oBasicSearchField2.getValue();
 
         var accGroupFilter = [];
+        if (sSearchQuery == null) {
+          this._filterTable([]);
+          return;
+        }
 
         if (sSearchQuery.length > 0) {
           accGroupFilter.push(

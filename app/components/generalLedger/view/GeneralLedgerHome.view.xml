@@ -16,14 +16,14 @@
 					header="G/L 조회"
 					press="onDisplayGL">
 					<TileContent >
-						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
+						<ImageContent src="sap-icon://multiselect-all"></ImageContent>
 					</TileContent>
 				</GenericTile>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
 					header="G/L 생성"
 					press="onCreateGL">
 					<TileContent >
-						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
+						<ImageContent src="sap-icon://document"></ImageContent>
 					</TileContent>
 				</GenericTile>
 				     <HBox width="100%" height="3rem" />

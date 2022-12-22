@@ -181,11 +181,9 @@ sap.ui.define(
 
         var sumSearch = oTable.aIndices.length;
         this.byId("TableName").setText("총계정원장(" + sumSearch + ")");
-        
       },
 
       onSearch2: function (oEvent) {
-
         this.onReset1();
         let search = this.byId("search").getValue();
 
@@ -231,7 +229,6 @@ sap.ui.define(
       },
 
       onReset1: function () {
-        
         this.byId("coaMulti").setTokens([]);
         this.byId("account").setValue(null);
         this.byId("accountType").setSelectedKeys([]);
@@ -484,7 +481,7 @@ sap.ui.define(
               oDialog.update();
 
               this._oBasicSearchField.setValue("");
-              this.onAcGroupFilterBarSearch();
+              this.onFilterBarSearch();
 
               oDialog.open();
               return;
@@ -624,7 +621,7 @@ sap.ui.define(
               oDialog2.update();
 
               this._oBasicSearchField2.setValue("");
-              this.onFilterBarSearch();
+              this.onAcGroupFilterBarSearch();
 
               this._filterTable2(
                 new Filter({
@@ -830,25 +827,11 @@ sap.ui.define(
       },
 
       // #endregion
-      onFilterBarSearch: function (oEvent) {
-        var sSearchQuery = this._oBasicSearchField.getValue(),
-          aSelectionSet = oEvent.getParameter("selectionSet");
+      onFilterBarSearch: function () {
+        var sSearchQuery = this._oBasicSearchField.getValue();
 
-        var filter = [];
+        var aFilters = [];
 
-        var aFilters = aSelectionSet.reduce(function (aResult, oControl) {
-          if (oControl.getValue()) {
-            aResult.push(
-              new Filter({
-                path: oControl.getName(),
-                operator: FilterOperator.Contains,
-                value1: oControl.getValue(),
-              })
-            );
-          }
-
-          return aResult;
-        }, []);
 
         aFilters.push(
           new Filter({
@@ -876,26 +859,11 @@ sap.ui.define(
         );
       },
 
-      onAcGroupFilterBarSearch: function (oEvent) {
-        var sSearchQuery = this._oBasicSearchField2.getValue(),
-          aSelectionSet = oEvent.getParameter("selectionSet");
+      onAcGroupFilterBarSearch: function () {
+        var sSearchQuery = this._oBasicSearchField2.getValue();
 
-        console.log(aSelectionSet);
-        console.log(sSearchQuery);
-
-        var filter = [];
-        aSelectionSet.reduce(function (aResult, oControl) {
-          if (oControl.getValue()) {
-            accGroupFilter.push(
-              new Filter({
-                path: oControl.getName(),
-                operator: FilterOperator.Contains,
-                value1: oControl.getValue(),
-              })
-            );
-          }
-        }, []);
-
+        var accGroupFilter = [];
+       
         if (sSearchQuery.length > 0) {
           accGroupFilter.push(
             new Filter({
