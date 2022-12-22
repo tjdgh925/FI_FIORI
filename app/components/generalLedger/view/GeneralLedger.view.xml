@@ -85,7 +85,7 @@
                                 labelFor="multiInput" />
                             <MultiInput id="accGroupMulti"
                                 valueHelpRequest="onAccGroupValueHelpRequested"
-                                 valueHelpOnly="true"
+                                valueHelpOnly="true"
                                 required="true">
                                 <suggestionColumns>
                                     <Column>

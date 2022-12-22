@@ -73,14 +73,18 @@
             <uxap:ObjectPageSection titleUppercase="false"
                 title="my section">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="일반" mode="Expanded" id="Section2" titleUppercase="false">
+                    <uxap:ObjectPageSubSection title="일반"
+                        mode="Expanded"
+                        id="Section2"
+                        titleUppercase="false">
                         <uxap:blocks>
-                            <uxap:ObjectPageLazyLoader stashed="true" id="Section2stashed">
+                            <uxap:ObjectPageLazyLoader stashed="true"
+                                id="Section2stashed">
                                 <VBox class="sapUiSmallMargin">
                                     <form:SimpleForm minWidth="1024"
                                         maxContainerCols="2"
                                         editable="false"
-                                        layout="ResponsiveGridLayout"                                        
+                                        layout="ResponsiveGridLayout"
                                         labelSpanL="3"
                                         labelSpanM="3"
                                         emptySpanL="4"
@@ -96,6 +100,7 @@
                                                 labelFor="coaMulti"
                                                 required="true" />
                                             <MultiInput id="coaMulti"
+                                                valueHelpOnly="true"
                                                 valueHelpRequest="onValueHelpRequested"
                                                 required="true"
                                                 maxTokens="1">
@@ -117,23 +122,24 @@
 
                                             <Label text="G/L 계정 유형" />
                                             <Select width="100%"
-                                                        id="GL_ACCOUNTTYPE"
-                                                        items="{
+                                                id="GL_ACCOUNTTYPE"
+                                                items="{
                                 path : 'selectAccountType>/',
                                 sorter : {path:'name'}
                                 }"
-                                                        required="true"
-                                                        selectedKey="{MassCreateModel>GL_ACCOUNTTYPE}"
-                                                        forceSelection="false"
-                                                        visible="{=${editModel>/edit}}">
-                                                        <core:Item text="{selectAccountType>name}"
-                                                            key="{selectAccountType>key}"/>
-                                                    </Select>
+                                                required="true"
+                                                selectedKey="{MassCreateModel>GL_ACCOUNTTYPE}"
+                                                forceSelection="false"
+                                                visible="{=${editModel>/edit}}">
+                                                <core:Item text="{selectAccountType>name}"
+                                                    key="{selectAccountType>key}"/>
+                                            </Select>
 
 
                                             <Label text="계정 그룹"
                                                 labelFor="accGroupMulti" />
                                             <MultiInput id="accGroupMulti"
+                                                valueHelpOnly="true"
                                                 valueHelpRequest="onAccGroupValueHelpRequested"
                                                 required="true"
                                                 maxTokens="1">
