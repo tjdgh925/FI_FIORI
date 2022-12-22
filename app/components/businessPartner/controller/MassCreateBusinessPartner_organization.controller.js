@@ -128,7 +128,7 @@ sap.ui.define(
           var check = await this.tablevalidate("massCreate_organization");
           if (check == true) {
             MessageBox.error(
-              "필수값이 입력되지 않았습니다.\n필수 값을 확인해주세요."
+              "필수 값이 입력되지 않았습니다.\n필수 값을 확인해주세요."
             );
             return;
           }
@@ -185,7 +185,7 @@ sap.ui.define(
                     cells[j].mProperties.value == undefined
                   ) {
                     cells[j].setValueState("Error");
-                    cells[j].setValueStateText("필수값입니다.");
+                    cells[j].setValueStateText("필수 값입니다.");
                     check = true;
                   }
                 }
@@ -199,7 +199,7 @@ sap.ui.define(
                     cells[j].mProperties.selectedKey == undefined
                   ) {
                     cells[j].setValueState("Error");
-                    cells[j].setValueStateText("필수값입니다.");
+                    cells[j].setValueStateText("필수 값입니다.");
                     check = true;
                   }
                 }

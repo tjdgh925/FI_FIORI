@@ -10,7 +10,7 @@
             </f:DynamicPageTitle>
         </f:title>
         <f:header>
-            <f:DynamicPageHeader pinnable="false">
+            <f:DynamicPageHeader pinnable="true">
                 <form:SimpleForm layout="ResponsiveGridLayout">
                     <form:content>
                         <VBox>
