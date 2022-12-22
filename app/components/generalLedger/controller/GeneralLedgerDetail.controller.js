@@ -242,18 +242,18 @@ sap.ui.define(
             this.byId("accGroupMulti").setValueState("Error");
             this.byId("accGroupMulti").setValueStateText(
               "계정 그룹을 입력해주세요."
-              );
-            }
-            if (!temp.GL_NAME) {
-              this.byId("GL_NAME").setValueState("Error");
-              this.byId("GL_NAME").setValueStateText("내역을 입력해주세요.");
-            }
-            if (!temp.GL_COMPANY_CODE) {
-              this.byId("companyCodeMulti").setValueState("Error");
-              this.byId("companyCodeMulti").setValueStateText(
-                "회사 코드를 선택해주세요."
-              );
-            }
+            );
+          }
+          if (!temp.GL_NAME) {
+            this.byId("GL_NAME").setValueState("Error");
+            this.byId("GL_NAME").setValueStateText("내역을 입력해주세요.");
+          }
+          if (!temp.GL_COMPANY_CODE) {
+            this.byId("companyCodeMulti").setValueState("Error");
+            this.byId("companyCodeMulti").setValueStateText(
+              "회사 코드를 선택해주세요."
+            );
+          }
           return 0;
         }
 
@@ -318,6 +318,9 @@ sap.ui.define(
               oDialog.setTokens([]);
               oDialog.setTokens(this._oMultiInput.getTokens());
               oDialog.update();
+
+              this._oBasicSearchField.setValue("");
+              this.onFilterBarSearch();
 
               oDialog.open();
               return;
@@ -449,6 +452,9 @@ sap.ui.define(
               oDialog2.setTokens(this._oMultiInput2.getTokens());
               oDialog2.update();
 
+              this._oBasicSearchField2.setValue("");
+              this.onAcGroupFilterBarSearch();
+
               this._filterTable2(
                 new Filter({
                   filters: accGroupFilter,
@@ -574,8 +580,7 @@ sap.ui.define(
         );
       },
       onCompanyCodeValueHelpRequest: function () {
-        if (!this._oBasicSearchField3)
-          this._oBasicSearchField3 = new SearchField();
+        this._oBasicSearchField3 = new SearchField();
         if (!this.pDialog3) {
           this.pDialog3 = this.loadFragment({
             name: "projectGL.view.fragments.GeneralLedgerCompanyCodeDialog",
@@ -592,12 +597,9 @@ sap.ui.define(
               oDialog3.setTokens(this._oMultiInput3.getTokens());
               oDialog3.update();
 
-              this._filterTable3(
-                new Filter({
-                  filters: accGroupFilter,
-                  and: true,
-                })
-              );
+              this._oBasicSearchField3.setValue("");
+              this.onCompnayCodeFilterBarSearch();
+
 
               oDialog3.open();
               return;
@@ -621,7 +623,7 @@ sap.ui.define(
 
             // Set Basic Search for FilterBar
             oFilterBar3.setFilterBarExpanded(false);
-            oFilterBar3.setBasicSearch(this._oBasicSearchField2);
+            oFilterBar3.setBasicSearch(this._oBasicSearchField3);
 
             // Trigger filter bar search when the basic search is fired
             this._oBasicSearchField3.attachSearch(function () {
@@ -664,7 +666,7 @@ sap.ui.define(
                   oTable3.addColumn(
                     new UIColumn({
                       label: "CC_COA",
-                      template: "CompanyData>CC_COA",
+                      template: "CompanyData>",
                     })
                   );
                 }
@@ -673,12 +675,13 @@ sap.ui.define(
                 if (oTable3.bindItems) {
                   // Bind items to the ODataModel and add columns
                   oTable3.bindAggregation("items", {
-                    path: "COA>/",
+                    path: "CompanyData>/",
                     template: new ColumnListItem({
                       cells: [
-                        new Label({ text: "{AC_GROUP_CODE}" }),
-                        new Label({ text: "{AC_COA}" }),
-                        new Label({ text: "{AC_NAME}" }),
+                        new Label({ text: "{CC_COMPANY_CODE}" }),
+                        new Label({ text: "{CC_COMPANY_NAME}" }),
+                        new Label({ text: "{CC_CURRENCY}" }),
+                        new Label({ text: "{CC_COA}" }),
                       ],
                     }),
                     events: {
@@ -689,14 +692,19 @@ sap.ui.define(
                   });
                   oTable3.addColumn(
                     new MColumn({
-                      header: new Label({ text: "AC_GROUP_CODE" }),
+                      header: new Label({ text: "CC_COMPANY_CODE" }),
                     })
                   );
                   oTable3.addColumn(
-                    new MColumn({ header: new Label({ text: "AC_COA" }) })
+                    new MColumn({
+                      header: new Label({ text: "CC_COMPANY_NAME" }),
+                    })
                   );
                   oTable3.addColumn(
-                    new MColumn({ header: new Label({ text: "AC_NAME" }) })
+                    new MColumn({ header: new Label({ text: "CC_CURRENCY" }) })
+                  );
+                  oTable3.addColumn(
+                    new MColumn({ header: new Label({ text: "CC_COA" }) })
                   );
                 }
                 oDialog3.update();
