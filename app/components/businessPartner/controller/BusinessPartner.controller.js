@@ -307,7 +307,7 @@ sap.ui.define(
           if (!temp.BP_NAME) {
             this.byId("bp_name_person").setValueState("Error");
             this.byId("bp_name_person").setValueStateText(
-              "BP 이름을 입력해주세요."
+              "이름을 입력해주세요."
             );
           }
           console.log(temp.BP_COUNTRY);
@@ -411,7 +411,7 @@ sap.ui.define(
           if (!temp.BP_NAME) {
             this.byId("bp_name_organization").setValueState("Error");
             this.byId("bp_name_organization").setValueStateText(
-              "BP 이름을 입력해주세요."
+              "이름을 입력해주세요."
             );
           }
           if (!temp.BP_REGISTRATION_NUMBER) {
