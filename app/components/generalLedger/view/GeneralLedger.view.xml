@@ -147,9 +147,6 @@
                     <OverflowToolbar>
                         <Title id="TableName" />
                         <ToolbarSpacer />
-                        <Button text="복사 생성"
-                            press=".onCopyCreateGL"
-                            type="Transparent" />
                         <Button text="생성"
                             press=".onCreateButtonGL"
                             type="Transparent">

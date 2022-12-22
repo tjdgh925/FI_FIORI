@@ -278,13 +278,13 @@ sap.ui.define(
                   });
                   oTable.addColumn(
                     new UIColumn({
-                      label: "COA_CODE",
+                      label: "계정과목표 코드",
                       template: "COA>COA_CODE",
                     })
                   );
                   oTable.addColumn(
                     new UIColumn({
-                      label: "COA_NAME",
+                      label: "계정과목표 내역",
                       template: "COA>COA_NAME",
                     })
                   );
@@ -417,19 +417,19 @@ sap.ui.define(
                   });
                   oTable2.addColumn(
                     new UIColumn({
-                      label: "AC_GROUP_CODE",
+                      label: "계정 그룹 코드",
                       template: "accGroup>AC_GROUP_CODE",
                     })
                   );
                   oTable2.addColumn(
                     new UIColumn({
-                      label: "AC_COA",
+                      label: "계정과목표",
                       template: "accGroup>AC_COA",
                     })
                   );
                   oTable2.addColumn(
                     new UIColumn({
-                      label: "AC_NAME",
+                      label: "계정과목표 내역",
                       template: "accGroup>AC_NAME",
                     })
                   );

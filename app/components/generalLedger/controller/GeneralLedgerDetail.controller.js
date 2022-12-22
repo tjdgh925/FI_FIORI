@@ -390,13 +390,13 @@ sap.ui.define(
                   });
                   oTable.addColumn(
                     new UIColumn({
-                      label: "COA_CODE",
+                      label: "계정과목표 코드",
                       template: "COA>COA_CODE",
                     })
                   );
                   oTable.addColumn(
                     new UIColumn({
-                      label: "COA_NAME",
+                      label: "계정과목표 내역",
                       template: "COA>COA_NAME",
                     })
                   );
@@ -531,19 +531,19 @@ sap.ui.define(
                   });
                   oTable2.addColumn(
                     new UIColumn({
-                      label: "AC_GROUP_CODE",
+                      label: "계정 그룹 코드",
                       template: "accGroup>AC_GROUP_CODE",
                     })
                   );
                   oTable2.addColumn(
                     new UIColumn({
-                      label: "AC_COA",
+                      label: "계정과목표",
                       template: "accGroup>AC_COA",
                     })
                   );
                   oTable2.addColumn(
                     new UIColumn({
-                      label: "AC_NAME",
+                      label: "계정과목표 내역",
                       template: "accGroup>AC_NAME",
                     })
                   );
@@ -667,26 +667,26 @@ sap.ui.define(
                   });
                   oTable3.addColumn(
                     new UIColumn({
-                      label: "CC_COMPANY_CODE",
+                      label: "회사 코드",
                       template: "CompanyData>CC_COMPANY_CODE",
                     })
                   );
                   oTable3.addColumn(
                     new UIColumn({
-                      label: "CC_COMPANY_NAME",
+                      label: "회사 이름",
                       template: "CompanyData>CC_COMPANY_NAME",
                     })
                   );
                   oTable3.addColumn(
                     new UIColumn({
-                      label: "CC_CURRENCY",
+                      label: "통화",
                       template: "CompanyData>CC_CURRENCY",
                     })
                   );
                   oTable3.addColumn(
                     new UIColumn({
-                      label: "CC_COA",
-                      template: "CompanyData>",
+                      label: "계정과목표",
+                      template: "CompanyData>CC_COA",
                     })
                   );
                 }

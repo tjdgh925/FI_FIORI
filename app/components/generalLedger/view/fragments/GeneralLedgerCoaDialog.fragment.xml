@@ -2,7 +2,7 @@
     xmlns:m="sap.m"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:core="sap.ui.core">
-    <ValueHelpDialog title="COA"
+    <ValueHelpDialog title="계정과목표"
         id="generalLedgerCoaDialog"
         ok=".onValueHelpOkPress"
         cancel=".onValueHelpCancelPress"
@@ -17,7 +17,7 @@
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="COA_CODE"
-                        label="COA Code"
+                        label="계정과목표 코드"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="COA Code" />
@@ -25,7 +25,7 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="COA_NAME"
-                        label="COA Name"
+                        label="계정과목표 내역"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="COA Name" />
