@@ -1,7 +1,8 @@
-<mvc:View controllerName="projectGL.controller.GeneralLedgerHome"
+<mvc:View controllerName="projectGL.controller.GeneralLedgerHome" 
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:f="sap.f"
+	xmlns:card="sap.f.cards"
 	displayBlock="true"
 	height="100%">
 	<ScrollContainer height="100%"
@@ -12,20 +13,48 @@
 			class="sapUiSmallMargin">
 			<content class="panelbottomline">
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-					header="GL 조회"
+					header="G/L 조회"
 					press="onDisplayGL">
 					<TileContent >
 						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
 					</TileContent>
 				</GenericTile>
 				<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop"
-					header="GL 생성"
+					header="G/L 생성"
 					press="onCreateGL">
 					<TileContent >
 						<ImageContent src="sap-icon://vehicle-repair"></ImageContent>
 					</TileContent>
 				</GenericTile>
-				
+				     <HBox width="100%" height="3rem" />
+					  <HBox width="100%" height="3rem" />
+                <HBox width="100%" height="3rem">
+                    <Title text="G/L 계정 Overview" />
+                </HBox>
+
+                <f:Card class="sapUiMediumMargin" width="300px">
+                    <f:header>
+                        <card:Header title="G/L 생성 목록" subtitle="최신 5개의 생성된 데이터가 보입니다." />
+                    </f:header>
+
+                    <f:content>
+                        <List showSeparators="None" items="{
+                            path:'GeneralLedgerModel>/'
+                            }">
+                            <CustomListItem press=".onTest" type="Active">
+                                <HBox alignItems="Center" justifyContent="SpaceBetween">
+                                    <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+                                        <Title level="H3" text="{GeneralLedgerModel>GL_CODE}" />
+                                        <Text text="{GeneralLedgerModel>GL_COMPANY_CODE}" />
+                                    </VBox>
+                                    <ObjectStatus class="sapUiTinyMargin sapUiSmallMarginEnd" text="{
+                            path:'GeneralLedgerModel>GL_ACCOUNTTYPE',
+                            formatter:'.formatter.statusText'}" state="None" />
+                                </HBox>
+                            </CustomListItem>
+                        </List>
+                    </f:content>
+                </f:Card>
 			</content>
 		</Panel>
 	</ScrollContainer>
