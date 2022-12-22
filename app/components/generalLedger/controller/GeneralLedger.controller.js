@@ -463,6 +463,9 @@ sap.ui.define(
               oDialog.setTokens(this._oMultiInput.getTokens());
               oDialog.update();
 
+              this._oBasicSearchField.setValue("");
+              this.onAcGroupFilterBarSearch();
+
               oDialog.open();
               return;
             }
@@ -599,6 +602,9 @@ sap.ui.define(
               oDialog2.setTokens([]);
               oDialog2.setTokens(this._oMultiInput2.getTokens());
               oDialog2.update();
+
+              this._oBasicSearchField2.setValue("");
+              this.onFilterBarSearch();
 
               this._filterTable2(
                 new Filter({

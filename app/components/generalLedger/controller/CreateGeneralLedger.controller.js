@@ -13,6 +13,7 @@ sap.ui.define(
     "sap/ui/model/json/JSONModel",
     "sap/ui/model/Sorter",
     "sap/ui/core/Fragment",
+    "sap/m/MessageBox",
   ],
   function (
     Controller,
@@ -26,7 +27,9 @@ sap.ui.define(
     UIColumn,
     MColumn,
     JSONModel,
-    Fragment
+    Sorter,
+    Fragment,
+    MessageBox
   ) {
     "use strict";
 
@@ -83,6 +86,7 @@ sap.ui.define(
         gl_code = parseInt(firstData.value[0].GL_CODE) + 1;
 
         this.getView().setModel(new JSONModel({ code: gl_code }), "GL_CODE");
+        this.onReset();
         this.onDialogValidation();
       },
       onDialogValidation: function () {
@@ -118,16 +122,59 @@ sap.ui.define(
 
         var temp = {
           GL_CODE: gl_code.toString(),
-          GL_COA: this.byId("coaMulti").getTokens()[0].mProperties.key,
+          GL_COA: this.byId("coaMulti").getTokens(),
           GL_ACCOUNTTYPE: this.byId("GL_ACCOUNTTYPE").getSelectedKey(),
-          GL_ACCOUNTGROUP:
-            this.byId("accGroupMulti").getTokens()[0].mProperties.key,
+          GL_ACCOUNTGROUP: this.byId("accGroupMulti").getTokens(),
           GL_PL_ACCOUNTTYPE: this.byId("GL_PL_ACCOUNTTYPE").getValue(),
           GL_NAME: this.byId("GL_NAME").getValue(),
           GL_DESCRIPTION: this.byId("GL_DESCRIPTION").getValue(),
           GL_TRADINGPARTNER: this.byId("GL_TRADINGPARTNER").getValue(),
           GL_COMPANY_CODE: companyCode,
         };
+
+        this.byId("coaMulti").setValueState("None");
+        this.byId("GL_ACCOUNTTYPE").setValueState("None");
+        this.byId("accGroupMulti").setValueState("None");
+        this.byId("GL_NAME").setValueState("None");
+
+        if (
+          temp.GL_COA.length === 0 ||
+          !temp.GL_ACCOUNTTYPE ||
+          temp.GL_ACCOUNTGROUP.length === 0 ||
+          !temp.GL_NAME ||
+          companyCode === ""
+        ) {
+          if (temp.GL_COA.length === 0) {
+            this.byId("coaMulti").setValueState("Error");
+            this.byId("coaMulti").setValueStateText(
+              "계정과목표를 입력해주세요."
+            );
+          }
+          if (!temp.GL_ACCOUNTTYPE) {
+            this.byId("GL_ACCOUNTTYPE").setValueState("Error");
+            this.byId("GL_ACCOUNTTYPE").setValueStateText(
+              "계정 유형을 입력해주세요."
+            );
+          }
+          if (temp.GL_ACCOUNTGROUP.length === 0) {
+            this.byId("accGroupMulti").setValueState("Error");
+            this.byId("accGroupMulti").setValueStateText(
+              "계정 그룹을 입력해주세요."
+            );
+          }
+          if (!temp.GL_NAME) {
+            this.byId("GL_NAME").setValueState("Error");
+            this.byId("GL_NAME").setValueStateText("내역을 입력해주세요.");
+          }
+          if (companyCode === "") {
+            MessageBox.error("CompanyCode 데이터가 입력되지 않았습니다.");
+            return;
+          }
+          return 0;
+        }
+
+        temp.GL_COA = temp.GL_COA[0].mProperties.key;
+        temp.GL_ACCOUNTGROUP = temp.GL_ACCOUNTGROUP[0].mProperties.key;
 
         console.log(temp);
         await $.ajax({
@@ -148,7 +195,6 @@ sap.ui.define(
       },
 
       onReset: function () {
-
         this.byId("coaMulti").setTokens([]);
         this.byId("GL_ACCOUNTTYPE").setValue("");
         this.byId("accGroupMulti").setTokens([]);
@@ -159,13 +205,16 @@ sap.ui.define(
       },
 
       onValueHelpRequested: function () {
-        if (!this._oBasicSearchField)
+        if (!this._oBasicSearchField) {
           this._oBasicSearchField = new SearchField();
+        }
+
         if (!this.pDialog) {
           this.pDialog = this.loadFragment({
             name: "projectGL.view.fragments.GeneralLedgerCoaDialog",
           });
         }
+
         this.pDialog.then(
           function (oDialog) {
             var oFilterBar = oDialog.getFilterBar();
@@ -175,6 +224,10 @@ sap.ui.define(
               // Re-set the tokens from the input and update the table
               oDialog.setTokens([]);
               oDialog.setTokens(this._oMultiInput.getTokens());
+
+              this._oBasicSearchField.setValue("");
+              this.onFilterBarSearch();
+
               oDialog.update();
 
               oDialog.open();
@@ -305,6 +358,9 @@ sap.ui.define(
               oDialog2.setTokens([]);
               oDialog2.setTokens(this._oMultiInput2.getTokens());
               oDialog2.update();
+
+              this._oBasicSearchField2.setValue("");
+              this.onAcGroupFilterBarSearch();
 
               this._filterTable2(
                 new Filter({
@@ -485,26 +541,13 @@ sap.ui.define(
       },
 
       // #endregion
-      onFilterBarSearch: function (oEvent) {
-        var sSearchQuery = this._oBasicSearchField.getValue(),
-          aSelectionSet = oEvent.getParameter("selectionSet");
-
-        var filter = [];
-
-        var aFilters = aSelectionSet.reduce(function (aResult, oControl) {
-          if (oControl.getValue()) {
-            aResult.push(
-              new Filter({
-                path: oControl.getName(),
-                operator: FilterOperator.Contains,
-                value1: oControl.getValue(),
-              })
-            );
-          }
-
-          return aResult;
-        }, []);
-
+      onFilterBarSearch: function () {
+        var sSearchQuery = this._oBasicSearchField.getValue();
+        var aFilters = [];
+        if (sSearchQuery == null) {
+          this._filterTable([]);
+          return;
+        }
         aFilters.push(
           new Filter({
             filters: [
@@ -531,25 +574,10 @@ sap.ui.define(
         );
       },
 
-      onAcGroupFilterBarSearch: function (oEvent) {
-        var sSearchQuery = this._oBasicSearchField2.getValue(),
-          aSelectionSet = oEvent.getParameter("selectionSet");
+      onAcGroupFilterBarSearch: function () {
+        var sSearchQuery = this._oBasicSearchField2.getValue();
 
-        console.log(aSelectionSet);
-        console.log(sSearchQuery);
-
-        var filter = [];
-        aSelectionSet.reduce(function (aResult, oControl) {
-          if (oControl.getValue()) {
-            accGroupFilter.push(
-              new Filter({
-                path: oControl.getName(),
-                operator: FilterOperator.Contains,
-                value1: oControl.getValue(),
-              })
-            );
-          }
-        }, []);
+        var accGroupFilter = [];
 
         if (sSearchQuery.length > 0) {
           accGroupFilter.push(
