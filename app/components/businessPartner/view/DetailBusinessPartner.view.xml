@@ -224,7 +224,6 @@
 
                                     <m:Select id="bp_name_title2"
                                         width="100%"
-                                        selectedKey="알수없음"
                                         visible="{=${editModel>/edit}&amp;&amp;${personal_visibleModel>/personal}}">
 
                                         <core:Item text=""
@@ -281,7 +280,6 @@
 
                                     <m:Select id="bp_legal_from2"
                                         width="100%"
-                                        selectedKey="알수없음"
                                         visible="{=${editModel>/edit}&amp;&amp;${organization_visibleModel>/organization}}">
 
                                         <core:Item text=""

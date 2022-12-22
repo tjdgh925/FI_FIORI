@@ -114,7 +114,7 @@
                         hAlign="Center"
                         headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터"
+                            <Label text="표준 주소"
                                 textAlign="Center" />
                             <Label text="도로 주소"
                                 textAlign="Center" />
@@ -128,7 +128,7 @@
                         hAlign="Center"
                         headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터"
+                            <Label text="표준 주소"
                                 textAlign="Center" />
                             <Label text="번지"
                                 textAlign="Center" />
@@ -142,7 +142,7 @@
                         hAlign="Center"
                         headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터"
+                            <Label text="표준 주소"
                                 textAlign="Center" />
                             <Label text="우편번호"
                                 textAlign="Center" />
@@ -156,7 +156,7 @@
                         hAlign="Center"
                         headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터"
+                            <Label text="표준 주소"
                                 textAlign="Center" />
                             <Label text="도시"
                                 textAlign="Center" />
@@ -170,7 +170,7 @@
                         hAlign="Center"
                         headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터"
+                            <Label text="표준 주소"
                                 textAlign="Center" />
                             <Label text="국가/지역"
                                 textAlign="Center"
@@ -196,7 +196,7 @@
                         hAlign="Center"
                         headerSpan="7,1">
                         <t:multiLabels>
-                            <Label text="회사 코드 데이터"
+                            <Label text="표준 주소"
                                 textAlign="Center" />
                             <Label text="지역"
                                 textAlign="Center" />

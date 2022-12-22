@@ -715,7 +715,7 @@ sap.ui.define(
             // set flag that the dialog is initialized
             this._bDialogInitialized = true;
             oDialog.open();
-        .bind(this)
+          }.bind(this)
         );
       },
 

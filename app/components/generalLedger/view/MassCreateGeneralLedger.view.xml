@@ -161,8 +161,7 @@
                                 width="100%" />
                             <Label text="G/L 계정 설명"
                                 textAlign="Center"
-                                width="100%"
-                                required="true" />
+                                width="100%" />
                         </t:multiLabels>
 
                         <t:template>

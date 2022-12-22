@@ -4,6 +4,12 @@ sap.ui.define(
     "use strict";
     return Controller.extend("projectBP.controller.ChartBusinessPartner", {
       onInit() {
+        this.getOwnerComponent()
+          .getRouter()
+          .getRoute("ChartBusinessPartner")
+          .attachPatternMatched(this.onMyRoutePatternMatched, this);
+      },
+      onMyRoutePatternMatched: function () {
         var oData = {
           0: 0,
           1: 0,
@@ -59,36 +65,50 @@ sap.ui.define(
         var countArr = dataArr.map((data) => {
           return data.COUNT;
         });
+        var countrySum = 0;
         var countryCnt = dataArr.length;
 
+        for (let i = 0; i < countArr.length; i++) {
+          countrySum += countArr[i];
+        }
         console.log(dataArr);
         console.log(labelArr);
         console.log(countArr);
-
+        console.log(countryCnt);
 
         for (let i = 0; i < dataArr.length; i++) {
           if (i <= 4) {
             var index = "/" + i;
             view.getModel("BP_COUNTRY_REGION").setProperty(index, countArr[i]);
             view
-            .getModel("BP_COUNTRY_REGION_LABEL")
-            .setProperty(index, labelArr[i]);
-            view.getModel("BP_COUNTRY_REGION_PERCENT").setProperty(index, (countArr[i] / countryCnt).toFixed(2));
+              .getModel("BP_COUNTRY_REGION_LABEL")
+              .setProperty(index, labelArr[i]);
+            view
+              .getModel("BP_COUNTRY_REGION_PERCENT")
+              .setProperty(
+                index,
+                ((countArr[i] / countrySum) * 100).toFixed(2)
+              );
           } else {
             var sum = view.getModel("BP_COUNTRY_REGION").getProperty("/others");
             sum += countArr[i];
             view.getModel("BP_COUNTRY_REGION").setProperty("/others", sum);
-            var labelCnt = view.getModel("BP_COUNTRY_REGION_LABEL").getProperty("/others");
-            view.getModel("BP_COUNTRY_REGION_LABEL").setProperty("/others", ++labelCnt);
+            var labelCnt = view
+              .getModel("BP_COUNTRY_REGION_LABEL")
+              .getProperty("/others");
+            view
+              .getModel("BP_COUNTRY_REGION_LABEL")
+              .setProperty("/others", ++labelCnt);
           }
         }
-        
+
         var sum = view.getModel("BP_COUNTRY_REGION").getProperty("/others");
-        view.getModel("BP_COUNTRY_REGION_PERCENT").setProperty("/others", (sum / countryCnt).toFixed(2));
+        view
+          .getModel("BP_COUNTRY_REGION_PERCENT")
+          .setProperty("/others", ((sum / countrySum) * 100).toFixed(2));
 
         view.getModel("BP_COUNTRY_REGION").setProperty("/Sum", countryCnt);
       },
     });
   }
 );
-

@@ -115,12 +115,9 @@ sap.ui.define(
         });
         var countryjsonmodel = new JSONModel(countryData.value);
         countryjsonmodel.setSizeLimit(500);
-        this.getView().setModel(
-          countryjsonmodel,
-          "CountryData"
-        );
+        this.getView().setModel(countryjsonmodel, "CountryData");
         console.log(this.getView().getModel("CountryData"));
-        this.byId("")
+        this.byId("");
       },
       //편집버튼 눌렀을때 작동하는 기능
       onEdit: function () {
@@ -155,25 +152,24 @@ sap.ui.define(
 
         this.getView().getModel("editModel").setProperty("/edit", true);
 
-        console.log(this.byId("bp_country2").getSelectedKey())
+        console.log(this.byId("bp_country2").getSelectedKey());
 
         let orgDivision = this.byId("bp_org_division").getText();
         let bpLegalForm = this.byId("bp_legal_from").getText();
         let bpNameTitle = this.byId("bp_name_title").getText();
         let bpCountry = this.byId("bp_country").getText();
-        // console.log(bpCountry);
-        console.log(this.byId("bp_country2"))
+
+
         this.byId("bp_org_division2").setSelectedKey(orgDivision);
         this.byId("bp_legal_from2").setSelectedKey(bpLegalForm);
         this.byId("bp_name_title2").setSelectedKey(bpNameTitle);
         this.byId("bp_country2").setSelectedKey(bpCountry);
 
-        console.log(this.getView().getModel("BusinessPartnerModel"))
+        console.log(this.getView().getModel("BusinessPartnerModel"));
         console.log(this.getView().getModel("CountryData"));
 
-        console.log(this.byId("bp_country2").getSelectedKey())
+        console.log(this.byId("bp_country2").getSelectedKey());
       },
-
 
       getBpData: async function () {
         const BP = await $.ajax({
@@ -263,10 +259,17 @@ sap.ui.define(
         let bpNameTitle = this.byId("bp_name_title2").getSelectedKey();
         let bpCountry = this.byId("bp_country2").getSelectedKey();
 
+        if (orgDivision == "") orgDivision = "ㅡ";
+        if (bpLegalForm == "") bpLegalForm = "ㅡ";
+        if (bpNameTitle == "") bpNameTitle = "ㅡ";
+        if (bpCountry == "") bpCountry = "ㅡ";
+
         this.byId("bp_org_division").setText(orgDivision);
         this.byId("bp_legal_from").setText(bpLegalForm);
         this.byId("bp_name_title").setText(bpNameTitle);
         this.byId("bp_country").setText(bpCountry);
+
+
 
         this.getView()
           .getModel("FinalSaveModel")

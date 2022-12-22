@@ -85,6 +85,10 @@ sap.ui.define(
 
         gl_code = parseInt(firstData.value[0].GL_CODE) + 1;
 
+        this.byId("coaMulti").setValueState("None");
+        this.byId("GL_ACCOUNTTYPE").setValueState("None");
+        this.byId("accGroupMulti").setValueState("None");
+        this.byId("GL_NAME").setValueState("None");
         this.getView().setModel(new JSONModel({ code: gl_code }), "GL_CODE");
         this.onReset();
         this.onDialogValidation();
@@ -578,7 +582,6 @@ sap.ui.define(
       onAcGroupFilterBarSearch: function () {
         var sSearchQuery = this._oBasicSearchField2.getValue();
 
-
         if (sSearchQuery == null) {
           this._filterTable([]);
           return;
@@ -680,12 +683,11 @@ sap.ui.define(
       },
       onBack: function () {
         this.onReset();
-       
+
         this.getOwnerComponent().getRouter().navTo("GeneralLedger");
       },
 
       onCheckSelect() {},
     });
-    
   }
 );

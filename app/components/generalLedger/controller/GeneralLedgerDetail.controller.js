@@ -132,9 +132,18 @@ sap.ui.define(
           url: url,
         });
 
-        console.log(GeneralLedger);
         let GeneralLedgerModel = new JSONModel(GeneralLedger);
         this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
+
+        let coaValue = GeneralLedger.GL_COA;
+        let acGroupValue = GeneralLedger.GL_ACCOUNTGROUP;
+
+        this.byId("coaMulti").addToken(
+          new Token({ key: coaValue, text: coaValue })
+        );
+        this.byId("accGroupMulti").addToken(
+          new Token({ key: acGroupValue, text: acGroupValue })
+        );
       },
 
       onFilterCompanyCode: async function (edit) {
@@ -292,12 +301,12 @@ sap.ui.define(
         this.onTest3();
         //await this.onUpdate(url,temp);
       },
-      
+
       onTest2: function () {
         this.getView().getModel("editModel").setProperty("/edit", true);
         this.onFilterCompanyCode(true);
       },
-      
+
       onTest3: function () {
         this.getView().getModel("editModel").setProperty("/edit", false);
         this.byId("coaMulti").setValueState("None");
@@ -305,7 +314,7 @@ sap.ui.define(
         this.byId("accGroupMulti").setValueState("None");
         this.byId("GL_NAME").setValueState("None");
         this.byId("companyCodeMulti").setValueState("None");
-        console.log("$$$$$$$$$$")
+
         this.getRefreshedData();
         this.onFilterCompanyCode();
 
@@ -895,8 +904,6 @@ sap.ui.define(
 
       onAcGroupFilterBarSearch: function () {
         var sSearchQuery = this._oBasicSearchField2.getValue();
-
-
 
         if (sSearchQuery.length > 0) {
           accGroupFilter.push(
