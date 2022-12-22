@@ -4,7 +4,7 @@
     xmlns:core="sap.ui.core"
     xmlns:layout="sap.ui.layout">
     <Dialog id="MassCreateNumberDialog"
-        title="GL 계정 대량 생산 수량">
+        title="GL 계정 대량 생성 수량">
         <content class="sapUiSmallMargin">
             <VBox>
                 <Label text="추가 생성할 계정 개수"

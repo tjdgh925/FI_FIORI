@@ -73,19 +73,14 @@
             <uxap:ObjectPageSection titleUppercase="false"
                 title="my section">
                 <uxap:subSections>
-                    <uxap:ObjectPageSubSection title="일반"
-                        mode="Expanded"
-                        id="Section2"
-                        titleUppercase="false">
+                    <uxap:ObjectPageSubSection title="일반" mode="Expanded" id="Section2" titleUppercase="false">
                         <uxap:blocks>
-                            <uxap:ObjectPageLazyLoader stashed="true"
-                                id="Section2stashed">
+                            <uxap:ObjectPageLazyLoader stashed="true" id="Section2stashed">
                                 <VBox class="sapUiSmallMargin">
                                     <form:SimpleForm minWidth="1024"
                                         maxContainerCols="2"
                                         editable="false"
-                                        layout="ResponsiveGridLayout"
-                                        title="기본 정보"
+                                        layout="ResponsiveGridLayout"                                        
                                         labelSpanL="3"
                                         labelSpanM="3"
                                         emptySpanL="4"

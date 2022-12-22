@@ -30,11 +30,10 @@ sap.ui.define(
     var gl_code;
     var accGroupFilter = [];
     //테이블 저장 실행시 값 변경을 담을 변수
-    var tablecheckflag=false;
+    var tablecheckflag = false;
     return Controller.extend("projectGL.controller.MassCreateGeneralLedger", {
       async onInit() {
         var data = [
-          { key: "", name: "" },
           { key: "P", name: "P(1차 원가 또는 수익)" },
           { key: "S", name: "S(2차 원가)" },
           { key: "X", name: "X(대차대조표 계정)" },
@@ -83,7 +82,6 @@ sap.ui.define(
           .getRouter()
           .getRoute("MassCreateGeneralLedger")
           .attachPatternMatched(this.onMyRoutePatternMatched, this);
-          
       },
 
       // 라우터 이름 일치할 경우 실행 함수
@@ -99,7 +97,7 @@ sap.ui.define(
         this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
 
         //화면 라우팅될때마다 생성시 변한 값 초기화
-        tablecheckflag=false;
+        tablecheckflag = false;
         this.tablevalidateclear("massCreateTable");
       },
 
@@ -173,7 +171,7 @@ sap.ui.define(
 
       onMassCreationApprove: async function () {
         //생성 버튼 클릭시 validate함수가 실행될 수 있게 설정
-        tablecheckflag=true;
+        tablecheckflag = true;
 
         var check = await this.tablevalidate("massCreateTable");
         if (check == true) {
@@ -223,17 +221,18 @@ sap.ui.define(
 
       tablevalidate: function (tableid) {
         //생성이 클릭이 한번이라도 될 경우에만 실행할 수 있게 조건문 작성
-        if(tablecheckflag==false){
+        if (tablecheckflag == false) {
           return;
         }
         var check = false;
-        var datalength = this.getView().getModel("MassCreateModel").oData.length;
-        if(datalength>30){
-          datalength=30;
+        var datalength =
+          this.getView().getModel("MassCreateModel").oData.length;
+        if (datalength > 30) {
+          datalength = 30;
         }
         var rows = this.byId("massCreateTable").mAggregations.rows;
         for (var i = 0; i < datalength; i++) {
-          console.log(rows[i])
+          console.log(rows[i]);
           var cells = rows[i].mAggregations.cells;
           for (var j = 0; j < cells.length; j++) {
             var element = cells[j].getMetadata().getElementName().split(".")[2];
@@ -272,6 +271,21 @@ sap.ui.define(
                   check = true;
                 }
               }
+            } else if (element == "MultiComboBox") {
+              if (cells[j].mProperties.required == true) {
+                cells[j].setValueState("None");
+                cells[j].setValueStateText(null);
+                if (
+                  cells[j].mProperties.selectedKeys == "" ||
+                  cells[j].mProperties.selectedKeys == null ||
+                  cells[j].mProperties.selectedKeys == undefined
+                ) {
+                  cells[j].setValueState("Error");
+                  cells[j].setValueStateText("필수값입니다.");
+
+                  check = true;
+                }
+              }
             }
           }
         }
@@ -279,22 +293,26 @@ sap.ui.define(
       },
       tablevalidateclear: function (tableid) {
         var rows = this.byId(tableid).mAggregations.rows;
-        var datalength = this.getView().getModel("MassCreateModel").oData.length;
-        if(datalength>30){
-          datalength=30;
+        var datalength =
+          this.getView().getModel("MassCreateModel").oData.length;
+        if (datalength > 30) {
+          datalength = 30;
         }
         for (var i = 0; i < 30; i++) {
           var cells = rows[i].mAggregations.cells;
           for (var j = 0; j < cells.length; j++) {
             var element = cells[j].getMetadata().getElementName().split(".")[2];
             if (
-              element == "Input"   ||
-              element == "Combobox"   ||
+              element == "Input" ||
+              element == "Combobox" ||
               element == "DatePicker"
             ) {
               cells[j].setValueState("None");
               cells[j].setValueStateText(null);
             } else if (element == "Select") {
+              cells[j].setValueState("None");
+              cells[j].setValueStateText(null);
+            } else if (element == "MultiComboBox") {
               cells[j].setValueState("None");
               cells[j].setValueStateText(null);
             }

@@ -5,8 +5,6 @@
     placement="Bottom">
     <Button text="개별생성"
         press=".onCreateGL" />
-    <Button text="복사생성"
-        press=".onCopyCreateGL" />
     <Button text="대량생성"
         press=".onMassCreateGL" />
 </ActionSheet>

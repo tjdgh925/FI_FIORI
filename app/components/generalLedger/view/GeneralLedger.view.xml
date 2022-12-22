@@ -31,8 +31,10 @@
                         </VBox>
                         <VBox>
                             <Label text="계정과목표"
-                                labelFor="multiInput" required="true" />
+                                labelFor="multiInput"
+                                required="true" />
                             <MultiInput id="coaMulti"
+                                valueHelpOnly="true"
                                 valueHelpRequest="onValueHelpRequested"
                                 required="true">
                                 <suggestionColumns>
@@ -83,6 +85,7 @@
                                 labelFor="multiInput" />
                             <MultiInput id="accGroupMulti"
                                 valueHelpRequest="onAccGroupValueHelpRequested"
+                                 valueHelpOnly="true"
                                 required="true">
                                 <suggestionColumns>
                                     <Column>
@@ -134,7 +137,7 @@
                 <t:rowActionTemplate>
                     <t:RowAction>
                         <t:items>
-                            <t:RowActionItem type="Navigation" 
+                            <t:RowActionItem type="Navigation"
                                 press="onNavToDetail" />
                         </t:items>
                     </t:RowAction>
@@ -181,28 +184,32 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column sortProperty="GL_CODE" filterProperty="GL_CODE">
+                    <t:Column sortProperty="GL_CODE"
+                        filterProperty="GL_CODE">
                         <Label text="G/L 계정" />
                         <t:template>
                             <Text text="{GeneralLedgerModel>GL_CODE}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column sortProperty="GL_NAME" filterProperty="GL_NAME">
+                    <t:Column sortProperty="GL_NAME"
+                        filterProperty="GL_NAME">
                         <Label text="내역" />
                         <t:template>
                             <Text text="{GeneralLedgerModel>GL_NAME}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column sortProperty="GL_COA" filterProperty="GL_COA">
+                    <t:Column sortProperty="GL_COA"
+                        filterProperty="GL_COA">
                         <Label text="계정과목표" />
                         <t:template>
                             <Text text="{GeneralLedgerModel>GL_COA}" />
                         </t:template>
                     </t:Column>
 
-                    <t:Column sortProperty="GL_ACCOUNTTYPE" filterProperty="GL_ACCOUNTTYPE">
+                    <t:Column sortProperty="GL_ACCOUNTTYPE"
+                        filterProperty="GL_ACCOUNTTYPE">
                         <Label text="G/L 계정 유형" />
                         <t:template>
                             <ObjectStatus text="{
@@ -214,7 +221,8 @@
                         </t:template>
                     </t:Column>
 
-                    <t:Column sortProperty="GL_ACCOUNTGROUP" filterProperty="GL_ACCOUNTGROUP">
+                    <t:Column sortProperty="GL_ACCOUNTGROUP"
+                        filterProperty="GL_ACCOUNTGROUP">
                         <Label text="계정 그룹" />
                         <t:template>
                             <Text text="{GeneralLedgerModel>GL_ACCOUNTGROUP}" />
