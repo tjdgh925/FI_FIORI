@@ -40,7 +40,6 @@
                         <t:template>
                             <Select
                                 id="bp_name_title_person"
-                                required="true"
                                 forceSelection="false"
                                 width="100%"
                                 items="{
