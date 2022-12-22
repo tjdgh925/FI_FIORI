@@ -1,17 +1,14 @@
 <mvc:View controllerName="projectBP.controller.MassCreateBusinessPartner_organization" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:t="sap.ui.table" xmlns:f="sap.f" xmlns:form="sap.ui.layout.form" xmlns:layout="sap.ui.layout" xmlns:core="sap.ui.core">
     <f:DynamicPage showFooter="true">
         <f:title>
-    <f:DynamicPageTitle>
+            <f:DynamicPageTitle>
                 <f:heading>
                     <HBox>
-                    
                         <Title text="Organization Creation (Mass)" />
                     </HBox>
-                    
                 </f:heading>
             </f:DynamicPageTitle>
         </f:title>
-
 
         <f:content>
             <t:Table id="massCreate_organization" rows="{MassCreateModel>/}" selectionMode="None" visibleRowCount="20" paste="onPaste" rowsUpdated=".tablevalidate">
@@ -41,10 +38,18 @@
                             <Label text="조직 구분" textAlign="Center" />
                         </t:multiLabels>
                         <t:template>
-                            <Select forceSelection="false"
-                            id="bp_org_division" selectedKey="{MassCreateModel>BP_ORG_DIVISION}">
-                                <core:Item text="국내" />
-                                <core:Item text="해외" />
+                            <Select
+                                id="bp_name_title_organization"
+                                required="true"
+                                forceSelection="false"
+                                width="100%"
+                                items="{
+                                path : 'selectNameTitle_organization>/',
+                                sorter : {path:'name'}
+                                }"
+                                selectedKey="{MassCreateModel>BP_ORG_DIVISION}"
+                            >
+                                <core:Item text="{selectNameTitle_organization>name}" key="{selectNameTitle_organization>key}" />
                             </Select>
                         </t:template>
                     </t:Column>
@@ -65,7 +70,7 @@
                             <Label text="사업자등록번호" textAlign="Center" required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Input id="bp_registration_number_organization" value="{MassCreateModel>BP_REGISTRATION_NUMBER}" required="true"/>
+                            <Input id="bp_registration_number_organization" value="{MassCreateModel>BP_REGISTRATION_NUMBER}" required="true" />
                         </t:template>
                     </t:Column>
 
@@ -115,10 +120,17 @@
                             <Label text="국가/지역" textAlign="Center" required="true" />
                         </t:multiLabels>
                         <t:template>
-                            <Select id="bp_country_organization" required="true" forceSelection="false" width="100%"  items="{
+                            <Select
+                                id="bp_country_organization"
+                                required="true"
+                                forceSelection="false"
+                                width="100%"
+                                items="{
                                 path : 'CountryData>/',
                                 sorter : {path:'COUNTRY_CODE'}
-                                }" selectedKey="{MassCreateModel>BP_COUNTRY}">
+                                }"
+                                selectedKey="{MassCreateModel>BP_COUNTRY}"
+                            >
                                 <core:Item text="{CountryData>COUNTRY_NAME}" key="{CountryData>COUNTRY_CODE}" />
                             </Select>
                         </t:template>
@@ -160,7 +172,5 @@
                 <Button type="Default" text="취소" press="onBack" />
             </OverflowToolbar>
         </f:footer>
-    
     </f:DynamicPage>
-
 </mvc:View>

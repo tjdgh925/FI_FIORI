@@ -770,13 +770,12 @@ sap.ui.define(
       onFilterBarSearch: function () {
         var sSearchQuery = this._oBasicSearchField.getValue();
 
-        console.log(aSelectionSet);
-
         var aFilters = [];
         if (sSearchQuery == null) {
           this._filterTable([]);
           return;
         }
+
 
         aFilters.push(
           new Filter({
