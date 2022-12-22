@@ -555,6 +555,11 @@ sap.ui.define(
           type: EdmType.String,
         });
         aCols.push({
+          label: "비즈니스 파트너 이름",
+          property: "BP_NAME",
+          type: EdmType.String,
+        });
+        aCols.push({
           label: "회사 코드",
           property: "BP_COMPANY_CODE",
           type: EdmType.String,
@@ -775,7 +780,6 @@ sap.ui.define(
           this._filterTable([]);
           return;
         }
-
 
         aFilters.push(
           new Filter({
