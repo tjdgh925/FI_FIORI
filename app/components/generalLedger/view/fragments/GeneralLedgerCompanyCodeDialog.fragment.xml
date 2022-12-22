@@ -2,7 +2,7 @@
     xmlns:m="sap.m"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:core="sap.ui.core">
-    <ValueHelpDialog title="Product"
+    <ValueHelpDialog title="회사 코드"
         id="generalLedgerCompanyCodeDialog"
         ok=".onCompanyCodeOkPress"
         cancel=".onCompanyCodeCancelPress"
@@ -16,7 +16,7 @@
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="CC_COMPANY_CODE"
-                        label="CC_COMPANY_CODE"
+                        label="회사 코드"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="CC_COMPANY_CODE" />
@@ -24,7 +24,7 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="CC_COMPANY_NAME"
-                        label="CC_COMPANY_NAME"
+                        label="회사 이름"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="CC_COMPANY_NAME" />
@@ -32,7 +32,7 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="CC_CURRENCY"
-                        label="CC_CURRENCY"
+                        label="통화"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="CC_CURRENCY" />
@@ -40,7 +40,7 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="CC_COA"
-                        label="CC_COA"
+                        label="계정과목표"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="CC_COA" />

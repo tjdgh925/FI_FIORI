@@ -2,7 +2,7 @@
     xmlns:m="sap.m"
     xmlns:fb="sap.ui.comp.filterbar"
     xmlns:core="sap.ui.core">
-    <ValueHelpDialog title="계정과목표"
+    <ValueHelpDialog title="계정 그룹"
         id="generalLedgerACGroupDialog"
         ok="onACGroupOkPress"
         cancel="onACGroupCancelPress"
@@ -16,7 +16,7 @@
                 <fb:filterGroupItems>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="AC_GROUP_CODE"
-                        label="AC Group Code"
+                        label="계정 그룹 코드"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="AC Group Code" />
@@ -24,7 +24,7 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="AC_COA"
-                        label="AC COA"
+                        label="계정 과목표"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="AC COA" />
@@ -32,7 +32,7 @@
                     </fb:FilterGroupItem>
                     <fb:FilterGroupItem groupName="__$INTERNAL$"
                         name="AC_NAME"
-                        label="AC Name"
+                        label="계정 그룹 내역"
                         visibleInFilterBar="true">
                         <fb:control>
                             <m:Input name="AC Name" />
