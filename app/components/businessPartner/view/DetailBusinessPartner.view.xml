@@ -499,6 +499,8 @@
                                         width="50%"
                                         id="bp_country2"
                                         required="true"
+                                        selectedKey="{BusinessPartnerModel>/BP_COUNTRY}"
+                                        visible="{=${editModel>/edit}}"
                                         items="{
                                 path : 'CountryData>/',
                                 sorter : {path:'COUNTRY_CODE'}
