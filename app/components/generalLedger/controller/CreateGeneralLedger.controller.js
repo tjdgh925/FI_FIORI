@@ -202,6 +202,7 @@ sap.ui.define(
         this.byId("GL_NAME").setValue("");
         this.byId("GL_DESCRIPTION").setValue("");
         this.byId("GL_TRADINGPARTNER").setValue("");
+        this.byId("companyCodeTable").clearSelection();
       },
 
       onValueHelpRequested: function () {
