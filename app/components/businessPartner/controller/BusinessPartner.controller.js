@@ -767,30 +767,15 @@ sap.ui.define(
       },
 
       // #endregion
-      onFilterBarSearch: function (oEvent) {
-        console.log(oEvent.getParameters());
+      onFilterBarSearch: function () {
+        var sSearchQuery = this._oBasicSearchField.getValue();
 
-        var sSearchQuery = this._oBasicSearchField.getValue(),
-          aSelectionSet = oEvent.getParameter("selectionSet");
+        var aFilters = [];
+        if (sSearchQuery == null) {
+          this._filterTable([]);
+          return;
+        }
 
-        console.log(aSelectionSet);
-
-        var filter = [];
-
-        var aFilters = aSelectionSet.reduce(function (aResult, oControl) {
-          console.log(aResult, oControl.getValue());
-          if (oControl.getValue()) {
-            aResult.push(
-              new Filter({
-                path: oControl.getName(),
-                operator: FilterOperator.Contains,
-                value1: oControl.getValue(),
-              })
-            );
-          }
-
-          return aResult;
-        }, []);
 
         aFilters.push(
           new Filter({
