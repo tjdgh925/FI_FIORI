@@ -3,7 +3,7 @@
         <uxap:headerTitle>
             <uxap:ObjectPageDynamicHeaderTitle>
                 <uxap:heading>
-                    <Title text="{GeneralLedgerModel>/GL_CODE}" />
+                    <Title text="복사생성 (G/L 마스터 데이터)" />
                 </uxap:heading>
                 <uxap:snappedTitleOnMobile>
                     <Title text="여기는 뭔가 싶어서 찾아보는곳" />
@@ -42,7 +42,7 @@
                                             <core:Title text="관리" />
                                             <VBox>
                                                 <Label text="G/L 계정" labelFor="GL_CODE" />
-                                                <Input id="GL_CODE" required="true" />
+                                                <Text id="GL_CODE" />
                                                 <!-- <Text id="GL_CODE" text="{GeneralLedgerModel>/GL_CODE}" /> -->
                                                 <layoutData>
                                                     <layout:GridData span="XL12 L12 M12 S12" />
@@ -50,7 +50,6 @@
                                             </VBox>
                                             <VBox>
                                                 <Label text="계정과목표" labelFor="GL_COA" />
-                                                
                                                 <Input id="GL_COA" required="true" value="{GeneralLedgerModel>/GL_COA}"  />
                                                 <layoutData>
                                                     <layout:GridData span="XL12 L12 M12 S12" />
@@ -59,7 +58,6 @@
 
                                             <VBox>
                                                 <Label text="G/L 계정 유형" labelFor="GL_ACCOUNTTYPE" />
-                                                
                                                 <Input id="GL_ACCOUNTTYPE" required="true" value="{GeneralLedgerModel>/GL_ACCOUNTTYPE}"  />
                                                 <layoutData>
                                                     <layout:GridData span="XL12 L12 M12 S12" />
@@ -68,7 +66,6 @@
 
                                             <VBox>
                                                 <Label text="계정 그룹" labelFor="GL_ACCOUNTGROUP" />
-                                                
                                                 <Input id="GL_ACCOUNTGROUP" required="true" value="{GeneralLedgerModel>/GL_ACCOUNTGROUP}"/>
                                                 <layoutData>
                                                     <layout:GridData span="XL12 L12 M12 S12" />
@@ -77,7 +74,6 @@
 
                                             <VBox>
                                                 <Label text="손익 계산서 계정 유형" />
-                                                
                                                 <Input id="GL_PL_ACCOUNTTYPE" value="{GeneralLedgerModel>/GL_PL_ACCOUNTTYPE}"/>
                                                 <layoutData>
                                                     <layout:GridData span="XL12 L12 M12 S12" />
