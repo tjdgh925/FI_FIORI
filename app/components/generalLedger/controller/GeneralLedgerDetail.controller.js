@@ -125,6 +125,17 @@ sap.ui.define(
         this.onFilterCompanyCode();
       },
 
+      getRefreshedData: async function () {
+        let url = "/general-ledger/GL/" + SelectedNum;
+        const GeneralLedger = await $.ajax({
+          type: "get",
+          url: url,
+        });
+
+        let GeneralLedgerModel = new JSONModel(GeneralLedger);
+        this.getView().setModel(GeneralLedgerModel, "GeneralLedgerModel");
+      },
+
       onFilterCompanyCode: async function (edit) {
         let url2 = "/general-ledger/CompanyCode";
         const CopmpanyCodeData = await $.ajax({
@@ -271,12 +282,12 @@ sap.ui.define(
         this.getView()
           .getModel("GeneralLedgerModel")
           .setProperty("/GL_COMPANY_CODE", temp.GL_COMPANY_CODE);
-        console.log(temp);
 
         // this.byId("accGroupMulti").setTokens([]);
         // this.byId("coaMulti").setTokens([]);
 
         await this.onFilterCompanyCode();
+        this.getRefreshedData();
         this.onTest3();
         //await this.onUpdate(url,temp);
       },
@@ -600,7 +611,6 @@ sap.ui.define(
               this._oBasicSearchField3.setValue("");
               this.onCompnayCodeFilterBarSearch();
 
-
               oDialog3.open();
               return;
             }
@@ -741,6 +751,7 @@ sap.ui.define(
           );
         });
         this._oMultiInput.setTokens(arr);
+        this._oMultiInput2.setTokens([]);
         this._oVHD.close();
       },
       onACGroupOkPress: function (oEvent) {

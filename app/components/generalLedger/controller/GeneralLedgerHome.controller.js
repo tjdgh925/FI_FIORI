@@ -29,6 +29,9 @@ sap.ui.define(["sap/ui/core/mvc/Controller",
     onCreateGL: function () {
       this.getOwnerComponent().getRouter().navTo("CreateGeneralLedger");
     },
+    onCreateMassGL: function(){
+      this.getOwnerComponent().getRouter().navTo("MassCreateGeneralLedger");
+    },
    
     onTest: function (oEvent) {
       console.log(oEvent);
