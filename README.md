@@ -4,8 +4,7 @@
 - SAP UI5를 활용해서 Fiori의 BP와 GL 마스터 관리 화면 구현하기
 
 ## 👨‍💻역할
-- [장성호](https://github.com/tjdgh925)(조장) : Value Help Dialog 기능 구현, 유효성 검증 기능 구현, 전체적인 비즈니스 로직 구현 및 오류 수정,
-   Git branch 전략 및 커밋 컨벤션 설정
+- [장성호](https://github.com/tjdgh925)(조장) : Value Help Dialog 기능 구현,  전체적인 비즈니스 로직 구현 및 오류 수정, Git branch 전략 및 커밋 컨벤션 설정
 - [고소영](https://github.com/ko-so-young) : BP 마스터 조회 화면, BP 마스터 생성 화면(개별, 대량)
 - [김수현](https://github.com/KIM-SOO-H) : BP 마스터 상세 화면, BP 마스터 편집 화면, BP 마스터 국가별 차트 화면
 - [이선주](https://github.com/SUNJU10) : GL 마스터 조회 화면, GL 마스터 생성 화면(개별, 대량)
